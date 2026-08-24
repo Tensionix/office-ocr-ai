@@ -1,0 +1,125 @@
+schema_version: 1
+
+providers:
+  openai:
+    enabled: true
+    # Suggested OpenAI OCR choices:
+    # - gpt-4.1: balanced default for mixed office archives
+    # - gpt-5.4: highest-quality mode for difficult documents
+    # - gpt-5.4-mini: faster and cheaper for cleaner large batches
+    # - gpt-5.4-nano: extreme budget mode, use only when cost matters more than OCR quality
+    model: GPT-4.1  # available: gpt-4.1, gpt-5.4, gpt-5.4-mini, gpt-5.4-nano
+
+  gemini:
+    enabled: true
+    # Suggested Gemini OCR choices:
+    # - gemini-3.5-flash: default high-throughput OCR mode
+    # - gemini-3.1-flash-lite: fast low-cost OCR/data extraction mode
+    # - gemini-2.5-pro: quality-focused mode and first quota fallback after two consecutive 429 errors
+    # - gemini-3.1-pro-preview: second quota fallback after two more consecutive 429 errors
+    # - gemini-2.5-flash: older balanced throughput mode
+    # - gemini-2.5-flash-lite: lighter budget-oriented mode
+    model: gemini-3.5-flash  # auto chain: gemini-3.5-flash -> gemini-2.5-pro -> gemini-3.1-pro-preview
+
+  yandex:
+    enabled: true
+    # Yandex OCR model values are recognition modes, not LLM quality tiers.
+    # Common modes: page, page-column-sort, table, handwritten, markdown, math-markdown.
+    model: page
+    api_key_file: api_key_yandex_studio.txt
+    folder_id_file: yandex_folder.txt
+
+  xai:
+    enabled: true
+    # xAI is used as a vision/text OCR helper through the OCR Brick vision adapter.
+    # Use Refresh list in the UI to query models exposed to the selected key.
+    model: grok-4.3
+    api_key_file: api_key_xai.txt
+
+ocr:
+  active_profile: mobile_safe
+
+  profiles:
+    mobile_safe:
+      language_hint: ru,en,de
+      prompt_file: ocr_prompt_primary_ru.md
+      entity_hints_enabled: true
+      entity_hints_file: ocr_named_entities_ru.yaml
+      entity_hints_max_chars: 4000
+      second_pass_enabled: true
+      second_pass_if_cyrillic: true
+      second_pass_prompt_file: ocr_prompt_refine_ru.md
+      second_pass_min_cyrillic_ratio: 0.18
+      numeric_mode_threshold: 0.95
+      pdf_render_dpi: 240
+      pages_per_batch: 3
+      image_min_long_side: 1400
+      image_max_long_side: 2200
+      image_format: JPEG
+      auto_photo_mode: true
+      autocontrast: true
+      grayscale: false
+      contrast: 1.04
+      sharpness: 1.03
+      median_filter_size: 0
+      photo_override:
+        autocontrast: true
+        grayscale: true
+        contrast: 1.08
+        sharpness: 1.06
+        median_filter_size: 3
+      openai:
+        pages_per_batch: 3
+        fallback_to_gemini_on_region_error: true
+        timeout_sec: 180
+        max_retries: 4
+        reasoning_effort: minimal
+        verbosity: medium
+      gemini:
+        pages_per_batch: 1
+        fallback_to_openai_on_region_error: true
+        timeout_sec: 30
+        file_timeout_sec: 30
+        max_retries: 4
+
+    max_quality:
+      language_hint: ru,en,de
+      prompt_file: ocr_prompt_primary_ru.md
+      entity_hints_enabled: true
+      entity_hints_file: ocr_named_entities_ru.yaml
+      entity_hints_max_chars: 4000
+      second_pass_enabled: true
+      second_pass_if_cyrillic: true
+      second_pass_prompt_file: ocr_prompt_refine_ru.md
+      second_pass_min_cyrillic_ratio: 0.18
+      numeric_mode_threshold: 0.95
+      pdf_render_dpi: 300
+      pages_per_batch: 4
+      image_min_long_side: 1600
+      image_max_long_side: 2800
+      image_format: PNG
+      auto_photo_mode: true
+      autocontrast: true
+      grayscale: false
+      contrast: 1.02
+      sharpness: 1.02
+      median_filter_size: 0
+      photo_override:
+        autocontrast: true
+        grayscale: true
+        contrast: 1.06
+        sharpness: 1.04
+        median_filter_size: 3
+      openai:
+        pages_per_batch: 4
+        fallback_to_gemini_on_region_error: true
+        timeout_sec: 240
+        max_retries: 5
+        reasoning_effort: minimal
+        verbosity: medium
+      gemini:
+        pages_per_batch: 1
+        fallback_to_openai_on_region_error: true
+        timeout_sec: 30
+        file_timeout_sec: 30
+        max_retries: 5

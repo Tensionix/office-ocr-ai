@@ -1,0 +1,18 @@
+# Core
+opencv-python>=4.9
+numpy>=1.26
+# Services
+fastapi>=0.110
+uvicorn>=0.29
+requests>=2.31
+# Renderers
+reportlab>=4.1        # searchable PDF text layer
+python-docx>=1.1      # DOCX output
+openpyxl>=3.1         # XLSX output
+# Source rasterization
+pymupdf>=1.24         # PDF -> page images (wire in preprocess.rasterize)
+# GUI
+nicegui>=1.4
+# Heavy engines (optional; install only what you use)
+# surya-ocr            # Surya layout + OCR (PyTorch)
+# External binaries (NOT pip): tesseract, realesrgan-ncnn-vulkan

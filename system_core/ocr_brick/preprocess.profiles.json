@@ -1,0 +1,12 @@
+{
+  "engine": {
+    "ncnn_exe": "bin/realesrgan-ncnn-vulkan.exe",
+    "gpu": "auto"
+  },
+  "profiles": {
+    "tesseract": { "sr_scale": 4, "sr_model": "general", "denoise": "weak",  "strip_vlines": false, "deskew": true, "binarize": "on",  "intent": "text" },
+    "surya":     { "sr_scale": 2, "sr_model": "general", "denoise": "weak",  "strip_vlines": false, "deskew": true, "binarize": "off", "intent": "text" },
+    "yandex":    { "sr_scale": 2, "sr_model": "general", "denoise": "weak",  "strip_vlines": false, "deskew": true, "binarize": "off", "intent": "text" },
+    "vision":    { "sr_scale": 2, "sr_model": "general", "denoise": "weak",  "strip_vlines": false, "deskew": true, "binarize": "off", "intent": "text" }
+  }
+}

@@ -1,0 +1,3512 @@
+tool:
+  id: audion_office_ocr_ai
+  name: "Audion Office OCR AI"
+  category: "OCR / Office"
+  version: "0.2.0-gui-preview"
+
+paths:
+  input: "input"
+  output: "output"
+  logs: "logs"
+  report: "report"
+  workspace: "workspace"
+  config: "config"
+  release: "release"
+
+ui:
+  title: "Audion Office OCR AI"
+  host: "127.0.0.1"
+  port: 8080
+  native: false
+  reload: false
+  open_browser: true
+
+operations:
+  - id: extract_local
+    title: "Convert to Markdown/MD"
+    title_ru: "КОНВЕРТАЦИЯ В MARKDOWN/MD"
+    description: "Convert text-based office files from input to Markdown in output."
+    description_ru: "Конвертировать DOCX/XLSX/PPTX/PDF/TXT/CSV/HTML из input в Markdown/MD внутри output без AI OCR."
+    service: "system_core.services.office_service:extract_local"
+    kind: "safe"
+
+  - id: build_docx
+    title: "Build DOCX"
+    title_ru: "Собрать DOCX"
+    description: "Compile Markdown files from input into office-style DOCX files."
+    description_ru: "Собрать Markdown-файлы из input в офисные DOCX."
+    service: "system_core.services.office_service:build_docx"
+    kind: "safe"
+
+  - id: build_xlsx
+    title: "Build XLSX"
+    title_ru: "Собрать XLSX"
+    description: "Extract Markdown tables from input into Excel workbooks."
+    description_ru: "Извлечь Markdown-таблицы из input в книги Excel."
+    service: "system_core.services.office_service:build_xlsx"
+    kind: "safe"
+
+operation_groups:
+  - id: extract
+    title: "Extract to Markdown"
+    title_ru: "Извлечь в Markdown"
+    description: "Create auditable Markdown from office files, PDFs, and scans."
+    description_ru: "Получить проверяемый Markdown из офисных файлов, PDF и сканов."
+    tooltip: "Start here when the source is an office file, PDF, scan, or image and you need clean Markdown for review or later DOCX/PDF export."
+    tooltip_ru: "Начинайте отсюда, если источник - офисный файл, PDF, скан или изображение, а на выходе нужен чистый Markdown для проверки и дальнейшей сборки DOCX/PDF."
+    children:
+      - id: extract_local
+        title: "Convert to Markdown/MD"
+        title_ru: "КОНВЕРТАЦИЯ В MARKDOWN/MD"
+        description: "DOCX/XLSX/PPTX/PDF/TXT/CSV/HTML to Markdown/MD without AI OCR."
+        description_ru: "DOCX/XLSX/PPTX/PDF/TXT/CSV/HTML в Markdown/MD без AI OCR: быстрое извлечение уже выделяемого офисного текста."
+        tooltip: "Use this for files that already contain selectable text. It does not try to read pixels from scanned pages."
+        tooltip_ru: "Для файлов, где текст уже выделяется мышкой. Этот режим не читает пиксели со сканов и не запускает OCR."
+        service: "system_core.services.office_service:extract_local"
+        kind: "safe"
+
+      - id: ocr_brick
+        title: "OCR Brick (preprocess + engines)"
+        title_ru: "OCR Brick: препроцессинг и движки"
+        description: "Run the new parameter-driven preprocess pipeline and selected OCR engine."
+        description_ru: "Запустить новый параметрический препроцессинг и выбранный движок OCR."
+        tooltip: "Main scan/image OCR pipeline: cleans the page first, then sends it to a local OCR engine or a paid vision/OCR API."
+        tooltip_ru: "Главный OCR-пайплайн для сканов и картинок: сначала чистит страницу, потом отдаёт её локальному движку или платной OCR/vision API-модели."
+        service: "system_core.services.office_service:ocr_brick_run"
+        kind: "safe"
+        parameters:
+          provider: "yandex"
+        fields:
+          - id: ocr_engine
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 7
+            choice_compact: true
+            hide_label: true
+            label: "Engine"
+            label_ru: "Движок"
+            default: "tesseract"
+            span: "full"
+            options:
+              - value: "tesseract"
+                label: "Tesseract"
+                label_ru: "Tesseract"
+                tone: "local"
+                tooltip: "Local OCR with word boxes; best with binarized text scans."
+                tooltip_ru: "Локальный OCR с координатами слов; лучше для бинаризованных текстовых сканов."
+              - value: "surya"
+                label: "Surya"
+                label_ru: "Surya"
+                tone: "local"
+                tooltip: "Local Surya OCR/layout through the optional portable runtime."
+                tooltip_ru: "Локальный Surya OCR/layout через optional portable runtime."
+              - value: "yandex"
+                label: "Yandex"
+                label_ru: "Yandex"
+                tone: "yandex"
+                tooltip: "Cloud OCR with word boxes; useful for difficult Russian scans."
+                tooltip_ru: "Облачный OCR с координатами слов; полезен для сложных русских сканов."
+              - value: "xai"
+                label: "xAI"
+                label_ru: "xAI"
+                tone: "vision"
+                tooltip: "xAI vision OCR returns Markdown/text without word boxes."
+                tooltip_ru: "xAI vision OCR возвращает Markdown/текст без координат слов."
+              - value: "mistral"
+                label: "Mistral OCR 4"
+                label_ru: "Mistral OCR 4"
+                tone: "vision"
+                tooltip: "Dedicated multilingual OCR with Markdown, tables, typed blocks, bounding boxes and confidence scores."
+                tooltip_ru: "Специализированный мультиязычный OCR: Markdown, таблицы, типы блоков, координаты и confidence."
+              - value: "gemini"
+                label: "Gemini"
+                label_ru: "Gemini"
+                tone: "vision"
+                tooltip: "Keep using the existing Gemini AI OCR route for this milestone."
+                tooltip_ru: "На этом этапе используйте существующий маршрут Gemini AI OCR."
+              - value: "chatgpt"
+                label: "ChatGPT"
+                label_ru: "ChatGPT"
+                tone: "vision"
+                tooltip: "Keep using the existing OpenAI AI OCR route for this milestone."
+                tooltip_ru: "На этом этапе используйте существующий маршрут OpenAI AI OCR."
+          - id: ocr_preprocess_profile
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 5
+            group: "filters"
+            hide_label: true
+            label: "Scan cleanup"
+            label_ru: "Очистка скана"
+            default: "auto"
+            span: "full"
+            hint: "Auto uses tuned defaults for the selected engine. Raw disables cleanup. Numbers boosts contrast/sharpening for legal and financial IDs. Manual opens the old detailed knobs in Advanced."
+            hint_ru: "Авто использует настроенные defaults под выбранный движок. Без очистки отдаёт страницу как есть. Цифры усиливает контраст/резкость для реквизитов. Ручной открывает старые детальные тумблеры в Advanced."
+            options:
+              - value: "auto"
+                label: "Auto"
+                label_ru: "Авто"
+                tone: "process"
+                tooltip: "Recommended: engine-aware cleanup for Tesseract, Surya, Yandex, and vision API models."
+                tooltip_ru: "Рекомендуется: очистка под выбранный движок Tesseract, Surya, Yandex или vision API."
+              - value: "raw"
+                label: "Raw"
+                label_ru: "Без очистки"
+                tone: "raw"
+                tooltip: "Skip preprocessing completely; useful when the scan is already clean and processing makes it worse."
+                tooltip_ru: "Полностью пропустить препроцессинг; полезно, если скан уже чистый и обработка только портит."
+              - value: "heavy"
+                label: "Heavy scan"
+                label_ru: "Тяжёлый скан"
+                tone: "warn"
+                tooltip: "More aggressive denoise, contrast and sharpening for damaged JPEG scans."
+                tooltip_ru: "Более агрессивное шумоподавление, контраст и резкость для повреждённых JPEG-сканов."
+              - value: "numbers"
+                label: "Numbers"
+                label_ru: "Цифры"
+                tone: "warn"
+                tooltip: "Contrast/sharpening profile for contracts, IKZ, dates, sums and other exact legal or financial fields."
+                tooltip_ru: "Профиль контраста/резкости для контрактов, ИКЗ, дат, сумм и других точных юридических или финансовых реквизитов."
+              - value: "manual"
+                label: "Manual"
+                label_ru: "Ручной"
+                tone: "cpu"
+                tooltip: "Shows the detailed preprocessing switches in Advanced."
+                tooltip_ru: "Показывает подробные переключатели препроцессинга в Advanced."
+          - id: preprocess_enabled
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 2
+            group: "filters"
+            advanced: true
+            show_if:
+              ocr_preprocess_profile: "manual"
+            label: "Preprocess"
+            label_ru: "Препроцессинг"
+            default: true
+            span: "full"
+            options:
+              - value: true
+                label: "On"
+                label_ru: "Включен"
+                tone: "process"
+              - value: false
+                label: "Raw passthrough"
+                label_ru: "Без обработки"
+                tone: "raw"
+          - id: ocr_sr_scale
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 3
+            group: "filters"
+            advanced: true
+            show_if:
+              ocr_preprocess_profile: "manual"
+            label: "Upscale"
+            label_ru: "Апскейл"
+            default: 2
+            span: "full"
+            options:
+              - value: 0
+                label: "Off"
+                label_ru: "Выкл"
+                tone: "cpu"
+              - value: 2
+                label: "2x"
+                label_ru: "2x"
+                tone: "gpu"
+              - value: 4
+                label: "4x"
+                label_ru: "4x"
+                tone: "gpu"
+          - id: ocr_sr_model
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 3
+            group: "filters"
+            show_if:
+              ocr_preprocess_profile: "manual"
+              ocr_sr_scale: [2, 4]
+            advanced: true
+            label: "SR model"
+            label_ru: "SR модель"
+            default: "auto"
+            span: "full"
+            options:
+              - value: "auto"
+                label: "Auto"
+                label_ru: "Авто"
+              - value: "general"
+                label: "General"
+                label_ru: "General"
+                tone: "process"
+              - value: "sharp"
+                label: "Sharp"
+                label_ru: "Sharp"
+                tone: "warn"
+          - id: ocr_denoise
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 3
+            group: "filters"
+            advanced: true
+            show_if:
+              ocr_preprocess_profile: "manual"
+            label: "Denoise"
+            label_ru: "Шум JPEG"
+            default: "weak"
+            span: "full"
+            options:
+              - value: "none"
+                label: "None"
+                label_ru: "Нет"
+              - value: "weak"
+                label: "Weak"
+                label_ru: "Слабый"
+                tone: "process"
+              - value: "strong"
+                label: "Strong"
+                label_ru: "Сильный"
+                tone: "warn"
+          - id: ocr_contrast
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 3
+            group: "filters"
+            advanced: true
+            show_if:
+              ocr_preprocess_profile: "manual"
+            label: "Contrast"
+            label_ru: "Контраст"
+            default: "auto"
+            span: "full"
+            options:
+              - value: "auto"
+                label: "Auto"
+                label_ru: "Авто"
+                tone: "process"
+              - value: "normal"
+                label: "Normal"
+                label_ru: "Норма"
+                tone: "cpu"
+              - value: "high"
+                label: "High"
+                label_ru: "Высокий"
+                tone: "warn"
+          - id: ocr_unsharp
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 3
+            group: "filters"
+            advanced: true
+            show_if:
+              ocr_preprocess_profile: "manual"
+            label: "Unsharp"
+            label_ru: "Unsharp"
+            default: "auto"
+            span: "full"
+            options:
+              - value: "auto"
+                label: "Auto"
+                label_ru: "Авто"
+                tone: "process"
+              - value: "off"
+                label: "Off"
+                label_ru: "Выкл"
+                tone: "raw"
+              - value: "strong"
+                label: "Strong"
+                label_ru: "Сильный"
+                tone: "warn"
+          - id: ocr_binarize
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 3
+            group: "filters"
+            advanced: true
+            show_if:
+              ocr_preprocess_profile: "manual"
+            label: "Binarize"
+            label_ru: "Бинаризация"
+            default: "auto"
+            span: "full"
+            options:
+              - value: "auto"
+                label: "Auto"
+                label_ru: "Авто"
+              - value: "on"
+                label: "Force on"
+                label_ru: "Включить"
+                tone: "warn"
+              - value: "off"
+                label: "Force off"
+                label_ru: "Выключить"
+          - id: ocr_intent
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 2
+            group: "filters"
+            advanced: true
+            show_if:
+              ocr_preprocess_profile: "manual"
+            label: "Intent"
+            label_ru: "Цель очистки"
+            default: "text"
+            span: "full"
+            options:
+              - value: "text"
+                label: "Text only"
+                label_ru: "Только текст"
+                tone: "process"
+              - value: "image"
+                label: "Preserve image"
+                label_ru: "Беречь изображение"
+          - id: ocr_output_contract
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 2
+            group: "output"
+            show_if:
+              ocr_engine: ["tesseract", "surya", "yandex", "mistral"]
+            label: "Output"
+            label_ru: "Контракт"
+            default: "text"
+            span: "full"
+            options:
+              - value: "text"
+                label: "Text + boxes"
+                label_ru: "Текст + боксы"
+                tone: "local"
+              - value: "structured"
+                label: "Layout"
+                label_ru: "Раскладка"
+                tone: "warn"
+          - id: ocr_output_formats
+            type: "checkboxes"
+            checkbox_layout: "grouped_chips"
+            checkbox_group_order: ["office", "dev"]
+            group: "deliverables"
+            hide_label: true
+            label: "Output formats"
+            label_ru: "Выходные форматы"
+            default: ["docx"]
+            span: "full"
+            hint: "Select independent exports from the lossless internal DocumentModel. DOCX is the working default; every checked format is written immediately after OCR without rerunning recognition."
+            hint_ru: "Выберите независимые экспорты из внутреннего DocumentModel без потерь. Рабочий дефолт — DOCX; каждый отмеченный формат записывается сразу после OCR без повторного распознавания."
+            options:
+              - value: "docx"
+                label: "DOCX"
+                label_ru: "DOCX"
+                tone: "office"
+              - value: "xlsx"
+                label: "XLSX"
+                label_ru: "XLSX"
+                tone: "office"
+              - value: "searchable_pdf"
+                label: "Searchable PDF"
+                label_ru: "Searchable PDF"
+                tone: "office"
+              - value: "odt"
+                label: "ODT"
+                label_ru: "ODT"
+                tone: "office"
+              - value: "markdown"
+                label: "Markdown"
+                label_ru: "Markdown"
+                tone: "dev"
+              - value: "json"
+                label: "OCR JSON"
+                label_ru: "OCR JSON"
+                tone: "dev"
+              - value: "html"
+                label: "HTML"
+                label_ru: "HTML"
+                tone: "dev"
+              - value: "verification"
+                label: "Verification"
+                label_ru: "Проверка"
+                tone: "dev"
+          - id: ocr_mistral_second_pass
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 2
+            group: "local_access"
+            show_if:
+              ocr_engine: "mistral"
+            label: "Independent second pass"
+            label_ru: "Независимый второй проход"
+            default: "tesseract"
+            span: "full"
+            hint: "Mistral keeps document structure. Yandex independently rereads the same cleaned page; Tesseract remains the local third opinion."
+            hint_ru: "Mistral сохраняет структуру. Yandex независимо перечитывает тот же очищенный растр; Tesseract остаётся локальным третьим мнением."
+            options:
+              - value: "none"
+                label: "None"
+                label_ru: "Нет"
+                tone: "raw"
+              - value: "tesseract"
+                label: "Tesseract"
+                label_ru: "Tesseract"
+                tone: "local"
+              - value: "yandex"
+                label: "Yandex"
+                label_ru: "Yandex"
+                tone: "yandex"
+              - value: "yandex_tesseract"
+                label: "Yandex + Tesseract"
+                label_ru: "Yandex + Tesseract"
+                tone: "warn"
+          - id: ocr_yandex_2pass_scope
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 2
+            group: "local_access"
+            show_if:
+              ocr_engine: "mistral"
+              ocr_mistral_second_pass: ["yandex", "yandex_tesseract"]
+            label: "Yandex pass scope"
+            label_ru: "Область прохода Yandex"
+            default: "suspicious"
+            span: "full"
+            options:
+              - value: "suspicious"
+                label: "Suspicious pages"
+                label_ru: "Подозрительные страницы"
+                tone: "process"
+              - value: "all"
+                label: "All pages"
+                label_ru: "Все страницы"
+                tone: "warn"
+          - id: ocr_yandex_fusion
+            type: "toggle"
+            group: "local_access"
+            show_if:
+              ocr_engine: "mistral"
+              ocr_mistral_second_pass: ["yandex", "yandex_tesseract"]
+            label: "Use Yandex as a verified text layer"
+            label_ru: "Использовать Yandex как проверяемый текстовый слой"
+            default: true
+            span: "half"
+            hint: "Builds a verified physical grid from raster lines and the numbered column row, then assigns Mistral, Yandex and Tesseract text inside exact cells. Numeric disagreements remain review items."
+            hint_ru: "Строит проверенную физическую сетку по линиям растра и строке нумерации столбцов, затем распределяет текст Mistral, Yandex и Tesseract по точным ячейкам. Расхождения цифр остаются на проверку."
+          - id: ocr_yandex_2pass_model
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 2
+            group: "advanced"
+            advanced: true
+            show_if:
+              ocr_engine: "mistral"
+              ocr_mistral_second_pass: ["yandex", "yandex_tesseract"]
+            label: "Yandex second-pass model"
+            label_ru: "Модель второго прохода Yandex"
+            default: "page"
+            span: "half"
+            options:
+              - value: "page"
+                label: "Printed"
+                label_ru: "Печатный"
+                tone: "yandex"
+              - value: "handwritten"
+                label: "Handwriting"
+                label_ru: "Рукописный"
+                tone: "warn"
+          - id: ocr_yandex_2pass_languages
+            type: "text"
+            group: "advanced"
+            advanced: true
+            show_if:
+              ocr_engine: "mistral"
+              ocr_mistral_second_pass: ["yandex", "yandex_tesseract"]
+            label: "Yandex languages"
+            label_ru: "Языки Yandex"
+            default: "ru,en"
+            span: "half"
+          - id: ocr_yandex_verify_threshold
+            type: "number"
+            group: "advanced"
+            advanced: true
+            show_if:
+              ocr_engine: "mistral"
+              ocr_mistral_second_pass: ["yandex", "yandex_tesseract"]
+            label: "Yandex numeric agreement threshold"
+            label_ru: "Порог согласия цифр Yandex"
+            default: 0.9
+            min: 0.5
+            max: 1.0
+            step: 0.05
+            span: "compact"
+          - id: ocr_tesseract_2pass
+            type: "toggle"
+            group: "local_access"
+            show_if:
+              ocr_engine: ["yandex", "xai", "gemini", "chatgpt"]
+            label: "Tesseract 2-pass"
+            label_ru: "2-pass Tesseract"
+            default: false
+            span: "half"
+            hint: "Run local Tesseract on the same cleaned page before the paid OCR engine. For xAI/Gemini/OpenAI it becomes a prompt hint; for Yandex/Mistral it is saved as a sidecar check."
+            hint_ru: "Запустить локальный Tesseract по той же очищенной странице перед платным OCR. Для xAI/Gemini/OpenAI это подсказка в prompt; для Yandex/Mistral — sidecar-сверка."
+          - id: ocr_tesseract_verify
+            type: "toggle"
+            group: "local_access"
+            show_if:
+              ocr_engine: "mistral"
+              ocr_mistral_second_pass: ["tesseract", "yandex_tesseract"]
+            label: "Verify Mistral result"
+            label_ru: "Верифицировать Mistral"
+            default: true
+            span: "half"
+            hint: "Compare normalized numbers, dates and vocabulary with Tesseract and mark the page pass/review. Pass means cross-engine agreement, not guaranteed truth."
+            hint_ru: "Сравнить нормализованные числа, даты и словарь с Tesseract и присвоить странице pass/review. Pass означает согласие движков, а не гарантированную истину."
+          - id: ocr_tesseract_verify_threshold
+            type: "number"
+            group: "advanced"
+            advanced: true
+            show_if:
+              ocr_engine: "mistral"
+              ocr_mistral_second_pass: ["tesseract", "yandex_tesseract"]
+              ocr_tesseract_verify: true
+            label: "Numeric agreement threshold"
+            label_ru: "Порог согласия цифр"
+            default: 0.9
+            min: 0.5
+            max: 1.0
+            step: 0.05
+            span: "compact"
+          - id: ocr_tesseract_2pass_hint
+            type: "toggle"
+            group: "local_access"
+            show_if:
+              ocr_engine: ["xai", "gemini", "chatgpt"]
+              ocr_tesseract_2pass: true
+            label: "Use as hint"
+            label_ru: "Дать как подсказку"
+            default: true
+            span: "half"
+            hint: "Passes Tesseract text to the vision model as a fallible hypothesis, useful for numbers and line order on damaged scans."
+            hint_ru: "Передаёт текст Tesseract vision-модели как ошибаемую гипотезу; полезно для цифр и порядка строк на повреждённых сканах."
+          - id: ocr_tesseract_2pass_lang
+            type: "text"
+            group: "local_access"
+            show_if:
+              ocr_engine: ["yandex", "mistral", "xai", "gemini", "chatgpt"]
+              ocr_tesseract_2pass: true
+            label: "2-pass language"
+            label_ru: "Язык 2-pass"
+            default: "rus+eng"
+            span: "half"
+            hint: "Tesseract language set for the local second pass."
+            hint_ru: "Набор языков Tesseract для локального второго прохода."
+          - id: ocr_tesseract_2pass_psm
+            type: "number"
+            group: "local_access"
+            show_if:
+              ocr_engine: ["yandex", "mistral", "xai", "gemini", "chatgpt"]
+              ocr_tesseract_2pass: true
+            label: "2-pass PSM"
+            label_ru: "2-pass PSM"
+            default: 6
+            min: 0
+            max: 13
+            step: 1
+            span: "compact"
+            hint: "Tesseract page segmentation mode. PSM 6 is a good default for document pages."
+            hint_ru: "Режим сегментации страницы Tesseract. PSM 6 обычно хорош для страниц документов."
+          - id: ocr_tesseract_2pass_prompt_chars
+            type: "number"
+            group: "advanced"
+            advanced: true
+            show_if:
+              ocr_engine: ["xai", "gemini", "chatgpt"]
+              ocr_tesseract_2pass: true
+              ocr_tesseract_2pass_hint: true
+            label: "Hint chars"
+            label_ru: "Символов подсказки"
+            default: 6000
+            min: 1000
+            max: 20000
+            step: 1000
+            span: "compact"
+            hint: "Maximum Tesseract text sent into the paid vision prompt."
+            hint_ru: "Максимум текста Tesseract, который попадёт в prompt платной vision-модели."
+          - id: surya_backend
+            type: "radio"
+            hidden: true
+            choice_style: "buttons"
+            choice_columns: 2
+            group: "local_access"
+            show_if:
+              ocr_engine: "surya"
+            label: "Surya backend"
+            label_ru: "Surya backend"
+            default: "llamacpp"
+            span: "full"
+            options:
+              - value: "llamacpp"
+                label: "llama.cpp"
+                label_ru: "llama.cpp"
+                tone: "local"
+              - value: "vllm"
+                label: "vLLM"
+                label_ru: "vLLM"
+                tone: "gpu"
+          - id: yandex_model
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 4
+            group: "model"
+            show_if:
+              ocr_engine: "yandex"
+            label: "Yandex mode"
+            label_ru: "Режим Yandex"
+            default: "page"
+            span: "full"
+            options_source: "system_core.services.office_service:yandex_ocr_model_options"
+            cache_seconds: 900
+            refresh_label: "Refresh OCR models"
+            refresh_label_ru: "Обновить OCR модели"
+            hint: "Refresh queries the Yandex model API when possible and keeps an OCR-safe cached selector."
+            hint_ru: "Обновление по возможности запрашивает Yandex model API и держит безопасный OCR-кэш."
+            options:
+              - value: "page"
+                label: "page"
+                label_ru: "Текст"
+                tone: "yandex"
+              - value: "page-column-sort"
+                label: "columns"
+                label_ru: "Колонки"
+                tone: "yandex"
+              - value: "table"
+                label: "table"
+                label_ru: "Таблица"
+                tone: "yandex"
+              - value: "handwritten"
+                label: "handwritten"
+                label_ru: "Рукописный"
+                tone: "warn"
+              - value: "markdown"
+                label: "Markdown"
+                label_ru: "Markdown"
+                tone: "yandex"
+              - value: "math-markdown"
+                label: "Math"
+                label_ru: "Формулы"
+                tone: "warn"
+              - value: "passport"
+                label: "passport"
+                label_ru: "Паспорт"
+                tone: "warn"
+              - value: "driver-license-front"
+                label: "driver front"
+                label_ru: "ВУ лицо"
+                tone: "warn"
+              - value: "driver-license-back"
+                label: "driver back"
+                label_ru: "ВУ оборот"
+                tone: "warn"
+              - value: "vehicle-registration-front"
+                label: "vehicle front"
+                label_ru: "СТС лицо"
+                tone: "warn"
+              - value: "vehicle-registration-back"
+                label: "vehicle back"
+                label_ru: "СТС оборот"
+                tone: "warn"
+              - value: "license-plates"
+                label: "plates"
+                label_ru: "Номера"
+                tone: "warn"
+          - id: yandex_api_key
+            type: "select"
+            group: "access"
+            show_if:
+              ocr_engine: "yandex"
+            label: "Yandex key"
+            label_ru: "Ключ Yandex"
+            default: ""
+            options_source: "system_core.services.office_service:api_key_options"
+            cache_seconds: 10
+            span: "half"
+          - id: yandex_languages
+            type: "text"
+            group: "parameters"
+            show_if:
+              ocr_engine: "yandex"
+            label: "Yandex languages"
+            label_ru: "Языки Yandex"
+            default: "ru,en"
+            span: "half"
+          - id: mistral_model
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 2
+            group: "model"
+            show_if:
+              ocr_engine: "mistral"
+            label: "Mistral OCR model"
+            label_ru: "Модель Mistral OCR"
+            default: "mistral-ocr-4-0"
+            span: "full"
+            options:
+              - value: "mistral-ocr-4-0"
+                label: "OCR 4 pinned"
+                label_ru: "OCR 4 закреплённая"
+                tone: "vision"
+              - value: "mistral-ocr-latest"
+                label: "OCR latest"
+                label_ru: "OCR latest"
+                tone: "warn"
+          - id: mistral_api_key
+            type: "select"
+            group: "access"
+            show_if:
+              ocr_engine: "mistral"
+            label: "Mistral key"
+            label_ru: "Ключ Mistral"
+            default: ""
+            options_source: "system_core.services.office_service:mistral_api_key_options"
+            cache_seconds: 10
+            span: "half"
+          - id: mistral_table_format
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 2
+            group: "parameters"
+            show_if:
+              ocr_engine: "mistral"
+            label: "Mistral tables"
+            label_ru: "Таблицы Mistral"
+            default: "html"
+            span: "half"
+            options:
+              - value: "html"
+                label: "HTML (merged cells)"
+                label_ru: "HTML (объединённые ячейки)"
+              - value: "markdown"
+                label: "Markdown"
+                label_ru: "Markdown"
+          - id: mistral_include_blocks
+            type: "toggle"
+            group: "parameters"
+            show_if:
+              ocr_engine: "mistral"
+            label: "Typed blocks and boxes"
+            label_ru: "Типы блоков и координаты"
+            default: true
+            span: "half"
+          - id: mistral_confidence
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 2
+            group: "parameters"
+            show_if:
+              ocr_engine: "mistral"
+            label: "Confidence detail"
+            label_ru: "Детализация confidence"
+            default: "word"
+            span: "half"
+            options:
+              - value: "word"
+                label: "Per word"
+                label_ru: "По словам"
+              - value: "page"
+                label: "Per page"
+                label_ru: "По странице"
+          - id: xai_model
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 4
+            group: "model"
+            show_if:
+              ocr_engine: "xai"
+            label: "xAI model"
+            label_ru: "Модель xAI"
+            default: "grok-4.3"
+            span: "full"
+            options_source: "system_core.services.office_service:xai_vision_model_options"
+            cache_seconds: 900
+            cache_fields: ["xai_api_key"]
+            refresh_label: "Refresh xAI models"
+            refresh_label_ru: "Обновить модели xAI"
+            hint: "Refresh queries xAI model APIs and caches the models available to the selected key."
+            hint_ru: "Обновление запрашивает xAI model API и кэширует модели выбранного ключа."
+            options:
+              - value: "grok-4.3"
+                label: "grok-4.3"
+                label_ru: "grok-4.3"
+                tone: "vision"
+                tooltip: "Official image-understanding example model."
+                tooltip_ru: "Официальный пример модели для image understanding."
+              - value: "grok-4.20-non-reasoning-latest"
+                label: "4.20 fast"
+                label_ru: "4.20 fast"
+                tone: "vision"
+                tooltip: "Pinned: grok-4.20-non-reasoning-latest."
+                tooltip_ru: "Закреплено: grok-4.20-non-reasoning-latest."
+              - value: "grok-4.20-reasoning-latest"
+                label: "4.20 quality"
+                label_ru: "4.20 quality"
+                tone: "warn"
+                tooltip: "Pinned: grok-4.20-reasoning-latest."
+                tooltip_ru: "Закреплено: grok-4.20-reasoning-latest."
+              - value: "grok-latest"
+                label: "Latest"
+                label_ru: "Latest"
+                tone: "vision"
+                tooltip: "Pinned: grok-latest."
+                tooltip_ru: "Закреплено: grok-latest."
+          - id: xai_api_key
+            type: "select"
+            group: "access"
+            show_if:
+              ocr_engine: "xai"
+            label: "xAI key"
+            label_ru: "Ключ xAI"
+            default: ""
+            options_source: "system_core.services.office_service:xai_api_key_options"
+            cache_seconds: 10
+            span: "half"
+          - id: xai_russian_review_enabled
+            type: "toggle"
+            group: "parameters"
+            show_if:
+              ocr_engine: "xai"
+            label: "Russian OCR review"
+            label_ru: "Проверка русского OCR"
+            default: false
+            span: "half"
+            hint: "Off by default. When enabled, a second xAI pass runs only for pages with suspicious Cyrillic, encoding damage, or abnormally short OCR."
+            hint_ru: "По умолчанию выключено. При включении второй проход xAI выполняется только для страниц с подозрительной кириллицей, повреждением кодировки или аномально коротким OCR."
+          - id: xai_russian_review_model
+            type: "text"
+            group: "parameters"
+            show_if:
+              ocr_engine: "xai"
+              xai_russian_review_enabled: true
+            label: "Russian review model"
+            label_ru: "Модель русской проверки"
+            default: "grok-4.20-reasoning-latest"
+            span: "half"
+          - id: xai_russian_review_prompt
+            type: "textarea"
+            group: "parameters"
+            show_if:
+              ocr_engine: "xai"
+              xai_russian_review_enabled: true
+            label: "Russian review prompt"
+            label_ru: "Промпт русской проверки"
+            default_file: "config/ocr_prompt_refine_ru.md"
+            rows: 7
+            span: "full"
+          - id: gemini_model
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 3
+            group: "model"
+            show_if:
+              ocr_engine: "gemini"
+            label: "Gemini model"
+            label_ru: "Модель Gemini"
+            default: "gemini-3.5-flash"
+            options_source: "system_core.services.office_service:gemini_model_options"
+            cache_seconds: 900
+            cache_fields: ["gemini_api_key"]
+            span: "full"
+            options:
+              - value: "gemini-3.5-flash"
+                label: "gemini-3.5-flash"
+                label_ru: "gemini-3.5-flash"
+                tone: "vision"
+                tooltip: "Current fast document/vision default."
+                tooltip_ru: "Текущий быстрый default для документов и vision."
+              - value: "gemini-3.1-flash-lite"
+                label: "gemini-3.1-flash-lite"
+                label_ru: "gemini-3.1-flash-lite"
+                tone: "vision"
+                tooltip: "Low-latency multimodal model for lightweight extraction."
+                tooltip_ru: "Быстрая multimodal-модель для лёгкого извлечения."
+              - value: "gemini-3.1-pro-preview"
+                label: "gemini-3.1-pro-preview"
+                label_ru: "gemini-3.1-pro-preview"
+                tone: "warn"
+                tooltip: "Preview quality option for difficult pages."
+                tooltip_ru: "Preview-вариант качества для сложных страниц."
+              - value: "gemini-2.5-pro"
+                label: "gemini-2.5-pro"
+                label_ru: "gemini-2.5-pro"
+                tone: "warn"
+                tooltip: "Stable quality fallback with image/PDF input."
+                tooltip_ru: "Стабильный качественный fallback с image/PDF input."
+              - value: "gemini-2.5-flash"
+                label: "gemini-2.5-flash"
+                label_ru: "gemini-2.5-flash"
+                tone: "vision"
+              - value: "gemini-2.5-flash-lite"
+                label: "gemini-2.5-flash-lite"
+                label_ru: "gemini-2.5-flash-lite"
+                tone: "vision"
+          - id: gemini_api_key
+            type: "select"
+            group: "access"
+            show_if:
+              ocr_engine: "gemini"
+            label: "Gemini key"
+            label_ru: "Ключ Gemini"
+            default: ""
+            options_source: "system_core.services.office_service:gemini_api_key_options"
+            cache_seconds: 10
+            span: "half"
+          - id: gemini_service_tier
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 2
+            group: "parameters"
+            show_if:
+              ocr_engine: "gemini"
+            label: "Gemini tier"
+            label_ru: "Тариф Gemini"
+            default: "standard"
+            span: "half"
+            hint: "Standard is the normal interactive API. Flex is cheaper, but may wait longer or fail when capacity is tight."
+            hint_ru: "Standard - обычный интерактивный API. Flex дешевле, но может дольше ждать или отказать при нехватке мощности."
+            options:
+              - value: "standard"
+                label: "Standard"
+                label_ru: "Standard"
+                tone: "vision"
+              - value: "flex"
+                label: "Flex"
+                label_ru: "Flex"
+                tone: "warn"
+          - id: gemini_use_stream
+            type: "toggle"
+            group: "parameters"
+            show_if:
+              ocr_engine: "gemini"
+            label: "Gemini stream"
+            label_ru: "Потоковый Gemini"
+            default: true
+            span: "half"
+            hint: "Use streaming Gemini responses. Turn this off when Gemini hangs, times out during SSL handshakes, or returns transport errors; OCR quality does not change."
+            hint_ru: "Потоковый ответ Gemini. Выключите, если Gemini зависает, ловит timeout на SSL или даёт транспортные ошибки; качество OCR от этого не меняется."
+          - id: openai_model
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 4
+            group: "model"
+            show_if:
+              ocr_engine: "chatgpt"
+            label: "OpenAI model"
+            label_ru: "Модель OpenAI"
+            default: "gpt-4.1"
+            options_source: "system_core.services.office_service:openai_model_options"
+            cache_seconds: 900
+            cache_fields: ["openai_api_key"]
+            span: "full"
+            options:
+              - value: "gpt-4.1"
+                label: "gpt-4.1"
+                label_ru: "gpt-4.1"
+                tone: "vision"
+                tooltip: "Project-proven balanced OCR/vision model."
+                tooltip_ru: "Проверенная в проекте сбалансированная OCR/vision-модель."
+              - value: "gpt-5.4"
+                label: "gpt-5.4"
+                label_ru: "gpt-5.4"
+                tone: "warn"
+                tooltip: "Quality mode for difficult documents."
+                tooltip_ru: "Режим качества для сложных документов."
+              - value: "gpt-5.4-mini"
+                label: "gpt-5.4-mini"
+                label_ru: "gpt-5.4-mini"
+                tone: "vision"
+                tooltip: "Fast/cost-balanced OCR mode."
+                tooltip_ru: "Быстрый и умеренный по стоимости OCR-режим."
+              - value: "gpt-5.4-nano"
+                label: "gpt-5.4-nano"
+                label_ru: "gpt-5.4-nano"
+                tone: "vision"
+                tooltip: "Budget OCR/data-extraction mode."
+                tooltip_ru: "Бюджетный режим OCR/data extraction."
+          - id: openai_api_key
+            type: "select"
+            group: "access"
+            show_if:
+              ocr_engine: "chatgpt"
+            label: "OpenAI key"
+            label_ru: "Ключ OpenAI"
+            default: ""
+            options_source: "system_core.services.office_service:openai_api_key_options"
+            cache_seconds: 10
+            span: "half"
+          - id: vision_prompt
+            type: "textarea"
+            group: "parameters"
+            show_if:
+              ocr_engine: ["xai", "gemini", "chatgpt"]
+            label: "Vision OCR prompt"
+            label_ru: "Промпт Vision OCR"
+            default_file: "config/ocr_prompt_vision_ocr.md"
+            rows: 9
+            span: "full"
+            hint: "Loaded from config/ocr_prompt_vision_ocr.md. Editing here affects this run; edit the file to make it permanent."
+            hint_ru: "Загружен из config/ocr_prompt_vision_ocr.md. Правка здесь влияет на текущий запуск; для постоянной правки измените файл."
+          - id: ocr_tesseract_lang
+            type: "text"
+            group: "local_access"
+            show_if:
+              ocr_engine: "tesseract"
+            label: "Tesseract language"
+            label_ru: "Язык Tesseract"
+            default: "rus+eng"
+            span: "half"
+          - id: ocr_tesseract_psm
+            type: "number"
+            group: "local_access"
+            show_if:
+              ocr_engine: "tesseract"
+            label: "Tesseract PSM"
+            label_ru: "Tesseract PSM"
+            default: 6
+            min: 0
+            max: 13
+            step: 1
+            span: "compact"
+          - id: ocr_strip_vlines
+            type: "toggle"
+            group: "options"
+            advanced: true
+            show_if:
+              ocr_preprocess_profile: "manual"
+            label: "Remove vertical lines"
+            label_ru: "Убирать вертикальные линии"
+            default: false
+            span: "half"
+          - id: ocr_deskew
+            type: "toggle"
+            group: "options"
+            advanced: true
+            show_if:
+              ocr_preprocess_profile: "manual"
+            label: "Deskew"
+            label_ru: "Выравнивать наклон"
+            default: true
+            span: "half"
+          - id: ocr_source_format
+            type: "select"
+            group: "advanced"
+            advanced: true
+            show_if:
+              ocr_preprocess_profile: "manual"
+            label: "Source format"
+            label_ru: "Формат источника"
+            default: "auto"
+            span: "half"
+            options:
+              - value: "auto"
+                label: "Auto"
+                label_ru: "Авто"
+              - value: "jpeg"
+                label: "JPEG"
+                label_ru: "JPEG"
+              - value: "png"
+                label: "PNG"
+                label_ru: "PNG"
+          - id: ocr_gpu
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 3
+            group: "advanced"
+            advanced: true
+            show_if:
+              ocr_preprocess_profile: "manual"
+              ocr_sr_scale: [2, 4]
+            label: "GPU device"
+            label_ru: "GPU"
+            default: "auto"
+            span: "full"
+            options:
+              - value: "auto"
+                label: "Auto"
+                label_ru: "Авто"
+                tone: "gpu"
+              - value: "cpu"
+                label: "CPU"
+                label_ru: "CPU"
+                tone: "cpu"
+              - value: "0"
+                label: "GPU 0"
+                label_ru: "GPU 0"
+                tone: "gpu"
+        children:
+          - id: ocr_brick_run
+            title: "Run OCR Brick"
+            title_ru: "Запустить OCR Brick"
+            description: "Run preprocess + selected engine on PDF/images from Source/input."
+            description_ru: "Запустить препроцессинг + выбранный движок для PDF/изображений из Source/input."
+            service: "system_core.services.office_service:ocr_brick_run"
+            kind: "safe"
+
+  - id: hybrid_workbench
+    title: "Python OCR Workbench"
+    title_ru: "Python OCR Workbench"
+    description: "Optional local Tesseract OCR, heuristic review queues, coordinates, and AI resolver candidates."
+    description_ru: "Опциональный локальный Tesseract OCR, эвристическая очередь ревью, координаты и кандидаты для AI resolver."
+    children:
+      - id: workbench_review
+        title: "Local OCR review queue"
+        title_ru: "Локальный OCR и очередь ревью"
+        description: "Analyze PDF/images locally, flag weak OCR/table-like regions, and write reports; runs in limited review mode when Tesseract is missing."
+        description_ru: "Локально анализировать PDF/изображения, отмечать слабые OCR/table-зоны и писать отчёты; без Tesseract работает в ограниченном review-режиме."
+        service: "system_core.services.office_service:workbench_review"
+        kind: "safe"
+        fields:
+          - id: workbench_ocr_engine
+            type: "select"
+            label: "Local OCR"
+            label_ru: "Локальный OCR"
+            default: "auto"
+            span: "half"
+            options:
+              - value: "auto"
+                label: "Auto"
+                label_ru: "Авто"
+              - value: "tesseract"
+                label: "Tesseract"
+                label_ru: "Tesseract"
+              - value: "disabled"
+                label: "Disabled"
+                label_ru: "Отключен"
+          - id: workbench_lang
+            type: "text"
+            label: "OCR language"
+            label_ru: "Язык OCR"
+            default: "rus+eng"
+            span: "half"
+          - id: workbench_low_confidence
+            type: "number"
+            label: "Low confidence"
+            label_ru: "Порог сомнений"
+            default: 70
+            min: 0
+            max: 100
+            step: 1
+            span: "compact"
+          - id: workbench_dpi
+            type: "number"
+            label: "Render DPI"
+            label_ru: "DPI рендера"
+            default: 180
+            min: 96
+            max: 400
+            step: 12
+            span: "compact"
+          - id: workbench_psm
+            type: "number"
+            label: "Tesseract PSM"
+            label_ru: "Tesseract PSM"
+            default: 6
+            min: 0
+            max: 13
+            step: 1
+            span: "compact"
+            advanced: true
+          - id: workbench_oem
+            type: "number"
+            label: "Tesseract OEM"
+            label_ru: "Tesseract OEM"
+            default: 1
+            min: 0
+            max: 3
+            step: 1
+            span: "compact"
+            advanced: true
+
+      - id: workbench_openai_resolver
+        title: "Python OCR + OpenAI resolver"
+        title_ru: "Python OCR + OpenAI resolver"
+        description: "Create a local review queue and package suspicious regions for OpenAI resolution; local OCR requires optional Tesseract."
+        description_ru: "Собрать локальную очередь ревью и упаковать спорные зоны для OpenAI resolver; локальный OCR требует optional Tesseract."
+        service: "system_core.services.office_service:workbench_ai"
+        kind: "safe"
+        parameters:
+          provider: "openai"
+        fields:
+          - id: workbench_ocr_engine
+            type: "select"
+            label: "Local OCR"
+            label_ru: "Локальный OCR"
+            default: "auto"
+            span: "half"
+            options:
+              - value: "auto"
+                label: "Auto"
+                label_ru: "Авто"
+              - value: "tesseract"
+                label: "Tesseract"
+                label_ru: "Tesseract"
+              - value: "disabled"
+                label: "Disabled"
+                label_ru: "Отключен"
+          - id: ai_resolver_mode
+            type: "radio"
+            label: "Resolver mode"
+            label_ru: "Режим resolver"
+            default: "review-only"
+            span: "full"
+            options:
+              - value: "review-only"
+                label: "Review queue only"
+                label_ru: "Только очередь ревью"
+              - value: "auto-fix-safe"
+                label: "Safe autofix queue"
+                label_ru: "Очередь safe autofix"
+          - id: ai_resolver_limit
+            type: "number"
+            label: "AI crop limit (-1 = all)"
+            label_ru: "Лимит AI-зон (-1 = все)"
+            default: -1
+            min: -1
+            max: 1000
+            step: 1
+            span: "compact"
+            advanced: true
+          - id: openai_model
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 4
+            label: "Model"
+            label_ru: "Модель"
+            default: "gpt-4.1"
+            options_source: "system_core.services.office_service:openai_model_options"
+            cache_seconds: 900
+            cache_fields: ["openai_api_key"]
+            span: "full"
+          - id: openai_api_key
+            type: "select"
+            label: "API key"
+            label_ru: "Ключ"
+            default: ""
+            options_source: "system_core.services.office_service:api_key_options"
+            cache_seconds: 10
+            span: "half"
+          - id: workbench_lang
+            type: "text"
+            label: "OCR language"
+            label_ru: "Язык OCR"
+            default: "rus+eng"
+            span: "half"
+          - id: workbench_low_confidence
+            type: "number"
+            label: "Low confidence"
+            label_ru: "Порог сомнений"
+            default: 70
+            min: 0
+            max: 100
+            step: 1
+            span: "compact"
+          - id: workbench_dpi
+            type: "number"
+            label: "Render DPI"
+            label_ru: "DPI рендера"
+            default: 180
+            min: 96
+            max: 400
+            step: 12
+            span: "compact"
+
+      - id: workbench_gemini_resolver
+        title: "Python OCR + Gemini resolver"
+        title_ru: "Python OCR + Gemini resolver"
+        description: "Create a local review queue and package suspicious regions for Gemini resolution; local OCR requires optional Tesseract."
+        description_ru: "Собрать локальную очередь ревью и упаковать спорные зоны для Gemini resolver; локальный OCR требует optional Tesseract."
+        service: "system_core.services.office_service:workbench_ai"
+        kind: "safe"
+        parameters:
+          provider: "gemini"
+        fields:
+          - id: workbench_ocr_engine
+            type: "select"
+            label: "Local OCR"
+            label_ru: "Локальный OCR"
+            default: "auto"
+            span: "half"
+            options:
+              - value: "auto"
+                label: "Auto"
+                label_ru: "Авто"
+              - value: "tesseract"
+                label: "Tesseract"
+                label_ru: "Tesseract"
+              - value: "disabled"
+                label: "Disabled"
+                label_ru: "Отключен"
+          - id: ai_resolver_mode
+            type: "radio"
+            label: "Resolver mode"
+            label_ru: "Режим resolver"
+            default: "review-only"
+            span: "full"
+            options:
+              - value: "review-only"
+                label: "Review queue only"
+                label_ru: "Только очередь ревью"
+              - value: "auto-fix-safe"
+                label: "Safe autofix queue"
+                label_ru: "Очередь safe autofix"
+          - id: ai_resolver_limit
+            type: "number"
+            label: "AI crop limit (-1 = all)"
+            label_ru: "Лимит AI-зон (-1 = все)"
+            default: -1
+            min: -1
+            max: 1000
+            step: 1
+            span: "compact"
+            advanced: true
+          - id: gemini_model
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 3
+            label: "Model"
+            label_ru: "Модель"
+            default: "gemini-3.5-flash"
+            options_source: "system_core.services.office_service:gemini_model_options"
+            cache_seconds: 900
+            cache_fields: ["gemini_api_key"]
+            span: "full"
+          - id: gemini_api_key
+            type: "select"
+            label: "API key"
+            label_ru: "Ключ"
+            default: ""
+            options_source: "system_core.services.office_service:api_key_options"
+            cache_seconds: 10
+            span: "half"
+          - id: workbench_lang
+            type: "text"
+            label: "OCR language"
+            label_ru: "Язык OCR"
+            default: "rus+eng"
+            span: "half"
+          - id: workbench_low_confidence
+            type: "number"
+            label: "Low confidence"
+            label_ru: "Порог сомнений"
+            default: 70
+            min: 0
+            max: 100
+            step: 1
+            span: "compact"
+          - id: workbench_dpi
+            type: "number"
+            label: "Render DPI"
+            label_ru: "DPI рендера"
+            default: 180
+            min: 96
+            max: 400
+            step: 12
+            span: "compact"
+
+      - id: workbench_coordinates
+        title: "Coordinate tables"
+        title_ru: "Координатные таблицы"
+        description: "Extract coordinate-like rows into XLSX while keeping review artifacts separate; OCR is limited when optional Tesseract is missing."
+        description_ru: "Извлечь координатные строки в XLSX, оставляя артефакты проверки отдельно; без optional Tesseract OCR ограничен."
+        service: "system_core.services.office_service:workbench_coordinates"
+        kind: "safe"
+        fields:
+          - id: workbench_ocr_engine
+            type: "select"
+            label: "Local OCR"
+            label_ru: "Локальный OCR"
+            default: "auto"
+            span: "half"
+            options:
+              - value: "auto"
+                label: "Auto"
+                label_ru: "Авто"
+              - value: "tesseract"
+                label: "Tesseract"
+                label_ru: "Tesseract"
+              - value: "disabled"
+                label: "Disabled"
+                label_ru: "Отключен"
+          - id: workbench_lang
+            type: "text"
+            label: "OCR language"
+            label_ru: "Язык OCR"
+            default: "rus+eng"
+            span: "half"
+          - id: workbench_dpi
+            type: "number"
+            label: "Render DPI"
+            label_ru: "DPI рендера"
+            default: 180
+            min: 96
+            max: 400
+            step: 12
+            span: "compact"
+
+  - id: dev_markdown_pdf
+    title: "DEV Markdown PDF"
+    title_ru: "DEV Markdown PDF"
+    description: "Render Markdown from input to paired dark/light PDFs through Chromium."
+    description_ru: "Собрать dark/light PDF из Markdown через Chromium."
+    service: "system_core.services.office_service:build_dev_markdown_pdf"
+    kind: "safe"
+    fields:
+      - id: dev_pdf_source_mode
+        type: "radio"
+        choice_style: "buttons"
+        choice_columns: 5
+        choice_align: "center"
+        group: "input_mode"
+        label: "What to process"
+        label_ru: "Что обработать"
+        default: "selected"
+        span: "full"
+        options:
+          - value: "selected"
+            label: "Source"
+            label_ru: "Источник"
+            tone: "process"
+            tooltip: "Use the current GUI Source file or folder."
+            tooltip_ru: "Использовать текущий файл или папку из поля Источник."
+          - value: "managed"
+            label: "Input/output"
+            label_ru: "Input/output"
+            tone: "local"
+            tooltip: "Scan only the managed input and output folders."
+            tooltip_ru: "Искать Markdown только в управляемых папках input и output."
+          - value: "search_docs"
+            label: "Docs"
+            label_ru: "Документация"
+            tone: "local"
+            tooltip: "Scan the project documentation tree using the document presets and filters."
+            tooltip_ru: "Искать Markdown в документации проекта с учётом пресетов и фильтров."
+          - value: "existing_pdf_pairs"
+            label: "PDF pairs"
+            label_ru: "PDF-пары"
+            tone: "warn"
+            tooltip: "Show only Markdown files that already have both generated PDF theme variants."
+            tooltip_ru: "Показать только Markdown, у которых уже есть обе PDF-версии."
+          - value: "outdated_only"
+            label: "Outdated PDFs"
+            label_ru: "Устаревшие PDF"
+            tone: "warn"
+            tooltip: "Show only Markdown files whose generated PDF is older than the source."
+            tooltip_ru: "Показать только Markdown, где PDF старее исходного файла."
+      - id: input_path
+        type: "folder"
+        hidden: true
+        label: "Workbench Source"
+        label_ru: "Источник Workbench"
+      - id: output_path
+        type: "folder"
+        hidden: true
+        label: "Workbench Target"
+        label_ru: "Назначение Workbench"
+      - id: dev_pdf_source_path
+        type: "text"
+        group: "input_mode"
+        label: "Where to search"
+        label_ru: "Где искать"
+        default: ""
+        span: "wide"
+        hint: "Relative to project root or absolute. Blank means current project root. The GUI Source action ignores this field."
+        hint_ru: "Относительный путь от корня проекта или абсолютный путь. Пусто = корень текущего проекта. Действие с Источником GUI это поле игнорирует."
+      - id: dev_pdf_output_mode
+        type: "radio"
+        choice_style: "buttons"
+        choice_columns: 4
+        choice_align: "center"
+        group: "output_mode"
+        label: "Where to put PDFs"
+        label_ru: "Куда положить PDF"
+        default: "docs-pdf"
+        span: "full"
+        tooltip: "Choose the final folder layout for generated dark/light PDF files before scanning and rendering starts."
+        tooltip_ru: "Выберите схему размещения сгенерированных dark/light PDF до сканирования и запуска сборки."
+        options:
+          - value: "docs-pdf"
+            label: "docs\\PDF"
+            label_ru: "docs\\PDF"
+            tooltip: "Default: rebuild documentation from each docs folder into its corresponding docs/PDF folder."
+            tooltip_ru: "По умолчанию: пересобрать документацию из каждой папки docs в соответствующую docs/PDF."
+          - value: "md-folder-pdf"
+            label: "PDF\\ near MD"
+            label_ru: "PDF\\ рядом с MD"
+            tooltip: "Every folder with Markdown gets one shared PDF subfolder."
+            tooltip_ru: "Для каждой папки с Markdown создаётся одна общая подпапка PDF."
+          - value: "beside"
+            label: "Beside Markdown"
+            label_ru: "Прямо рядом с MD"
+            tooltip: "Write generated PDFs directly into the same folder as the Markdown files, without creating a PDF subfolder."
+            tooltip_ru: "Положить PDF прямо в ту же папку, где лежат Markdown-файлы, без подпапки PDF."
+          - value: "mirror-output"
+            label: "Mirror to Target"
+            label_ru: "Зеркало в Назначение"
+            tooltip: "Write PDFs into the current Workbench Target while preserving the source folder tree. Use this for a separate generated PDF tree."
+            tooltip_ru: "Положить PDF в текущее Назначение Workbench с сохранением дерева исходных папок. Используйте, когда нужен отдельный каталог сгенерированных PDF."
+      - id: dev_pdf_doc_kinds
+        type: "checkboxes"
+        group: "filters"
+        checkbox_layout: "grid"
+        label: "Document presets"
+        label_ru: "Документные пресеты"
+        default: ["README", "USER", "GUIDE", "GUI", "GUARD", "ARCHITECTURE", "CHANGELOG", "INSTALL", "PORTABLE", "USAGE", "CONFIG", "TROUBLESHOOTING", "SECURITY"]
+        span: "wide"
+        options:
+          - value: "ALL_MD"
+            label: "ALL MD"
+            label_ru: "ВСЕ MD"
+          - value: "README"
+            label: "README"
+            label_ru: "README"
+          - value: "USER"
+            label: "USER"
+            label_ru: "USER"
+          - value: "GUIDE"
+            label: "GUIDE"
+            label_ru: "GUIDE"
+          - value: "GUI"
+            label: "GUI"
+            label_ru: "GUI"
+          - value: "GUARD"
+            label: "GUARD"
+            label_ru: "GUARD"
+          - value: "ARCHITECTURE"
+            label: "ARCHITECTURE"
+            label_ru: "ARCHITECTURE"
+          - value: "CHANGELOG"
+            label: "CHANGELOG"
+            label_ru: "CHANGELOG"
+          - value: "INSTALL"
+            label: "INSTALL"
+            label_ru: "INSTALL"
+          - value: "PORTABLE"
+            label: "PORTABLE"
+            label_ru: "PORTABLE"
+          - value: "USAGE"
+            label: "USAGE"
+            label_ru: "USAGE"
+          - value: "CONFIG"
+            label: "CONFIG"
+            label_ru: "CONFIG"
+          - value: "TROUBLESHOOTING"
+            label: "TROUBLE"
+            label_ru: "TROUBLE"
+          - value: "SECURITY"
+            label: "SECURITY"
+            label_ru: "SECURITY"
+          - value: "FAQ"
+            label: "FAQ"
+            label_ru: "FAQ"
+          - value: "API"
+            label: "API"
+            label_ru: "API"
+          - value: "ROADMAP"
+            label: "ROADMAP"
+            label_ru: "ROADMAP"
+          - value: "MIGRATION"
+            label: "MIGRATION"
+            label_ru: "MIGRATION"
+          - value: "RELEASE"
+            label: "RELEASE"
+            label_ru: "RELEASE"
+          - value: "LICENSE"
+            label: "LICENSE"
+            label_ru: "LICENSE"
+          - value: "AGENTS"
+            label: "AGENTS"
+            label_ru: "AGENTS"
+        selection_buttons:
+          - mode: "all"
+            label: "Select all"
+            label_ru: "Выбрать все"
+          - mode: "default"
+            label: "Default"
+            label_ru: "По-умолчанию"
+          - mode: "none"
+            label: "Clear"
+            label_ru: "Снять все"
+      - id: dev_pdf_custom_filters
+        type: "text"
+        group: "filters"
+        label: "Custom filename filters"
+        label_ru: "Свой фильтр имён"
+        default: ""
+        span: "wide"
+        hint: "Comma-separated tokens matched against Markdown filename/path, for example: API, ROADMAP, INSTALL."
+        hint_ru: "Через запятую: фрагменты имени или пути Markdown, например: API, ROADMAP, INSTALL."
+      - id: dev_pdf_exclude_dirs
+        type: "checkboxes"
+        group: "filters"
+        advanced: true
+        checkbox_layout: "grid"
+        label: "Exclude folders"
+        label_ru: "Исключить папки"
+        default: ["runtime", "data", "output", "logs", "release", "workspace", "work", "tools", "node_modules", "license", "licenses", "site-packages", "ripgrep"]
+        span: "wide"
+        options:
+          - value: "runtime"
+            label: "runtime"
+            label_ru: "runtime"
+          - value: "data"
+            label: "data"
+            label_ru: "data"
+          - value: "output"
+            label: "output"
+            label_ru: "output"
+          - value: "logs"
+            label: "logs"
+            label_ru: "logs"
+          - value: "release"
+            label: "release"
+            label_ru: "release"
+          - value: "workspace"
+            label: "workspace"
+            label_ru: "workspace"
+          - value: "work"
+            label: "work"
+            label_ru: "work"
+          - value: "node_modules"
+            label: "node_modules"
+            label_ru: "node_modules"
+          - value: "tools"
+            label: "tools"
+            label_ru: "tools"
+          - value: "license"
+            label: "license"
+            label_ru: "license"
+          - value: "licenses"
+            label: "licenses"
+            label_ru: "licenses"
+          - value: "site-packages"
+            label: "site-packages"
+            label_ru: "site-packages"
+          - value: "ripgrep"
+            label: "ripgrep"
+            label_ru: "ripgrep"
+      - id: dev_pdf_selected_docs
+        type: "checkboxes"
+        group: "documents"
+        checkbox_layout: "list"
+        label: "Found Markdown"
+        label_ru: "Найденные Markdown"
+        default: []
+        span: "wide"
+        options_source: "system_core.services.office_service:dev_markdown_doc_options"
+        cache_seconds: 0
+        cache_fields:
+          - "dev_pdf_source_mode"
+          - "dev_pdf_source_path"
+          - "input_path"
+          - "output_path"
+          - "dev_pdf_doc_kinds"
+          - "dev_pdf_custom_filters"
+          - "dev_pdf_exclude_dirs"
+          - "dev_pdf_output_mode"
+        refresh_label: "Scan"
+        refresh_label_ru: "Сканировать"
+        hint: "Empty selection means all found Markdown files matching the filters."
+        hint_ru: "Пустой выбор означает все найденные Markdown-файлы по фильтрам."
+        selection_buttons:
+          - mode: "all"
+            label: "Select all"
+            label_ru: "Выбрать все"
+          - mode: "missing_pdf"
+            label: "Only without PDF"
+            label_ru: "Только без PDF"
+          - mode: "outdated"
+            label: "Only outdated"
+            label_ru: "Только устаревшие"
+          - mode: "changelog"
+            label: "Only CHANGELOG"
+            label_ru: "Только CHANGELOG"
+          - mode: "none"
+            label: "Clear"
+            label_ru: "Снять все"
+      - id: dev_pdf_margin_left_mm
+        type: "number"
+        group: "layout"
+        advanced: true
+        label: "Left, mm"
+        label_ru: "Слева, мм"
+        default: 17
+        min: 0
+        max: 60
+        step: 1
+        span: "compact-start"
+      - id: dev_pdf_margin_right_mm
+        type: "number"
+        group: "layout"
+        advanced: true
+        label: "Right, mm"
+        label_ru: "Справа, мм"
+        default: 17
+        min: 0
+        max: 60
+        step: 1
+        span: "compact"
+      - id: dev_pdf_margin_top_mm
+        type: "number"
+        group: "layout"
+        advanced: true
+        label: "Top, mm"
+        label_ru: "Сверху, мм"
+        default: 16
+        min: 0
+        max: 60
+        step: 1
+        span: "compact"
+      - id: dev_pdf_margin_bottom_mm
+        type: "number"
+        group: "layout"
+        advanced: true
+        label: "Bottom, mm"
+        label_ru: "Снизу, мм"
+        default: 20
+        min: 0
+        max: 60
+        step: 1
+        span: "compact"
+      - id: dev_pdf_page_margin_y_mm
+        type: "number"
+        group: "layout"
+        advanced: true
+        label: "Page breathing, mm"
+        label_ru: "Воздух страницы, мм"
+        default: 4
+        min: 0
+        max: 30
+        step: 1
+        span: "compact-start"
+        hint: "Extra breathing room added above and below page content."
+        hint_ru: "Дополнительный воздух над и под содержимым страницы."
+      - id: dev_pdf_line_height
+        type: "number"
+        group: "layout"
+        advanced: true
+        label: "Line height"
+        label_ru: "Межстрочный"
+        default: 1.5
+        min: 1
+        max: 2
+        step: 0.05
+        span: "compact"
+
+  - id: table_workflow
+    title: "Tables"
+    title_ru: "Таблицы"
+    description: "Inspect Markdown tables and export them to Excel."
+    description_ru: "Проверить Markdown-таблицы и выгрузить их в Excel."
+    children:
+      - id: inspect_tables
+        title: "Inspect Markdown tables"
+        title_ru: "Проверить Markdown-таблицы"
+        description: "Show headings and table blocks for one file or all Markdown files."
+        description_ru: "Показать заголовки и блоки таблиц для одного файла или всех Markdown-файлов."
+        service: "system_core.services.office_service:inspect_tables"
+        kind: "safe"
+        fields:
+          - id: markdown_file
+            type: "select"
+            label: "Markdown file"
+            label_ru: "Markdown-файл"
+            default: ""
+            options_source: "system_core.services.office_service:markdown_file_options"
+            cache_seconds: 10
+            searchable: true
+      - id: build_xlsx
+        title: "Build XLSX"
+        title_ru: "Собрать XLSX"
+        description: "Turn Markdown tables from input into Excel sheets."
+        description_ru: "Преобразовать Markdown-таблицы из input в листы Excel."
+        service: "system_core.services.office_service:build_xlsx"
+        kind: "safe"
+
+  - id: build
+    title: "Build office output"
+    title_ru: "Собрать офисный результат"
+    description: "Compile reviewed Markdown into office formats."
+    description_ru: "Собрать проверенный Markdown в офисные форматы."
+    children:
+      - id: build_docx
+        title: "DOCX"
+        title_ru: "DOCX"
+        description: "Office-style Word document."
+        description_ru: "Офисный Word-документ."
+        service: "system_core.services.office_service:build_docx"
+        kind: "safe"
+        fields:
+          - id: docx_orientation
+            type: "radio"
+            label: "Page orientation"
+            label_ru: "Ориентация"
+            default: "portrait"
+            span: "full"
+            options:
+              - value: "portrait"
+                label: "Portrait"
+                label_ru: "Книжная"
+              - value: "landscape"
+                label: "Landscape"
+                label_ru: "Альбомная"
+          - id: docx_font_name
+            type: "select"
+            label: "Body font"
+            label_ru: "Основной шрифт"
+            default: "Arial"
+            options_source: "system_core.services.office_service:font_options"
+            cache_seconds: 3600
+            searchable: true
+            span: "double"
+          - id: docx_font_size_pt
+            type: "number"
+            label: "Body size, pt"
+            label_ru: "Размер, pt"
+            default: 10.5
+            min: 6
+            max: 72
+            step: 0.5
+            span: "compact"
+          - id: docx_margin_top_mm
+            type: "number"
+            label: "Top margin, mm"
+            label_ru: "Поле сверху, мм"
+            default: 20
+            min: 0
+            max: 100
+            step: 1
+            span: "compact-start"
+          - id: docx_margin_right_mm
+            type: "number"
+            label: "Right margin, mm"
+            label_ru: "Поле справа, мм"
+            default: 10
+            min: 0
+            max: 100
+            step: 1
+            span: "compact"
+          - id: docx_margin_bottom_mm
+            type: "number"
+            label: "Bottom margin, mm"
+            label_ru: "Поле снизу, мм"
+            default: 20
+            min: 0
+            max: 100
+            step: 1
+            span: "compact"
+          - id: docx_margin_left_mm
+            type: "number"
+            label: "Left margin, mm"
+            label_ru: "Поле слева, мм"
+            default: 20
+            min: 0
+            max: 100
+            step: 1
+            span: "compact"
+      - id: build_docx_llm
+        title: "DOCX from LLM Markdown"
+        title_ru: "DOCX из LLM Markdown"
+        description: "Dense Word layout for LLM-flavored Markdown."
+        description_ru: "Плотная Word-раскладка для Markdown от LLM."
+        service: "system_core.services.office_service:build_docx_llm"
+        kind: "safe"
+        fields:
+          - id: docx_orientation
+            type: "radio"
+            label: "Page orientation"
+            label_ru: "Ориентация"
+            default: "portrait"
+            span: "full"
+            options:
+              - value: "portrait"
+                label: "Portrait"
+                label_ru: "Книжная"
+              - value: "landscape"
+                label: "Landscape"
+                label_ru: "Альбомная"
+          - id: docx_font_name
+            type: "select"
+            label: "Body font"
+            label_ru: "Основной шрифт"
+            default: "Arial"
+            options_source: "system_core.services.office_service:font_options"
+            cache_seconds: 3600
+            searchable: true
+            span: "double"
+          - id: docx_font_size_pt
+            type: "number"
+            label: "Body size, pt"
+            label_ru: "Размер, pt"
+            default: 10
+            min: 6
+            max: 72
+            step: 0.5
+            span: "compact"
+          - id: docx_margin_top_mm
+            type: "number"
+            label: "Top margin, mm"
+            label_ru: "Поле сверху, мм"
+            default: 20
+            min: 0
+            max: 100
+            step: 1
+            span: "compact-start"
+          - id: docx_margin_right_mm
+            type: "number"
+            label: "Right margin, mm"
+            label_ru: "Поле справа, мм"
+            default: 10
+            min: 0
+            max: 100
+            step: 1
+            span: "compact"
+          - id: docx_margin_bottom_mm
+            type: "number"
+            label: "Bottom margin, mm"
+            label_ru: "Поле снизу, мм"
+            default: 20
+            min: 0
+            max: 100
+            step: 1
+            span: "compact"
+          - id: docx_margin_left_mm
+            type: "number"
+            label: "Left margin, mm"
+            label_ru: "Поле слева, мм"
+            default: 20
+            min: 0
+            max: 100
+            step: 1
+            span: "compact"
+      - id: build_pdf
+        title: "PDF"
+        title_ru: "PDF"
+        description: "Build PDF through Microsoft Word."
+        description_ru: "Собрать PDF через Microsoft Word."
+        service: "system_core.services.office_service:build_pdf"
+        kind: "safe"
+      - id: build_pptx
+        title: "PPTX"
+        title_ru: "PPTX"
+        description: "Build PowerPoint presentation."
+        description_ru: "Собрать презентацию PowerPoint."
+        service: "system_core.services.office_service:build_pptx"
+        kind: "safe"
+      - id: build_xlsx
+        title: "XLSX"
+        title_ru: "XLSX"
+        description: "Build Excel workbooks from Markdown tables."
+        description_ru: "Собрать Excel-книги из Markdown-таблиц."
+        service: "system_core.services.office_service:build_xlsx"
+        kind: "safe"
+
+  - id: project_tools
+    title: "Project tools"
+    title_ru: "Инструменты проекта"
+    description: "Status, diagnostics, and model checks."
+    description_ru: "Статус, диагностика и проверка моделей."
+    tooltip: "Install local OCR/image tools or check whether runtime, keys, models, and short OCR smoke tests are ready."
+    tooltip_ru: "Здесь ставятся локальные OCR/графические инструменты и проверяется готовность runtime, ключей, моделей и коротких OCR smoke-тестов."
+    children:
+      - id: project_status
+        title: "Project status"
+        title_ru: "Статус проекта"
+        description: "Print resolved project folders and runtime information."
+        description_ru: "Показать папки проекта и сведения о runtime."
+        tooltip: "Shows which folders and Python runtime the GUI is actually using. Useful when something runs from the wrong place."
+        tooltip_ru: "Показывает, какие папки и какой Python runtime реально использует GUI. Полезно, если что-то запускается не из того места."
+        service: "system_core.services.office_service:project_status"
+        kind: "safe"
+      - id: env_doctor
+        title: "Environment doctor"
+        title_ru: "Проверить окружение"
+        description: "Run runtime and import checks."
+        description_ru: "Проверить runtime и импорты."
+        tooltip: "Quick health check: verifies that the portable Python can import the libraries required by the project."
+        tooltip_ru: "Быстрая проверка здоровья: portable Python импортирует нужные проекту библиотеки или сразу показывает, чего не хватает."
+        service: "system_core.services.office_service:env_doctor"
+        kind: "safe"
+      - id: coordinate_tables
+        title: "Coordinate tables"
+        title_ru: "Координатные таблицы"
+        description: "Extract coordinate-like rows from PDFs/images into XLSX. Uses local vector text or optional Tesseract OCR."
+        description_ru: "Извлечь координатные строки из PDF/изображений в XLSX. Использует локальный текст PDF или optional Tesseract OCR."
+        service: "system_core.services.office_service:workbench_coordinates"
+        kind: "safe"
+        fields:
+          - id: coordinate_ocr_engine
+            type: "select"
+            group: "parameters"
+            label: "Local OCR"
+            label_ru: "Локальный OCR"
+            default: "auto"
+            span: "half"
+            options:
+              - value: "auto"
+                label: "Auto"
+                label_ru: "Авто"
+              - value: "tesseract"
+                label: "Tesseract"
+                label_ru: "Tesseract"
+              - value: "disabled"
+                label: "Disabled"
+                label_ru: "Отключен"
+          - id: coordinate_lang
+            type: "text"
+            group: "parameters"
+            label: "OCR language"
+            label_ru: "Язык OCR"
+            default: "rus+eng"
+            span: "half"
+          - id: coordinate_dpi
+            type: "number"
+            group: "parameters"
+            label: "Render DPI"
+            label_ru: "DPI рендера"
+            default: 180
+            min: 96
+            max: 400
+            step: 12
+            span: "compact"
+      - id: check_models_openai
+        title: "OpenAI models check"
+        title_ru: "Проверить модели OpenAI"
+        description: "Query OpenAI models for the selected key."
+        description_ru: "Запросить модели OpenAI для выбранного ключа."
+        tooltip: "Asks OpenAI which models are available for the selected key and refreshes the local model cache."
+        tooltip_ru: "Запрашивает у OpenAI список моделей, доступных выбранному ключу, и обновляет локальный кэш моделей."
+        service: "system_core.services.office_service:check_models"
+        kind: "safe"
+        parameters:
+          provider: "openai"
+        fields:
+          - id: openai_api_key
+            type: "select"
+            label: "API key"
+            label_ru: "Ключ"
+            default: ""
+            options_source: "system_core.services.office_service:api_key_options"
+            cache_seconds: 10
+            span: "half"
+      - id: check_models_gemini
+        title: "Gemini models check"
+        title_ru: "Проверить модели Gemini"
+        description: "Query Gemini models for the selected key."
+        description_ru: "Запросить модели Gemini для выбранного ключа."
+        tooltip: "Asks Gemini which models are available for the selected key and refreshes the local model cache."
+        tooltip_ru: "Запрашивает у Gemini список моделей, доступных выбранному ключу, и обновляет локальный кэш моделей."
+        service: "system_core.services.office_service:check_models"
+        kind: "safe"
+        parameters:
+          provider: "gemini"
+        fields:
+          - id: gemini_api_key
+            type: "select"
+            label: "API key"
+            label_ru: "Ключ"
+            default: ""
+            options_source: "system_core.services.office_service:api_key_options"
+            cache_seconds: 10
+            span: "half"
+      - id: gemini_batch_create
+        title: "Gemini Batch OCR"
+        title_ru: "Gemini Batch OCR"
+        description: "Prepare a Gemini Batch API OCR JSONL file and optionally submit the remote batch job."
+        description_ru: "Подготовить JSONL для Gemini Batch API OCR и при необходимости отправить удалённый batch job."
+        tooltip: "For large, non-urgent Gemini OCR runs. Batch is asynchronous and cheaper, but results are collected later by job id."
+        tooltip_ru: "Для больших несрочных OCR-прогонов Gemini. Batch работает асинхронно и дешевле, но результат забирается позже по job id."
+        service: "system_core.services.office_service:gemini_batch_create"
+        kind: "safe"
+        fields:
+          - id: gemini_batch_source
+            type: "text"
+            group: "source"
+            label: "PDF/image/folder"
+            label_ru: "PDF/изображение/папка"
+            default: "input"
+            span: "full"
+            hint: "Relative to project root or absolute. Folder means all supported PDFs/images inside it."
+            hint_ru: "Относительный путь от корня проекта или абсолютный. Папка означает все найденные PDF/изображения внутри."
+          - id: gemini_batch_pages
+            type: "text"
+            group: "source"
+            label: "Pages"
+            label_ru: "Страницы"
+            default: "all"
+            span: "compact"
+            hint: "Use all, a single page, or ranges like 6-8,12."
+            hint_ru: "all, одна страница или диапазоны вроде 6-8,12."
+          - id: gemini_batch_dpi
+            type: "number"
+            group: "source"
+            label: "Render DPI"
+            label_ru: "DPI рендера"
+            default: 300
+            min: 150
+            max: 450
+            step: 25
+            span: "compact"
+          - id: gemini_batch_preprocess_profile
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 4
+            group: "processing"
+            label: "Preprocess"
+            label_ru: "Препроцессинг"
+            default: "raw"
+            span: "full"
+            hint: "Raw is safest for Gemini tables. Clean profiles can help weak text, but may damage text near vertical stripes."
+            hint_ru: "Raw безопаснее для таблиц Gemini. Clean-профили могут помочь слабому тексту, но иногда портят строки рядом с вертикальными полосами."
+            options:
+              - value: "raw"
+                label: "Raw"
+                label_ru: "Raw"
+                tone: "vision"
+              - value: "auto"
+                label: "Auto"
+                label_ru: "Авто"
+                tone: "local"
+              - value: "heavy"
+                label: "Heavy"
+                label_ru: "Heavy"
+                tone: "warn"
+              - value: "numbers"
+                label: "Numbers"
+                label_ru: "Numbers"
+                tone: "warn"
+          - id: gemini_model
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 3
+            group: "model"
+            label: "Gemini model"
+            label_ru: "Модель Gemini"
+            default: "gemini-3.5-flash"
+            options_source: "system_core.services.office_service:gemini_model_options"
+            cache_seconds: 900
+            cache_fields: ["gemini_api_key"]
+            span: "full"
+          - id: gemini_api_key
+            type: "select"
+            group: "access"
+            label: "Gemini key"
+            label_ru: "Ключ Gemini"
+            default: ""
+            options_source: "system_core.services.office_service:gemini_api_key_options"
+            cache_seconds: 10
+            span: "half"
+          - id: gemini_batch_submit
+            type: "toggle"
+            group: "access"
+            label: "Submit to Google"
+            label_ru: "Отправить в Google"
+            default: false
+            span: "half"
+            hint: "Off means only build the local JSONL and manifest. Turn on to create the paid remote Batch API job."
+            hint_ru: "Выключено - только собрать локальный JSONL и manifest. Включите, чтобы создать платный удалённый Batch API job."
+          - id: vision_prompt
+            type: "textarea"
+            group: "parameters"
+            label: "Vision OCR prompt"
+            label_ru: "Промпт Vision OCR"
+            default_file: "config/ocr_prompt_vision_ocr.md"
+            rows: 9
+            span: "full"
+      - id: gemini_batch_collect
+        title: "Gemini Batch collect"
+        title_ru: "Забрать Gemini Batch"
+        description: "Check a Gemini Batch job and download finished OCR results into Markdown."
+        description_ru: "Проверить Gemini Batch job и скачать готовый OCR в Markdown."
+        tooltip: "Use after Gemini Batch OCR has been submitted. If job id is blank, the latest local manifest is used."
+        tooltip_ru: "Используйте после отправки Gemini Batch OCR. Если job id пустой, берётся последний локальный manifest."
+        service: "system_core.services.office_service:gemini_batch_collect"
+        kind: "safe"
+        fields:
+          - id: gemini_batch_job_name
+            type: "text"
+            group: "source"
+            label: "Job name"
+            label_ru: "Job name"
+            default: ""
+            span: "half"
+            hint: "Example: batches/123456789. Blank means latest submitted manifest."
+            hint_ru: "Например: batches/123456789. Пусто - последний отправленный manifest."
+          - id: gemini_batch_manifest
+            type: "text"
+            group: "source"
+            label: "Manifest"
+            label_ru: "Manifest"
+            default: ""
+            span: "half"
+            hint: "Optional manifest path. Blank means workspace/gemini_batch/latest.json."
+            hint_ru: "Опциональный путь к manifest. Пусто - workspace/gemini_batch/latest.json."
+          - id: gemini_api_key
+            type: "select"
+            group: "access"
+            label: "Gemini key"
+            label_ru: "Ключ Gemini"
+            default: ""
+            options_source: "system_core.services.office_service:gemini_api_key_options"
+            cache_seconds: 10
+            span: "half"
+      - id: check_models_yandex
+        title: "Yandex models check"
+        title_ru: "Проверить модели Yandex"
+        description: "Query Yandex AI Studio models for the selected key and refresh OCR-safe model cache."
+        description_ru: "Запросить модели Yandex AI Studio для выбранного ключа и обновить OCR-safe кэш."
+        tooltip: "Checks Yandex AI Studio access, then keeps only OCR-safe models in the cached selector."
+        tooltip_ru: "Проверяет доступ к Yandex AI Studio и обновляет кэш только тех моделей, которые безопасно использовать для OCR."
+        service: "system_core.services.office_service:check_models"
+        kind: "safe"
+        parameters:
+          provider: "yandex"
+        fields:
+          - id: yandex_api_key
+            type: "select"
+            label: "API key"
+            label_ru: "Ключ"
+            default: ""
+            options_source: "system_core.services.office_service:api_key_options"
+            cache_seconds: 10
+            span: "half"
+      - id: check_models_xai
+        title: "xAI models check"
+        title_ru: "Проверить модели xAI"
+        description: "Query xAI model APIs for the selected key and refresh the vision model cache."
+        description_ru: "Запросить xAI model API для выбранного ключа и обновить кэш vision-моделей."
+        tooltip: "Checks xAI access and filters the model list down to vision models that can accept images and return text."
+        tooltip_ru: "Проверяет доступ к xAI и отбирает vision-модели, которые принимают изображения и возвращают текст."
+        service: "system_core.services.office_service:check_models"
+        kind: "safe"
+        parameters:
+          provider: "xai"
+        fields:
+          - id: xai_api_key
+            type: "select"
+            label: "API key"
+            label_ru: "Ключ"
+            default: ""
+            options_source: "system_core.services.office_service:xai_api_key_options"
+            cache_seconds: 10
+            span: "half"
+      - id: install_realesrgan
+        title: "Real-ESRGAN Vulkan"
+        title_ru: "Real-ESRGAN Vulkan"
+        description: "Download the portable Windows Real-ESRGAN ncnn-vulkan binary into tools with license and manifest files."
+        description_ru: "Скачать portable Windows Real-ESRGAN ncnn-vulkan в tools с лицензией и manifest-файлом."
+        tooltip: "Optional Vulkan image enhancer/upscaler used before OCR to reduce scan artifacts and improve weak text."
+        tooltip_ru: "Опциональный Vulkan-усилитель изображений перед OCR: помогает убрать артефакты сканов, усилить слабый текст и подготовить апскейл."
+        service: "system_core.services.office_service:install_realesrgan"
+        kind: "safe"
+      - id: surya_acceleration
+        title: "Surya acceleration installs"
+        title_ru: "Ускорение Surya"
+        description: "Install only the acceleration module this machine needs: Vulkan, llama.cpp CUDA, or heavy PyTorch CUDA."
+        description_ru: "Установить только нужный этой машине модуль ускорения: Vulkan, llama.cpp CUDA или тяжёлый PyTorch CUDA."
+        tooltip: "Surya is a careful but slow local OCR/layout engine. This menu installs only the acceleration path that fits this GPU."
+        tooltip_ru: "Surya - въедливый, но медленный локальный OCR/layout-движок. Здесь ставится только тот путь ускорения, который подходит этой видеокарте."
+        children:
+          - id: install_llamacpp_vulkan
+            title: "llama.cpp Vulkan"
+            title_ru: "llama.cpp Vulkan"
+            description: "Recommended non-NVIDIA path. Installs Vulkan llama-server for Surya VLM inference."
+            description_ru: "Рекомендованный путь без NVIDIA. Ставит Vulkan llama-server для VLM-инференса Surya."
+            tooltip: "Best first choice for AMD/Intel and many non-CUDA machines: GPU acceleration through Vulkan without installing PyTorch."
+            tooltip_ru: "Лучший первый вариант для AMD/Intel и многих машин без CUDA: ускорение через Vulkan без установки тяжёлого PyTorch."
+            service: "system_core.services.office_service:install_llamacpp"
+            kind: "safe"
+            parameters:
+              llamacpp_variant: "vulkan"
+          - id: install_llamacpp_cuda124
+            title: "llama.cpp CUDA 12.4"
+            title_ru: "llama.cpp CUDA 12.4"
+            description: "Light NVIDIA path for RTX 20xx/30xx/40xx before trying heavy PyTorch CUDA."
+            description_ru: "Лёгкий NVIDIA-путь для RTX 20xx/30xx/40xx перед тяжёлым PyTorch CUDA."
+            tooltip: "Light NVIDIA acceleration for Surya VLM inference. Try this before the huge PyTorch CUDA runtime."
+            tooltip_ru: "Лёгкое NVIDIA-ускорение для VLM-инференса Surya. Его стоит попробовать до огромного PyTorch CUDA runtime."
+            service: "system_core.services.office_service:install_llamacpp"
+            kind: "safe"
+            parameters:
+              llamacpp_variant: "cuda124"
+          - id: install_llamacpp_cuda133
+            title: "llama.cpp CUDA 13.3"
+            title_ru: "llama.cpp CUDA 13.3"
+            description: "Light NVIDIA path for newest CUDA machines, including RTX 50xx when supported by drivers."
+            description_ru: "Лёгкий NVIDIA-путь для новых CUDA-машин, включая RTX 50xx при поддержке драйвера."
+            tooltip: "Light CUDA path for newer NVIDIA cards and drivers, especially RTX 50xx-class machines."
+            tooltip_ru: "Лёгкий CUDA-путь для новых NVIDIA-карт и драйверов, особенно для машин класса RTX 50xx."
+            service: "system_core.services.office_service:install_llamacpp"
+            kind: "safe"
+            parameters:
+              llamacpp_variant: "cuda133"
+          - id: install_surya_cpu
+            title: "Surya CPU runtime"
+            title_ru: "Surya CPU runtime"
+            description: "Install Surya into its isolated optional runtime; VLM inference uses llama.cpp."
+            description_ru: "Установить Surya в изолированный optional runtime; VLM-инференс использует llama.cpp."
+            tooltip: "Installs Surya itself into a separate project-local Python. It is slow, but free per page and isolated from the main runtime."
+            tooltip_ru: "Ставит сам Surya в отдельный project-local Python. Это медленно, зато бесплатно за страницу и не ломает основной runtime."
+            service: "system_core.services.office_service:install_optional_ocr_engines"
+            kind: "safe"
+            parameters:
+              optional_ocr_engine: "surya"
+              optional_ocr_mode: "cpu"
+          - id: install_surya_pytorch_cuda40
+            title: "Surya PyTorch CUDA 40xx"
+            title_ru: "Surya PyTorch CUDA 40xx"
+            description: "Heavy NVIDIA module: installs PyTorch CUDA wheels inside Surya optional runtime for benchmarking."
+            description_ru: "Тяжёлый NVIDIA-модуль: ставит PyTorch CUDA wheels внутрь optional runtime Surya для benchmark."
+            tooltip: "Huge optional runtime for CUDA benchmarks on RTX 40xx-class machines. Install only if you expect a multiple-speed win."
+            tooltip_ru: "Огромный optional runtime для CUDA-бенчмарков на машинах RTX 40xx. Ставить только если ждём кратный выигрыш скорости."
+            service: "system_core.services.office_service:install_optional_ocr_engines"
+            kind: "safe"
+            parameters:
+              optional_ocr_engine: "surya"
+              optional_ocr_mode: "cuda40"
+          - id: install_surya_pytorch_cuda50
+            title: "Surya PyTorch CUDA 50xx"
+            title_ru: "Surya PyTorch CUDA 50xx"
+            description: "Heavy RTX 50xx test module; isolated from the core portable runtime."
+            description_ru: "Тяжёлый тестовый модуль RTX 50xx; изолирован от основного portable runtime."
+            tooltip: "Huge optional runtime for RTX 50xx CUDA tests. Kept isolated because PyTorch CUDA can add many gigabytes."
+            tooltip_ru: "Огромный optional runtime для CUDA-тестов RTX 50xx. Изолирован отдельно, потому что PyTorch CUDA может добавить много гигабайт."
+            service: "system_core.services.office_service:install_optional_ocr_engines"
+            kind: "safe"
+            parameters:
+              optional_ocr_engine: "surya"
+              optional_ocr_mode: "cuda50"
+          - id: install_llamacpp
+            title: "llama.cpp custom"
+            title_ru: "llama.cpp вручную"
+            description: "Manual installer with CPU/Vulkan/CUDA variant selector and force reinstall."
+            description_ru: "Ручной installer с выбором CPU/Vulkan/CUDA и принудительной переустановкой."
+            tooltip: "Manual override when the recommended one-click Vulkan/CUDA buttons are not enough for this machine."
+            tooltip_ru: "Ручной override на случай, когда рекомендованных кнопок Vulkan/CUDA недостаточно для конкретной машины."
+            service: "system_core.services.office_service:install_llamacpp"
+            kind: "safe"
+            fields:
+              - id: llamacpp_variant
+                type: "radio"
+                choice_style: "buttons"
+                choice_columns: 4
+                label: "Variant"
+                label_ru: "Вариант"
+                default: "vulkan"
+                span: "full"
+                options:
+                  - value: "vulkan"
+                    label: "Vulkan"
+                    label_ru: "Vulkan"
+                    tone: "gpu"
+                  - value: "cpu"
+                    label: "CPU"
+                    label_ru: "CPU"
+                    tone: "cpu"
+                  - value: "cuda124"
+                    label: "CUDA 12.4"
+                    label_ru: "CUDA 12.4"
+                    tone: "gpu"
+                  - value: "cuda133"
+                    label: "CUDA 13.3"
+                    label_ru: "CUDA 13.3"
+                    tone: "gpu"
+              - id: force_reinstall
+                type: "toggle"
+                label: "Force reinstall"
+                label_ru: "Переустановить"
+                default: false
+                span: "half"
+          - id: install_optional_ocr_engines
+            title: "Surya custom runtime"
+            title_ru: "Surya runtime вручную"
+            description: "Manual Surya optional runtime installer with CPU/CUDA mode and PyTorch index override."
+            description_ru: "Ручной installer optional runtime Surya с CPU/CUDA и override PyTorch index."
+            tooltip: "Manual Surya installer for expert cases: CPU/CUDA mode, dry run, force reinstall, and custom PyTorch wheel index."
+            tooltip_ru: "Ручной установщик Surya для экспертных случаев: CPU/CUDA mode, dry run, принудительная переустановка и свой PyTorch wheel index."
+            service: "system_core.services.office_service:install_optional_ocr_engines"
+            kind: "safe"
+            fields:
+              - id: optional_ocr_engine
+                type: "radio"
+                choice_style: "buttons"
+                choice_columns: 1
+                label: "Engine"
+                label_ru: "Движок"
+                default: "surya"
+                span: "full"
+                options:
+                  - value: "surya"
+                    label: "Surya"
+                    label_ru: "Surya"
+                    tone: "local"
+              - id: optional_ocr_mode
+                type: "radio"
+                choice_style: "buttons"
+                choice_columns: 4
+                label: "Runtime"
+                label_ru: "Runtime"
+                default: "cpu"
+                span: "full"
+                options:
+                  - value: "cpu"
+                    label: "CPU"
+                    label_ru: "CPU"
+                    tone: "cpu"
+                  - value: "cuda"
+                    label: "CUDA"
+                    label_ru: "CUDA"
+                    tone: "gpu"
+                  - value: "cuda40"
+                    label: "CUDA 40xx"
+                    label_ru: "CUDA 40xx"
+                    tone: "gpu"
+                  - value: "cuda50"
+                    label: "CUDA 50xx"
+                    label_ru: "CUDA 50xx"
+                    tone: "gpu"
+              - id: dry_run
+                type: "toggle"
+                label: "Dry run"
+                label_ru: "Только показать команды"
+                default: true
+                span: "half"
+              - id: force_reinstall
+                type: "toggle"
+                label: "Force reinstall"
+                label_ru: "Пересобрать runtime"
+                default: false
+                span: "half"
+              - id: torch_index_url
+                type: "text"
+                advanced: true
+                label: "PyTorch index URL"
+                label_ru: "PyTorch index URL"
+                default: ""
+                span: "full"
+                hint: "Optional override; CUDA modes default to the current PyTorch cu128 wheel index."
+                hint_ru: "Опциональный override; CUDA-режимы по умолчанию используют текущий PyTorch cu128 wheel index."
+      - id: ocr_brick_status
+        title: "OCR Brick status"
+        title_ru: "Статус OCR Brick"
+        description: "Check preprocess dependencies, Vulkan device, Tesseract, Real-ESRGAN and Yandex key files."
+        description_ru: "Проверить зависимости препроцессинга, Vulkan, Tesseract, Real-ESRGAN и файлы Yandex."
+        tooltip: "Single readiness report for OCR: preprocessing libraries, GPU/Vulkan visibility, local engines, Real-ESRGAN, and key files."
+        tooltip_ru: "Единый отчёт готовности OCR: библиотеки препроцессинга, видимость GPU/Vulkan, локальные движки, Real-ESRGAN и файлы ключей."
+        service: "system_core.services.office_service:ocr_brick_status"
+        kind: "safe"
+      - id: ocr_quality_benchmark
+        title: "OCR quality test"
+        title_ru: "Тест качества OCR"
+        description: "Run raw/clean OCR comparisons on one page before processing a large batch."
+        description_ru: "Сравнить OCR raw/clean на одной странице перед большим прогоном."
+        tooltip: "Runs one page through selected OCR engines with and without preprocessing, so you can compare text dirt before spending time or API money."
+        tooltip_ru: "Гоняет одну страницу через выбранные OCR-движки с препроцессингом и без него, чтобы сравнить грязь в тексте до большого прогона и трат API."
+        service: "system_core.services.office_service:ocr_quality_benchmark"
+        kind: "safe"
+        fields:
+          - id: benchmark_source
+            type: "text"
+            group: "source"
+            label: "PDF/image"
+            label_ru: "PDF/изображение"
+            default: "input/10_Самарская_Тольятти.pdf"
+            span: "full"
+            hint: "Relative to project root or absolute. Folder means first supported PDF/image inside it."
+            hint_ru: "Относительный путь от корня проекта или абсолютный. Папка означает первый найденный PDF/скан внутри."
+          - id: benchmark_page
+            type: "number"
+            group: "source"
+            label: "Page"
+            label_ru: "Страница"
+            default: 1
+            min: 1
+            max: 9999
+            step: 1
+            span: "compact"
+          - id: benchmark_dpi
+            type: "number"
+            group: "source"
+            label: "Render DPI"
+            label_ru: "DPI рендера"
+            default: 300
+            min: 120
+            max: 600
+            step: 25
+            span: "compact"
+          - id: benchmark_variants
+            type: "checkboxes"
+            group: "filters"
+            checkbox_layout: "grid"
+            label: "Variants"
+            label_ru: "Варианты"
+            default: ["raw", "clean"]
+            min_selected: 1
+            span: "wide"
+            options:
+              - value: "raw"
+                label: "Raw"
+                label_ru: "Без обработки"
+              - value: "clean"
+                label: "Clean"
+                label_ru: "С препроцессингом"
+            selection_buttons:
+              - mode: "all"
+                label: "Both"
+                label_ru: "Оба"
+              - mode: "default"
+                label: "Default"
+                label_ru: "По-умолчанию"
+          - id: benchmark_local_engines
+            type: "checkboxes"
+            group: "local_access"
+            checkbox_layout: "grid"
+            label: "Local engines"
+            label_ru: "Локальные движки"
+            default: ["tesseract", "surya"]
+            span: "wide"
+            options:
+              - value: "tesseract"
+                label: "Tesseract"
+                label_ru: "Tesseract"
+              - value: "surya"
+                label: "Surya"
+                label_ru: "Surya"
+            selection_buttons:
+              - mode: "all"
+                label: "All local"
+                label_ru: "Все локальные"
+              - mode: "default"
+                label: "Default"
+                label_ru: "По-умолчанию"
+              - mode: "none"
+                label: "Clear"
+                label_ru: "Снять все"
+          - id: benchmark_include_api
+            type: "toggle"
+            group: "cloud_access"
+            label: "Check API models"
+            label_ru: "Проверять API-модели"
+            default: false
+            span: "half"
+            hint: "Off means local-only: Yandex/Mistral/xAI/Gemini/ChatGPT are excluded even if their fields have saved values."
+            hint_ru: "Выключено = только локально: Yandex/Mistral/xAI/Gemini/ChatGPT исключаются даже при сохранённых значениях полей."
+          - id: benchmark_api_engines
+            type: "checkboxes"
+            group: "cloud_access"
+            show_if:
+              benchmark_include_api: true
+            checkbox_layout: "grid"
+            label: "API engines"
+            label_ru: "API-движки"
+            default: ["yandex", "mistral", "xai", "gemini", "chatgpt"]
+            span: "wide"
+            options:
+              - value: "yandex"
+                label: "Yandex"
+                label_ru: "Yandex"
+              - value: "mistral"
+                label: "Mistral OCR 4"
+                label_ru: "Mistral OCR 4"
+              - value: "xai"
+                label: "xAI"
+                label_ru: "xAI"
+              - value: "gemini"
+                label: "Gemini"
+                label_ru: "Gemini"
+              - value: "chatgpt"
+                label: "ChatGPT"
+                label_ru: "ChatGPT"
+            selection_buttons:
+              - mode: "all"
+                label: "All API"
+                label_ru: "Все API"
+              - mode: "default"
+                label: "Default"
+                label_ru: "По-умолчанию"
+              - mode: "none"
+                label: "Clear"
+                label_ru: "Снять все"
+          - id: ocr_sr_scale
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 3
+            group: "filters"
+            label: "Upscale"
+            label_ru: "Апскейл"
+            default: 0
+            span: "full"
+            options:
+              - value: 0
+                label: "Off"
+                label_ru: "Выкл"
+                tone: "cpu"
+              - value: 2
+                label: "2x"
+                label_ru: "2x"
+                tone: "gpu"
+              - value: 4
+                label: "4x"
+                label_ru: "4x"
+                tone: "gpu"
+          - id: ocr_denoise
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 3
+            group: "filters"
+            label: "Denoise"
+            label_ru: "Шум JPEG"
+            default: "weak"
+            span: "full"
+            options:
+              - value: "none"
+                label: "None"
+                label_ru: "Нет"
+              - value: "weak"
+                label: "Weak"
+                label_ru: "Слабый"
+                tone: "process"
+              - value: "strong"
+                label: "Strong"
+                label_ru: "Сильный"
+                tone: "warn"
+          - id: ocr_contrast
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 3
+            group: "filters"
+            label: "Contrast"
+            label_ru: "Контраст"
+            default: "auto"
+            span: "full"
+            options:
+              - value: "auto"
+                label: "Auto"
+                label_ru: "Авто"
+                tone: "process"
+              - value: "normal"
+                label: "Normal"
+                label_ru: "Норма"
+                tone: "cpu"
+              - value: "high"
+                label: "High"
+                label_ru: "Высокий"
+                tone: "warn"
+          - id: ocr_unsharp
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 3
+            group: "filters"
+            label: "Unsharp"
+            label_ru: "Unsharp"
+            default: "auto"
+            span: "full"
+            options:
+              - value: "auto"
+                label: "Auto"
+                label_ru: "Авто"
+                tone: "process"
+              - value: "off"
+                label: "Off"
+                label_ru: "Выкл"
+                tone: "raw"
+              - value: "strong"
+                label: "Strong"
+                label_ru: "Сильный"
+                tone: "warn"
+          - id: ocr_binarize
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 3
+            group: "filters"
+            label: "Binarize"
+            label_ru: "Бинаризация"
+            default: "auto"
+            span: "full"
+            options:
+              - value: "auto"
+                label: "Auto"
+                label_ru: "Авто"
+              - value: "on"
+                label: "Force on"
+                label_ru: "Включить"
+                tone: "warn"
+              - value: "off"
+                label: "Force off"
+                label_ru: "Выключить"
+          - id: ocr_tesseract_lang
+            type: "text"
+            group: "local_access"
+            show_if:
+              benchmark_local_engines: "tesseract"
+            label: "Tesseract language"
+            label_ru: "Язык Tesseract"
+            default: "rus+eng"
+            span: "half"
+          - id: ocr_tesseract_psm
+            type: "number"
+            group: "local_access"
+            show_if:
+              benchmark_local_engines: "tesseract"
+            label: "Tesseract PSM"
+            label_ru: "Tesseract PSM"
+            default: 6
+            min: 0
+            max: 13
+            step: 1
+            span: "compact"
+          - id: surya_backend
+            type: "radio"
+            hidden: true
+            choice_style: "buttons"
+            choice_columns: 2
+            group: "local_access"
+            show_if:
+              benchmark_local_engines: "surya"
+            label: "Surya backend"
+            label_ru: "Surya backend"
+            default: "llamacpp"
+            span: "full"
+            options:
+              - value: "llamacpp"
+                label: "llama.cpp"
+                label_ru: "llama.cpp"
+                tone: "local"
+              - value: "vllm"
+                label: "vLLM"
+                label_ru: "vLLM"
+                tone: "gpu"
+          - id: yandex_model
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 3
+            group: "model"
+            show_if:
+              benchmark_include_api: true
+              benchmark_api_engines: "yandex"
+            label: "Yandex mode"
+            label_ru: "Режим Yandex"
+            default: "page"
+            span: "full"
+            options_source: "system_core.services.office_service:yandex_ocr_model_options"
+            cache_seconds: 900
+            options:
+              - value: "page"
+                label: "Printed"
+                label_ru: "Печатный"
+                tone: "yandex"
+              - value: "page-column-sort"
+                label: "Columns"
+                label_ru: "Колонки"
+                tone: "yandex"
+              - value: "handwritten"
+                label: "Handwriting"
+                label_ru: "Рукописный"
+                tone: "warn"
+          - id: yandex_api_key
+            type: "select"
+            group: "access"
+            show_if:
+              benchmark_include_api: true
+              benchmark_api_engines: "yandex"
+            label: "Yandex key"
+            label_ru: "Ключ Yandex"
+            default: ""
+            options_source: "system_core.services.office_service:yandex_api_key_options"
+            cache_seconds: 10
+            span: "half"
+          - id: yandex_languages
+            type: "text"
+            group: "parameters"
+            show_if:
+              benchmark_include_api: true
+              benchmark_api_engines: "yandex"
+            label: "Yandex languages"
+            label_ru: "Языки Yandex"
+            default: "ru,en"
+            span: "half"
+          - id: xai_model
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 4
+            group: "model"
+            show_if:
+              benchmark_include_api: true
+              benchmark_api_engines: "xai"
+            label: "xAI model"
+            label_ru: "Модель xAI"
+            default: "grok-4.3"
+            span: "full"
+            options_source: "system_core.services.office_service:xai_vision_model_options"
+            cache_seconds: 900
+            cache_fields: ["xai_api_key"]
+            options:
+              - value: "grok-4.3"
+                label: "grok-4.3"
+                label_ru: "grok-4.3"
+                tone: "vision"
+              - value: "grok-4.20-non-reasoning-latest"
+                label: "4.20 fast"
+                label_ru: "4.20 fast"
+                tone: "vision"
+              - value: "grok-4.20-reasoning-latest"
+                label: "4.20 quality"
+                label_ru: "4.20 quality"
+                tone: "warn"
+          - id: mistral_model
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 2
+            group: "model"
+            show_if:
+              benchmark_include_api: true
+              benchmark_api_engines: "mistral"
+            label: "Mistral OCR model"
+            label_ru: "Модель Mistral OCR"
+            default: "mistral-ocr-4-0"
+            span: "full"
+            options:
+              - value: "mistral-ocr-4-0"
+                label: "OCR 4 pinned"
+                label_ru: "OCR 4 закреплённая"
+                tone: "vision"
+              - value: "mistral-ocr-latest"
+                label: "OCR latest"
+                label_ru: "OCR latest"
+                tone: "warn"
+          - id: mistral_api_key
+            type: "select"
+            group: "access"
+            show_if:
+              benchmark_include_api: true
+              benchmark_api_engines: "mistral"
+            label: "Mistral key"
+            label_ru: "Ключ Mistral"
+            default: ""
+            options_source: "system_core.services.office_service:mistral_api_key_options"
+            cache_seconds: 10
+            span: "half"
+          - id: xai_api_key
+            type: "select"
+            group: "access"
+            show_if:
+              benchmark_include_api: true
+              benchmark_api_engines: "xai"
+            label: "xAI key"
+            label_ru: "Ключ xAI"
+            default: ""
+            options_source: "system_core.services.office_service:xai_api_key_options"
+            cache_seconds: 10
+            span: "half"
+          - id: gemini_model
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 3
+            group: "model"
+            show_if:
+              benchmark_include_api: true
+              benchmark_api_engines: "gemini"
+            label: "Gemini model"
+            label_ru: "Модель Gemini"
+            default: "gemini-3.5-flash"
+            options_source: "system_core.services.office_service:gemini_model_options"
+            cache_seconds: 900
+            cache_fields: ["gemini_api_key"]
+            span: "full"
+          - id: gemini_api_key
+            type: "select"
+            group: "access"
+            show_if:
+              benchmark_include_api: true
+              benchmark_api_engines: "gemini"
+            label: "Gemini key"
+            label_ru: "Ключ Gemini"
+            default: ""
+            options_source: "system_core.services.office_service:gemini_api_key_options"
+            cache_seconds: 10
+            span: "half"
+          - id: gemini_service_tier
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 2
+            group: "parameters"
+            show_if:
+              benchmark_include_api: true
+              benchmark_api_engines: "gemini"
+            label: "Gemini tier"
+            label_ru: "Тариф Gemini"
+            default: "standard"
+            span: "half"
+            hint: "Standard is the normal interactive API. Flex is cheaper, but may wait longer or fail when capacity is tight."
+            hint_ru: "Standard - обычный интерактивный API. Flex дешевле, но может дольше ждать или отказать при нехватке мощности."
+            options:
+              - value: "standard"
+                label: "Standard"
+                label_ru: "Standard"
+                tone: "vision"
+              - value: "flex"
+                label: "Flex"
+                label_ru: "Flex"
+                tone: "warn"
+          - id: gemini_use_stream
+            type: "toggle"
+            group: "parameters"
+            show_if:
+              benchmark_include_api: true
+              benchmark_api_engines: "gemini"
+            label: "Gemini stream"
+            label_ru: "Потоковый Gemini"
+            default: true
+            span: "half"
+            hint: "Use streaming Gemini responses. Turn this off when Gemini hangs, times out during SSL handshakes, or returns transport errors; OCR quality does not change."
+            hint_ru: "Потоковый ответ Gemini. Выключите, если Gemini зависает, ловит timeout на SSL или даёт транспортные ошибки; качество OCR от этого не меняется."
+          - id: openai_model
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 4
+            group: "model"
+            show_if:
+              benchmark_include_api: true
+              benchmark_api_engines: "chatgpt"
+            label: "OpenAI model"
+            label_ru: "Модель OpenAI"
+            default: "gpt-4.1"
+            options_source: "system_core.services.office_service:openai_model_options"
+            cache_seconds: 900
+            cache_fields: ["openai_api_key"]
+            span: "full"
+          - id: openai_api_key
+            type: "select"
+            group: "access"
+            show_if:
+              benchmark_include_api: true
+              benchmark_api_engines: "chatgpt"
+            label: "OpenAI key"
+            label_ru: "Ключ OpenAI"
+            default: ""
+            options_source: "system_core.services.office_service:openai_api_key_options"
+            cache_seconds: 10
+            span: "half"
+          - id: ocr_strip_vlines
+            type: "toggle"
+            group: "options"
+            label: "Remove vertical lines"
+            label_ru: "Убирать вертикальные линии"
+            default: false
+            span: "half"
+          - id: ocr_deskew
+            type: "toggle"
+            group: "options"
+            label: "Deskew"
+            label_ru: "Выравнивать наклон"
+            default: true
+            span: "half"
+          - id: ocr_gpu
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 3
+            group: "advanced"
+            advanced: true
+            show_if:
+              ocr_sr_scale: [2, 4]
+            label: "GPU device"
+            label_ru: "GPU"
+            default: "auto"
+            span: "full"
+            options:
+              - value: "auto"
+                label: "Auto"
+                label_ru: "Авто"
+                tone: "gpu"
+              - value: "cpu"
+                label: "CPU"
+                label_ru: "CPU"
+                tone: "cpu"
+              - value: "0"
+                label: "GPU 0"
+                label_ru: "GPU 0"
+                tone: "gpu"
+      - id: numeric_check_pass
+        title: "Numeric check"
+        title_ru: "Проверка реквизитов"
+        description: "Crop numeric legal/financial lines on one page and verify exact identifiers with a selected xAI vision model."
+        description_ru: "Вырезать числовые юридические/финансовые строки на одной странице и проверить точные реквизиты выбранной xAI vision-моделью."
+        tooltip: "Use this after OCR when contract numbers, IKZ, INN/KPP, account numbers, dates or sums matter. In Auto mode Tesseract is used only if present; otherwise the selected Grok model checks the page directly."
+        tooltip_ru: "Используйте после OCR, когда важны номера контрактов, ИКЗ, ИНН/КПП, счета, даты или суммы. В режиме Авто Tesseract используется только если установлен; иначе выбранная Grok-модель проверяет страницу напрямую."
+        service: "system_core.services.office_service:numeric_check_pass"
+        kind: "safe"
+        fields:
+          - id: numeric_source
+            type: "text"
+            group: "source"
+            label: "PDF/image"
+            label_ru: "PDF/изображение"
+            default: "input/1_Псковская_Псковский.pdf"
+            span: "full"
+            hint: "Relative to project root or absolute. Folder means first supported PDF/image inside it."
+            hint_ru: "Относительный путь от корня проекта или абсолютный. Папка означает первый найденный PDF/скан внутри."
+          - id: numeric_page
+            type: "number"
+            group: "source"
+            label: "Page"
+            label_ru: "Страница"
+            default: 1
+            min: 1
+            max: 9999
+            step: 1
+            span: "compact"
+            hint: "One page only, so you can check risky identifiers before a large run."
+            hint_ru: "Только одна страница, чтобы проверить рискованные реквизиты перед большим прогоном."
+          - id: numeric_dpi
+            type: "number"
+            group: "source"
+            label: "Render DPI"
+            label_ru: "DPI рендера"
+            default: 300
+            min: 120
+            max: 600
+            step: 25
+            span: "compact"
+            hint: "300 DPI is a good default for legal scans; raise it only when tiny numbers are unreadable."
+            hint_ru: "300 DPI обычно достаточно для юридических сканов; повышайте только если мелкие цифры не читаются."
+          - id: xai_model
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 4
+            group: "model"
+            label: "xAI verifier"
+            label_ru: "xAI-проверка"
+            default: "grok-4.3"
+            span: "full"
+            options_source: "system_core.services.office_service:xai_vision_model_options"
+            cache_seconds: 900
+            cache_fields: ["xai_api_key"]
+            refresh_label: "Refresh xAI models"
+            refresh_label_ru: "Обновить модели xAI"
+            hint: "OCR fast is the first choice; OCR quality is slower and more expensive, useful only if the fast verifier disagrees with the crop."
+            hint_ru: "OCR fast — первый выбор; OCR quality медленнее и дороже, имеет смысл только если fast спорит с кропом."
+            options:
+              - value: "grok-4.3"
+                label: "grok-4.3"
+                label_ru: "grok-4.3"
+                tone: "vision"
+              - value: "grok-4.20-non-reasoning-latest"
+                label: "4.20 fast"
+                label_ru: "4.20 fast"
+                tone: "vision"
+              - value: "grok-4.20-reasoning-latest"
+                label: "4.20 quality"
+                label_ru: "4.20 quality"
+                tone: "warn"
+          - id: xai_api_key
+            type: "select"
+            group: "access"
+            label: "xAI key"
+            label_ru: "Ключ xAI"
+            default: ""
+            options_source: "system_core.services.office_service:xai_api_key_options"
+            cache_seconds: 10
+            span: "half"
+            hint: "The selected key is used only for the small cropped verifier calls."
+            hint_ru: "Выбранный ключ используется только для маленьких verifier-запросов по кропам."
+          - id: numeric_locator
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 4
+            group: "parameters"
+            label: "Locator"
+            label_ru: "Локатор"
+            default: "auto"
+            span: "full"
+            hint: "Auto uses local Tesseract for cheap line crops, then Surya if installed, and only then falls back to a paid full-page vision check."
+            hint_ru: "Авто использует локальный Tesseract для дешёвых кропов строк, затем Surya если установлен, и только потом платную vision-проверку всей страницы."
+            options:
+              - value: "auto"
+                label: "Auto"
+                label_ru: "Авто"
+                tone: "process"
+              - value: "tesseract"
+                label: "Tesseract"
+                label_ru: "Tesseract"
+                tone: "local"
+              - value: "surya"
+                label: "Surya"
+                label_ru: "Surya"
+                tone: "local"
+              - value: "vision-page"
+                label: "Vision page"
+                label_ru: "Страница vision"
+                tone: "vision"
+          - id: numeric_locator_hint
+            type: "toggle"
+            group: "parameters"
+            label: "Use local hint"
+            label_ru: "Локальная подсказка"
+            default: true
+            span: "half"
+            hint: "When a local locator is available, passes its reading to the model as a hypothesis, then reports match/mismatch instead of silently trusting either side."
+            hint_ru: "Когда локальный локатор доступен, передаёт его чтение модели как гипотезу, затем показывает match/mismatch вместо слепого доверия одной стороне."
+          - id: numeric_max_candidates
+            type: "number"
+            group: "parameters"
+            label: "Max crops"
+            label_ru: "Кропов максимум"
+            default: 6
+            min: 1
+            max: 20
+            step: 1
+            span: "compact"
+            hint: "Limits paid verifier calls. Start with 3-6 crops on heavy pages."
+            hint_ru: "Ограничивает платные verifier-запросы. Для тяжёлых страниц начните с 3-6 кропов."
+          - id: numeric_min_digits
+            type: "number"
+            group: "parameters"
+            label: "Min digits"
+            label_ru: "Минимум цифр"
+            default: 8
+            min: 4
+            max: 40
+            step: 1
+            span: "compact"
+            hint: "Lower values catch dates and short document numbers; higher values focus on long IDs."
+            hint_ru: "Меньшие значения ловят даты и короткие номера; большие фокусируются на длинных идентификаторах."
+          - id: surya_backend
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 2
+            group: "advanced"
+            advanced: true
+            show_if:
+              numeric_locator: "surya"
+            label: "Surya backend"
+            label_ru: "Surya backend"
+            default: "llamacpp"
+            span: "full"
+            hint: "llama.cpp keeps Surya portable and can use Vulkan/CUDA builds when installed; vLLM is the heavier PyTorch CUDA path."
+            hint_ru: "llama.cpp оставляет Surya портативным и может использовать Vulkan/CUDA-сборки; vLLM — тяжёлый PyTorch CUDA-путь."
+            options:
+              - value: "llamacpp"
+                label: "llama.cpp"
+                label_ru: "llama.cpp"
+                tone: "local"
+              - value: "vllm"
+                label: "vLLM"
+                label_ru: "vLLM"
+                tone: "gpu"
+          - id: surya_timeout_sec
+            type: "number"
+            group: "advanced"
+            advanced: true
+            show_if:
+              numeric_locator: "surya"
+            label: "Surya timeout"
+            label_ru: "Surya timeout"
+            default: 900
+            min: 60
+            max: 3600
+            step: 60
+            span: "compact"
+            hint: "Surya can be slow on CPU; keep this high for damaged pages."
+            hint_ru: "Surya на CPU может быть медленным; для убитых страниц оставляйте запас."
+          - id: ocr_denoise
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 3
+            group: "filters"
+            label: "Denoise"
+            label_ru: "Шум JPEG"
+            default: "weak"
+            span: "full"
+            hint: "Weak JPEG cleanup usually keeps digits readable while removing compression dirt."
+            hint_ru: "Слабая очистка JPEG обычно сохраняет цифры читаемыми и убирает компрессионную грязь."
+            options:
+              - value: "none"
+                label: "None"
+                label_ru: "Нет"
+              - value: "weak"
+                label: "Weak"
+                label_ru: "Слабый"
+                tone: "process"
+              - value: "strong"
+                label: "Strong"
+                label_ru: "Сильный"
+                tone: "warn"
+          - id: ocr_contrast
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 3
+            group: "filters"
+            label: "Contrast"
+            label_ru: "Контраст"
+            default: "high"
+            span: "full"
+            hint: "High contrast separates touching pixels in worn numbers and headings."
+            hint_ru: "Высокий контраст разделяет слипшиеся пиксели в повреждённых цифрах и заголовках."
+            options:
+              - value: "auto"
+                label: "Auto"
+                label_ru: "Авто"
+                tone: "process"
+              - value: "normal"
+                label: "Normal"
+                label_ru: "Норма"
+                tone: "cpu"
+              - value: "high"
+                label: "High"
+                label_ru: "Высокий"
+                tone: "warn"
+          - id: ocr_unsharp
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 3
+            group: "filters"
+            label: "Unsharp"
+            label_ru: "Unsharp"
+            default: "strong"
+            span: "full"
+            hint: "Sharpens digit edges after cleanup. Strong is useful for blurred legal scans."
+            hint_ru: "Подчеркивает края цифр после очистки. Strong полезен для размытых юридических сканов."
+            options:
+              - value: "auto"
+                label: "Auto"
+                label_ru: "Авто"
+                tone: "process"
+              - value: "off"
+                label: "Off"
+                label_ru: "Выкл"
+                tone: "raw"
+              - value: "strong"
+                label: "Strong"
+                label_ru: "Сильный"
+                tone: "warn"
+          - id: ocr_binarize
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 3
+            group: "filters"
+            label: "Binarize"
+            label_ru: "Бинаризация"
+            default: "off"
+            span: "full"
+            hint: "Turns pixels into black/white. It can help text but often damages thin numbers, so off is the numeric default."
+            hint_ru: "Превращает пиксели в чёрно-белые. Иногда помогает тексту, но часто портит тонкие цифры, поэтому для реквизитов по умолчанию выключено."
+            options:
+              - value: "auto"
+                label: "Auto"
+                label_ru: "Авто"
+              - value: "on"
+                label: "Force on"
+                label_ru: "Включить"
+                tone: "warn"
+              - value: "off"
+                label: "Force off"
+                label_ru: "Выключить"
+          - id: ocr_deskew
+            type: "toggle"
+            group: "options"
+            label: "Deskew"
+            label_ru: "Выравнивать наклон"
+            default: true
+            span: "half"
+            hint: "Straightens slightly rotated scans before the local numeric locator runs."
+            hint_ru: "Выравнивает слегка повернутые сканы перед локальным поиском числовых строк."
+          - id: ocr_tesseract_lang
+            type: "text"
+            group: "advanced"
+            advanced: true
+            label: "Tesseract language"
+            label_ru: "Язык Tesseract"
+            default: "rus+eng"
+            span: "half"
+            hint: "Languages for the local locator. rus+eng is the safest default for Russian contracts with Latin abbreviations."
+            hint_ru: "Языки локального локатора. rus+eng — безопасный вариант для русских контрактов с латинскими сокращениями."
+          - id: ocr_tesseract_psm
+            type: "number"
+            group: "advanced"
+            advanced: true
+            label: "Tesseract PSM"
+            label_ru: "Tesseract PSM"
+            default: 6
+            min: 0
+            max: 13
+            step: 1
+            span: "compact"
+            hint: "Page segmentation mode for local line finding. PSM 6 works well on full document pages."
+            hint_ru: "Режим разметки страницы для локального поиска строк. PSM 6 обычно хорош для полных страниц документа."
+      - id: yandex_ocr_smoke
+        title: "Yandex OCR smoke test"
+        title_ru: "Yandex OCR smoke test"
+        description: "Send one generated test image to Yandex OCR to validate key, folder id and billing access."
+        description_ru: "Отправить одно тестовое изображение в Yandex OCR для проверки ключа, folder id и billing."
+        tooltip: "A tiny paid-provider check: verifies that Yandex key, folder_id, roles, and billing can actually process one image."
+        tooltip_ru: "Маленькая проверка платного провайдера: ключ Yandex, folder_id, роли и billing действительно могут обработать одно изображение."
+        service: "system_core.services.office_service:yandex_ocr_smoke"
+        kind: "safe"
+        parameters:
+          provider: "yandex"
+        fields:
+          - id: yandex_model
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 3
+            group: "model"
+            label: "Yandex mode"
+            label_ru: "Режим Yandex"
+            default: "page"
+            span: "full"
+            options_source: "system_core.services.office_service:yandex_ocr_model_options"
+            cache_seconds: 900
+            refresh_label: "Refresh OCR models"
+            refresh_label_ru: "Обновить OCR модели"
+            hint: "Refresh queries the Yandex model API when possible and keeps an OCR-safe cached selector."
+            hint_ru: "Обновление по возможности запрашивает Yandex model API и держит безопасный OCR-кэш."
+            options:
+              - value: "page"
+                label: "Printed"
+                label_ru: "Печатный"
+                tone: "yandex"
+              - value: "page-column-sort"
+                label: "Columns"
+                label_ru: "Колонки"
+                tone: "yandex"
+              - value: "handwritten"
+                label: "Handwriting"
+                label_ru: "Рукописный"
+                tone: "warn"
+          - id: yandex_languages
+            type: "text"
+            group: "parameters"
+            label: "Languages"
+            label_ru: "Языки"
+            default: "ru,en"
+            span: "half"
+          - id: yandex_api_key
+            type: "select"
+            group: "access"
+            label: "API key"
+            label_ru: "Ключ"
+            default: ""
+            options_source: "system_core.services.office_service:api_key_options"
+            cache_seconds: 10
+            span: "half"
+      - id: xai_ocr_smoke
+        title: "xAI OCR smoke test"
+        title_ru: "xAI OCR smoke test"
+        description: "Send one generated test image to xAI vision OCR to validate key and model access."
+        description_ru: "Отправить одно тестовое изображение в xAI vision OCR для проверки ключа и доступа к модели."
+        tooltip: "A tiny xAI vision check: sends one generated image to the selected Grok model and verifies that image-to-text works."
+        tooltip_ru: "Маленькая проверка xAI vision: отправляет одно сгенерированное изображение выбранной Grok-модели и проверяет image-to-text."
+        service: "system_core.services.office_service:xai_ocr_smoke"
+        kind: "safe"
+        parameters:
+          provider: "xai"
+        fields:
+          - id: xai_model
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 4
+            group: "model"
+            label: "xAI model"
+            label_ru: "Модель xAI"
+            default: "grok-4.3"
+            span: "full"
+            options_source: "system_core.services.office_service:xai_vision_model_options"
+            cache_seconds: 900
+            cache_fields: ["xai_api_key"]
+            refresh_label: "Refresh xAI models"
+            refresh_label_ru: "Обновить модели xAI"
+            options:
+              - value: "grok-4.3"
+                label: "grok-4.3"
+                label_ru: "grok-4.3"
+                tone: "vision"
+              - value: "grok-4.20-non-reasoning-latest"
+                label: "4.20 fast"
+                label_ru: "4.20 fast"
+                tone: "vision"
+              - value: "grok-4.20-reasoning-latest"
+                label: "4.20 quality"
+                label_ru: "4.20 quality"
+                tone: "warn"
+              - value: "grok-latest"
+                label: "Latest"
+                label_ru: "Latest"
+                tone: "vision"
+          - id: xai_api_key
+            type: "select"
+            group: "access"
+            label: "API key"
+            label_ru: "Ключ"
+            default: ""
+            options_source: "system_core.services.office_service:xai_api_key_options"
+            cache_seconds: 10
+            span: "half"
+      - id: mistral_ocr_smoke
+        title: "Mistral OCR 4 smoke test"
+        title_ru: "Mistral OCR 4 smoke test"
+        description: "Send one generated Russian page with a table and formula to Mistral OCR 4."
+        description_ru: "Отправить одну тестовую русскую страницу с таблицей и формулой в Mistral OCR 4."
+        tooltip: "A tiny paid check of the key, billing, Cyrillic OCR, table extraction and structural blocks."
+        tooltip_ru: "Маленькая платная проверка ключа, billing, кириллицы, таблицы и структурных блоков."
+        service: "system_core.services.office_service:mistral_ocr_smoke"
+        kind: "safe"
+        parameters:
+          provider: "mistral"
+        fields:
+          - id: mistral_model
+            type: "radio"
+            choice_style: "buttons"
+            choice_columns: 2
+            group: "model"
+            label: "Mistral OCR model"
+            label_ru: "Модель Mistral OCR"
+            default: "mistral-ocr-4-0"
+            span: "full"
+            options:
+              - value: "mistral-ocr-4-0"
+                label: "OCR 4 pinned"
+                label_ru: "OCR 4 закреплённая"
+                tone: "vision"
+              - value: "mistral-ocr-latest"
+                label: "OCR latest"
+                label_ru: "OCR latest"
+                tone: "warn"
+          - id: mistral_api_key
+            type: "select"
+            group: "access"
+            label: "API key"
+            label_ru: "Ключ"
+            default: ""
+            options_source: "system_core.services.office_service:mistral_api_key_options"
+            cache_seconds: 10
+            span: "half"
+
+maintenance_operations:
+  - id: cleanup_document_model_artifacts
+    title: "Clear DocumentModel artifacts"
+    title_ru: "Очистить DocumentModel"
+    description: "Delete internal *.document packages and machine JSON verification exports from managed output/report/workspace. Keep DOCX, XLSX, Markdown, PDF, images and source files."
+    description_ru: "Удалить внутренние пакеты *.document и машинные JSON проверки из управляемых output/report/workspace. Сохранить DOCX, XLSX, Markdown, PDF, изображения и исходники."
+    service: "system_core.services.office_service:cleanup_document_model_artifacts"
+    kind: "dangerous"
+
+  - id: copy_output_markdown_to_input
+    title: "Copy Markdown output to input"
+    title_ru: "Markdown output -> input"
+    description: "Copy generated .md files from output back into input for a second-stage build."
+    description_ru: "Скопировать .md из output обратно в input для второго этапа сборки."
+    service: "system_core.services.office_service:copy_output_markdown_to_input"
+    kind: "safe"
+
+  - id: cleanup_input_output
+    title: "Clear I/O"
+    title_ru: "Очистить I/O"
+    description: "Delete contents of managed input and output folders, including stale placeholders."
+    description_ru: "Удалить содержимое управляемых папок input и output, включая старые placeholder-файлы."
+    service: "system_core.services.office_service:cleanup_input_output"
+    kind: "dangerous"

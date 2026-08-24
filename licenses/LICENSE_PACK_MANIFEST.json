@@ -1,0 +1,36 @@
+{
+  "schema": "audion.build_licenses.pack_manifest.v1",
+  "generated_utc": "2026-08-24T17:44:55Z",
+  "run_id": "20260824T174428Z_audion-office-ocr-ai_54c8d98c",
+  "project_id": "audion-office-ocr-ai",
+  "project_name": "Audion Office OCR AI",
+  "scan_root": "S:\\Release\\Audion Office OCR AI",
+  "output_dir": "S:\\Release\\Audion Office OCR AI\\licenses",
+  "files": [
+    {
+      "name": "THIRD_PARTY_NOTICES.txt",
+      "sha256": "e39c87a4c6fb7878da4d4e3d30c04874144924c14cf32a910c0e72b64fa86cb4",
+      "size": 1531817
+    },
+    {
+      "name": "SOURCE_CODE_AVAILABILITY.txt",
+      "sha256": "c8a3d02f760ee8fb6b838c9ea363d9f77828041a8f5293737dadcdb6246c6b3d",
+      "size": 1349
+    },
+    {
+      "name": "COMPONENTS.json",
+      "sha256": "95954c343905161af751e1fd06b1d5640a81ffe2c7d910618349dc4e2c31317b",
+      "size": 266566
+    },
+    {
+      "name": "_records.json",
+      "sha256": "5336ab3d700204afb86bac5136f463bd284ed034f19c1f71e41b19f4236b0aa6",
+      "size": 64850
+    },
+    {
+      "name": "LICENSE_SCAN_REPORT.md",
+      "sha256": "ba47ed43bc1d1ecf59a943636c0dbd31fb70773cadbf8470ae1337826153d73e",
+      "size": 9433
+    }
+  ]
+}

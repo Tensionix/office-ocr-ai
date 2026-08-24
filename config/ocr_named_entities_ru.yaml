@@ -1,0 +1,26 @@
+families:
+  - lemma: Марушкина
+    forms:
+      - Марушкина
+      - Марушкиной
+      - Марушкину
+      - Марушкине
+  - lemma: Мезер
+    indeclinable: true
+    forms:
+      - Мезер
+
+places:
+  - Омск
+  - Нефтеюганск
+  - Благовещенск
+
+regions:
+  - ХМАО - Югра
+  - Нефтеюганский район
+
+organizations:
+  - ООО "ИТП "ГРАД""
+
+water_and_mountains:
+  - Иртыш

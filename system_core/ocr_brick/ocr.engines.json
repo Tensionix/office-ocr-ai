@@ -1,0 +1,15 @@
+{
+  "_note": "Families only. Keys and concrete model strings live in config/llm-settings.yaml, chosen per-provider from a GUI dropdown. Never embed keys here.",
+  "engines": {
+    "tesseract": { "kind": "ocr",    "profile": "tesseract" },
+    "surya":     { "kind": "ocr",    "profile": "surya" },
+    "yandex":    { "kind": "yandex", "profile": "yandex",
+                   "creds": { "auth_type": "api_key",
+                              "secret_file": "config/api_key_yandex_studio.txt",
+                              "folder_id_file": "config/yandex_folder.txt" } },
+    "mistral":   { "kind": "mistral", "profile": "vision", "creds": "config/api_key_mistral.txt" },
+    "xai":       { "kind": "vision", "profile": "vision", "creds": "config/api_key_xai.txt" },
+    "gemini":    { "kind": "vision", "profile": "vision", "creds": "config/llm-settings.yaml" },
+    "chatgpt":   { "kind": "vision", "profile": "vision", "creds": "config/llm-settings.yaml" }
+  }
+}
