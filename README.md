@@ -8,7 +8,7 @@
 - [Direct download](https://audion.dev/get/office-ocr-ai/1.8.0/Audion_Office_OCR_AI_v1.8.0_Full.zip) — unmetered, no rate limits
 - [Project page](https://audion.dev/downloads/office-ocr-ai) — every version and how to install
 
-![The program window](docs/screenshot.png)
+<img src="docs/screenshot.png" alt="The program window" width="560">
 
 `SHA-256: 70f8655ad2a9c647ed3c4d4690ae8deb622716ecab6fdb11b5902f6a87cfde8e`
 
