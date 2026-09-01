@@ -3,7 +3,7 @@
     "name": "aiofiles",
     "version": "25.1.0",
     "license": "Apache-2.0",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -17,7 +17,7 @@
     "name": "aiohappyeyeballs",
     "version": "2.7.1",
     "license": "PSF-2.0",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -30,7 +30,7 @@
     "name": "aiohttp",
     "version": "3.14.3",
     "license": "Apache-2.0 AND MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -44,7 +44,7 @@
     "name": "aiosignal",
     "version": "1.4.0",
     "license": "Apache 2.0",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -57,7 +57,7 @@
     "name": "annotated-doc",
     "version": "0.0.5",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -70,7 +70,7 @@
     "name": "annotated-types",
     "version": "0.8.0",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -83,7 +83,7 @@
     "name": "anyio",
     "version": "4.14.2",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -96,7 +96,7 @@
     "name": "attrs",
     "version": "26.1.0",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -109,7 +109,7 @@
     "name": "azure-ai-contentunderstanding",
     "version": "1.2.0b3",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -122,7 +122,7 @@
     "name": "azure-ai-documentintelligence",
     "version": "1.0.2",
     "license": "MIT License",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -135,7 +135,7 @@
     "name": "azure-core",
     "version": "1.41.0",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -148,7 +148,7 @@
     "name": "azure-identity",
     "version": "1.25.3",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -161,7 +161,7 @@
     "name": "beautifulsoup4",
     "version": "4.15.0",
     "license": "MIT License",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -173,22 +173,23 @@
   },
   {
     "name": "bidict",
-    "version": "0.23.1",
-    "license": "MPL 2.0",
-    "source": "site-packages",
+    "version": "0.24.1",
+    "license": "MPL-2.0",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
-    "license_fingerprint": "1d3b8b6bca4fde30d09b3ac44b987f4415fd515fb4b149205ad2a53b8afa109f",
+    "license_fingerprint": "bc7354b0ee4f770469d29442d787c2ccce79b41107e3c3dcc55795233d691e8b",
     "legal_document_hashes": [
-      "f3f53adcecaa48d73a66e238fa5ba906cb41876783b45d28a1346b3142eebd9a"
+      "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+      "099b9dcb04485b32cf93aba82b303e099bcf98ab2476fae716d22c930fd6b915"
     ]
   },
   {
     "name": "bottle",
     "version": "0.13.4",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -199,9 +200,9 @@
   },
   {
     "name": "build",
-    "version": "1.5.0",
+    "version": "1.6.0",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -214,7 +215,7 @@
     "name": "certifi",
     "version": "2026.7.22",
     "license": "MPL-2.0",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -227,7 +228,7 @@
     "name": "cffi",
     "version": "2.1.1",
     "license": "MIT-0",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -240,7 +241,7 @@
     "name": "charset-normalizer",
     "version": "3.5.1",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -251,9 +252,9 @@
   },
   {
     "name": "click",
-    "version": "8.4.2",
+    "version": "8.5.0",
     "license": "BSD-3-Clause",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -266,7 +267,7 @@
     "name": "clr_loader",
     "version": "0.3.1",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -279,7 +280,7 @@
     "name": "cobble",
     "version": "0.1.4",
     "license": "BSD-2-Clause",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -292,7 +293,7 @@
     "name": "colorama",
     "version": "0.4.6",
     "license": "License :: OSI Approved :: BSD License",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -305,7 +306,7 @@
     "name": "coloredlogs",
     "version": "15.0.1",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -316,9 +317,9 @@
   },
   {
     "name": "cryptography",
-    "version": "50.0.0",
+    "version": "50.0.1",
     "license": "Apache-2.0 OR BSD-3-Clause",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -333,7 +334,7 @@
     "name": "defusedxml",
     "version": "0.7.1",
     "license": "PSFL",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -346,7 +347,7 @@
     "name": "distro",
     "version": "1.9.0",
     "license": "Apache License, Version 2.0",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -359,7 +360,7 @@
     "name": "docutils",
     "version": "0.23",
     "license": "License :: Public Domain; License :: OSI Approved :: BSD License; License :: OSI Approved :: GNU General Public License (GPL)",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -375,7 +376,7 @@
     "name": "et_xmlfile",
     "version": "2.0.0",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -390,7 +391,7 @@
     "name": "fastapi",
     "version": "0.141.1",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -403,7 +404,7 @@
     "name": "flatbuffers",
     "version": "25.12.19",
     "license": "Apache-2.0",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -416,7 +417,7 @@
     "name": "frozenlist",
     "version": "1.8.0",
     "license": "Apache-2.0",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -440,9 +441,9 @@
   },
   {
     "name": "google-auth",
-    "version": "2.56.3",
+    "version": "2.57.0",
     "license": "Apache 2.0",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -453,9 +454,9 @@
   },
   {
     "name": "google-genai",
-    "version": "2.19.0",
+    "version": "2.21.0",
     "license": "Apache-2.0",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -468,7 +469,7 @@
     "name": "greenlet",
     "version": "3.5.5",
     "license": "MIT AND PSF-2.0",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -482,7 +483,7 @@
     "name": "h11",
     "version": "0.16.0",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -495,7 +496,7 @@
     "name": "httpcore",
     "version": "1.0.9",
     "license": "BSD-3-Clause",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -508,7 +509,7 @@
     "name": "httpcore2",
     "version": "2.12.0",
     "license": "BSD-3-Clause",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -521,7 +522,7 @@
     "name": "httptools",
     "version": "0.8.0",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -536,7 +537,7 @@
     "name": "httpx",
     "version": "0.28.1",
     "license": "BSD-3-Clause",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -549,7 +550,7 @@
     "name": "httpx2",
     "version": "2.12.0",
     "license": "BSD-3-Clause",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -562,7 +563,7 @@
     "name": "humanfriendly",
     "version": "10.0",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -575,7 +576,7 @@
     "name": "idna",
     "version": "3.19",
     "license": "BSD-3-Clause",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -588,7 +589,7 @@
     "name": "ifaddr",
     "version": "0.2.0",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -601,7 +602,7 @@
     "name": "iniconfig",
     "version": "2.3.0",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -614,7 +615,7 @@
     "name": "isodate",
     "version": "0.7.2",
     "license": "License :: OSI Approved :: BSD License",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -627,7 +628,7 @@
     "name": "itsdangerous",
     "version": "2.2.0",
     "license": "License :: OSI Approved :: BSD License",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -640,7 +641,7 @@
     "name": "Jinja2",
     "version": "3.1.6",
     "license": "License :: OSI Approved :: BSD License",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -653,7 +654,7 @@
     "name": "jiter",
     "version": "0.16.0",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -666,7 +667,7 @@
     "name": "lxml",
     "version": "6.1.2",
     "license": "BSD-3-Clause",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -680,7 +681,7 @@
     "name": "magika",
     "version": "0.6.3",
     "license": "Apache-2.0",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -693,7 +694,7 @@
     "name": "mammoth",
     "version": "1.11.0",
     "license": "BSD-2-Clause",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -706,7 +707,7 @@
     "name": "markdown-it-py",
     "version": "4.2.0",
     "license": "License :: OSI Approved :: MIT License",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -720,7 +721,7 @@
     "name": "markdown2",
     "version": "2.5.5",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -733,7 +734,7 @@
     "name": "markdownify",
     "version": "1.2.3",
     "license": "License :: OSI Approved :: MIT License",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -746,7 +747,7 @@
     "name": "markitdown",
     "version": "0.1.7",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -759,7 +760,7 @@
     "name": "MarkupSafe",
     "version": "3.0.3",
     "license": "BSD-3-Clause",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -772,7 +773,7 @@
     "name": "mdurl",
     "version": "0.1.2",
     "license": "License :: OSI Approved :: MIT License",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -785,7 +786,7 @@
     "name": "mpmath",
     "version": "1.3.0",
     "license": "BSD",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -798,7 +799,7 @@
     "name": "msal",
     "version": "1.38.0",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -811,7 +812,7 @@
     "name": "msal-extensions",
     "version": "1.3.1",
     "license": "MIT License",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -824,7 +825,7 @@
     "name": "multidict",
     "version": "6.7.1",
     "license": "Apache License 2.0",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -837,7 +838,7 @@
     "name": "nicegui",
     "version": "3.16.0",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -850,12 +851,13 @@
     "name": "numpy",
     "version": "2.5.2",
     "license": "BSD-3-Clause AND 0BSD AND MIT AND Zlib AND CC0-1.0",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
-    "license_fingerprint": "d32d2d30095acf0a41696c60f7248750963c2428dc276276c1b675a59bccff1b",
+    "license_fingerprint": "f34d6d49dda63d8bb23244d3f2a8142fd92499e416e285df5dbb2ecb33a1ec93",
     "legal_document_hashes": [
+      "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
       "1900269b4c2f0ff0c7ad01ecf13f5ded5610968a0cf1fb6bc3a83bccc2b4c38d",
       "211e7d737d6179a08f791ebb0a99897ce7cd2457410c542876d125576edfe910",
       "3f2c1ffa76383a55ae0aac01c9737cd70050dff63e1f026694fbe9d662573c98",
@@ -879,7 +881,7 @@
     "name": "olefile",
     "version": "0.47",
     "license": "BSD",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -895,7 +897,7 @@
     "name": "onnxruntime",
     "version": "1.20.1",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -908,9 +910,9 @@
   },
   {
     "name": "openai",
-    "version": "3.3.1",
+    "version": "3.6.0",
     "license": "Apache-2.0",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -924,7 +926,7 @@
     "name": "openpyxl",
     "version": "3.1.5",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -937,7 +939,7 @@
     "name": "orjson",
     "version": "3.12.0",
     "license": "MPL-2.0 AND (Apache-2.0 OR MIT)",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -952,7 +954,7 @@
     "name": "packaging",
     "version": "26.3",
     "license": "Apache-2.0 OR BSD-2-Clause",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -967,7 +969,7 @@
     "name": "pandas",
     "version": "3.0.5",
     "license": "License :: OSI Approved :: BSD License",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -980,7 +982,7 @@
     "name": "pdfminer.six",
     "version": "20260107",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -993,7 +995,7 @@
     "name": "pdfplumber",
     "version": "0.11.10",
     "license": "License :: OSI Approved :: MIT License",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1006,7 +1008,7 @@
     "name": "pillow",
     "version": "12.3.0",
     "license": "MIT-CMU",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1019,7 +1021,7 @@
     "name": "pip",
     "version": "26.2.1",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1052,7 +1054,7 @@
     "name": "pip-tools",
     "version": "7.6.1",
     "license": "BSD",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1065,12 +1067,13 @@
     "name": "playwright",
     "version": "1.62.0",
     "license": "Apache-2.0",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
-    "license_fingerprint": "925cf7b28bd487a625f3abb38f97422cfdc0764cb41fe13f2d2a8fb183077bff",
+    "license_fingerprint": "cbdaeb69cb6ca75e4e0fefc03e8fc168146d27dfd970d0ada326ae9e8dbb00e0",
     "legal_document_hashes": [
+      "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
       "148eacf7863ef4329224a29398623077200a27194aa075569faf4a0a85566ca5",
       "37bdf4db7e3aad1c8775b0aaf09baddfe442a8c621afd5eca9da2d7cc6e51f42",
       "6d602191187b35b9b01d2cffa01c8469c2c8d9de8a96f1bf868e0f264f51c81d",
@@ -1094,7 +1097,7 @@
     "name": "pluggy",
     "version": "1.6.0",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1120,7 +1123,7 @@
     "name": "propcache",
     "version": "0.5.2",
     "license": "Apache-2.0",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1132,9 +1135,9 @@
   },
   {
     "name": "protobuf",
-    "version": "7.36.0",
+    "version": "7.36.1",
     "license": "3-Clause BSD License",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1147,7 +1150,7 @@
     "name": "proxy_tools",
     "version": "0.1.0",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1160,7 +1163,7 @@
     "name": "pyasn1",
     "version": "0.6.4",
     "license": "BSD-2-Clause",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1173,7 +1176,7 @@
     "name": "pyasn1_modules",
     "version": "0.4.2",
     "license": "BSD",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1186,7 +1189,7 @@
     "name": "pycparser",
     "version": "3.0",
     "license": "BSD-3-Clause",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1197,9 +1200,9 @@
   },
   {
     "name": "pydantic",
-    "version": "2.13.4",
+    "version": "2.13.5",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1210,9 +1213,9 @@
   },
   {
     "name": "pydantic_core",
-    "version": "2.46.4",
+    "version": "2.46.5",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1225,7 +1228,7 @@
     "name": "pydub",
     "version": "0.25.1",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1239,7 +1242,7 @@
     "name": "pyee",
     "version": "13.0.1",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1252,7 +1255,7 @@
     "name": "Pygments",
     "version": "2.21.0",
     "license": "BSD-2-Clause",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1266,7 +1269,7 @@
     "name": "PyJWT",
     "version": "2.13.0",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1280,7 +1283,7 @@
     "name": "pymupdf",
     "version": "1.28.2",
     "license": "Dual Licensed - GNU AFFERO GPL 3.0 or Artifex Commercial License",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1293,7 +1296,7 @@
     "name": "pypdfium2",
     "version": "5.13.0",
     "license": "BSD-3-Clause, Apache-2.0, dependency licenses",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1324,7 +1327,7 @@
     "name": "pyproject_hooks",
     "version": "1.2.0",
     "license": "License :: OSI Approved :: MIT License",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1337,7 +1340,7 @@
     "name": "pyreadline3",
     "version": "3.5.6",
     "license": "BSD",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1350,7 +1353,7 @@
     "name": "pytesseract",
     "version": "0.3.13",
     "license": "Apache License 2.0",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1363,7 +1366,7 @@
     "name": "pytest",
     "version": "9.1.1",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1376,7 +1379,7 @@
     "name": "python-dateutil",
     "version": "2.9.0.post0",
     "license": "Dual License",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1389,7 +1392,7 @@
     "name": "python-docx",
     "version": "1.2.0",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1402,7 +1405,7 @@
     "name": "python-dotenv",
     "version": "1.2.3",
     "license": "BSD-3-Clause",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1426,9 +1429,9 @@
   },
   {
     "name": "python-engineio",
-    "version": "4.13.5",
+    "version": "4.14.0",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1441,7 +1444,7 @@
     "name": "python-multipart",
     "version": "0.0.32",
     "license": "Apache-2.0",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1454,7 +1457,7 @@
     "name": "python-pptx",
     "version": "1.0.2",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1467,7 +1470,7 @@
     "name": "python-socketio",
     "version": "5.16.4",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1480,7 +1483,7 @@
     "name": "pythonnet",
     "version": "3.1.0",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1494,7 +1497,7 @@
     "name": "pywebview",
     "version": "6.2.1",
     "license": "License :: OSI Approved :: BSD License",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1507,7 +1510,7 @@
     "name": "pywin32",
     "version": "312",
     "license": "PSF",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1527,7 +1530,7 @@
     "name": "PyYAML",
     "version": "6.0.3",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1540,7 +1543,7 @@
     "name": "requests",
     "version": "2.34.2",
     "license": "Apache-2.0",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1554,7 +1557,7 @@
     "name": "rich",
     "version": "15.0.0",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1567,7 +1570,7 @@
     "name": "setuptools",
     "version": "84.0.0",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1593,7 +1596,7 @@
     "name": "simple-websocket",
     "version": "1.1.0",
     "license": "License :: OSI Approved :: MIT License",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1606,7 +1609,7 @@
     "name": "six",
     "version": "1.17.0",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1619,7 +1622,7 @@
     "name": "sniffio",
     "version": "1.3.1",
     "license": "MIT OR Apache-2.0",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1634,7 +1637,7 @@
     "name": "soupsieve",
     "version": "2.9.2",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1647,7 +1650,7 @@
     "name": "SpeechRecognition",
     "version": "3.17.0",
     "license": "BSD-3-Clause",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1662,7 +1665,7 @@
     "name": "starlette",
     "version": "1.6.0",
     "license": "BSD-3-Clause",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1675,7 +1678,7 @@
     "name": "sympy",
     "version": "1.14.0",
     "license": "BSD",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1690,7 +1693,7 @@
     "name": "tenacity",
     "version": "9.1.4",
     "license": "Apache 2.0",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1729,7 +1732,7 @@
     "name": "tinycss2",
     "version": "1.5.1",
     "license": "License :: OSI Approved :: BSD License",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1742,7 +1745,7 @@
     "name": "tqdm",
     "version": "4.70.0",
     "license": "MPL-2.0 AND MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1755,7 +1758,7 @@
     "name": "truststore",
     "version": "0.10.4",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1768,7 +1771,7 @@
     "name": "typing_extensions",
     "version": "4.16.0",
     "license": "PSF-2.0",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1781,7 +1784,7 @@
     "name": "typing-inspection",
     "version": "0.4.4",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1794,7 +1797,7 @@
     "name": "tzdata",
     "version": "2026.3",
     "license": "Apache-2.0",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1808,7 +1811,7 @@
     "name": "urllib3",
     "version": "2.7.0",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1821,7 +1824,7 @@
     "name": "uvicorn",
     "version": "0.52.4",
     "license": "BSD-3-Clause",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1834,7 +1837,7 @@
     "name": "watchfiles",
     "version": "1.2.0",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1847,7 +1850,7 @@
     "name": "webencodings",
     "version": "0.6.1",
     "license": "BSD-3-Clause",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1861,7 +1864,7 @@
     "name": "websockets",
     "version": "16.1.1",
     "license": "BSD-3-Clause",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1874,7 +1877,7 @@
     "name": "wheel",
     "version": "0.48.0",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1887,7 +1890,7 @@
     "name": "wsproto",
     "version": "1.3.2",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1900,7 +1903,7 @@
     "name": "xlrd",
     "version": "2.0.2",
     "license": "BSD",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1913,7 +1916,7 @@
     "name": "xlsxwriter",
     "version": "3.2.9",
     "license": "BSD-2-Clause",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1926,7 +1929,7 @@
     "name": "yarl",
     "version": "1.24.5",
     "license": "Apache-2.0",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
@@ -1940,7 +1943,7 @@
     "name": "youtube-transcript-api",
     "version": "1.0.3",
     "license": "MIT",
-    "source": "site-packages",
+    "source": "wheelhouse",
     "license_files": [
       "licenses/THIRD_PARTY_NOTICES.txt"
     ],
