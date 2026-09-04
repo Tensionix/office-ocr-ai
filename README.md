@@ -23,7 +23,7 @@ An **Audion** tool, published by [Tensionix](https://github.com/Tensionix).
 <!-- /audion:release -->
 
 
-[Русский](Docs/README_RU.md) · [User Guide](Docs/USER_GUIDE_EN.md) · [History](Docs/CHANGELOG_EN.md)
+[Русский](docs/README_RU.md) · [User Guide](docs/USER_GUIDE_EN.md) · [History](docs/CHANGELOG_EN.md)
 
 **Contents**
 
@@ -110,8 +110,8 @@ around it.
 
 ## Next
 
-* [User Guide](Docs/USER_GUIDE_EN.md) — step by step.
-* [History](Docs/CHANGELOG_EN.md) — what changed.
+* [User Guide](docs/USER_GUIDE_EN.md) — step by step.
+* [History](docs/CHANGELOG_EN.md) — what changed.
 
 ---
 
