@@ -1,5 +1,25 @@
 # Changelog
 
+**Contents**
+
+- [2026-07-19 - Resilient bootstrap downloads](#2026-07-19---resilient-bootstrap-downloads)
+  - [Changed](#changed)
+- [2026-07-17 - Canonical Workbench and shared CLI/GUI services](#2026-07-17---canonical-workbench-and-shared-cligui-services)
+  - [Changed](#changed-1)
+  - [Verified](#verified)
+- [2026-07-15 - Provider-neutral DocumentModel and office exports](#2026-07-15---provider-neutral-documentmodel-and-office-exports)
+  - [Added](#added)
+  - [Changed](#changed-2)
+  - [Clarified](#clarified)
+- [2026-07-06 - DEV Markdown PDF and GUI polish](#2026-07-06---dev-markdown-pdf-and-gui-polish)
+  - [Changed](#changed-3)
+- [2026-07-01 - OCR Brick integration and UI cleanup](#2026-07-01---ocr-brick-integration-and-ui-cleanup)
+  - [Added](#added-1)
+  - [Changed](#changed-4)
+  - [Removed](#removed)
+  - [Verified](#verified-1)
+  - [Cleanup](#cleanup)
+
 ## 2026-07-19 - Resilient bootstrap downloads
 
 ### Changed

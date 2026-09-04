@@ -1,7 +1,7 @@
 # Audion Build Licenses Scan Report
 
 - Project: **Audion Office OCR AI** (`audion-office-ocr-ai`)
-- Run: `20260901T043659Z_audion-office-ocr-ai_7043c95e`
+- Run: `20260904T023112Z_audion-office-ocr-ai_c2324ebd`
 - Project root: `S:\Release\Audion Office OCR AI`
 - Scan root: `S:\Release\Audion Office OCR AI`
 - Output: `S:\Release\Audion Office OCR AI\licenses`
@@ -24,7 +24,7 @@ No issues detected.
 | aiosignal | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 1.4.0 | 1.4.0 |
 | annotated-doc | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 0.0.5 | 0.0.5 |
 | annotated-types | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 0.8.0 | 0.8.0 |
-| anyio | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 4.14.2 | 4.14.2 |
+| anyio | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 4.15.0 | 4.15.0 |
 | attrs | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 26.1.0 | 26.1.0 |
 | azure-ai-contentunderstanding | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 1.2.0b3 | 1.2.0b3 |
 | azure-ai-documentintelligence | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 1.0.2 | 1.0.2 |
@@ -51,8 +51,8 @@ No issues detected.
 | flatbuffers | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 25.12.19 | 25.12.19 |
 | frozenlist | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 1.8.0 | 1.8.0 |
 | fzf | `UNCHANGED` | bundled | bundled |
-| google-auth | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 2.57.0 | 2.57.0 |
-| google-genai | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 2.21.0 | 2.21.0 |
+| google-auth | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 2.57.0 | 2.57.1 |
+| google-genai | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 2.22.0 | 2.22.0 |
 | greenlet | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 3.5.5 | 3.5.5 |
 | h11 | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 0.16.0 | 0.16.0 |
 | httpcore | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 1.0.9 | 1.0.9 |
@@ -68,7 +68,7 @@ No issues detected.
 | itsdangerous | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 2.2.0 | 2.2.0 |
 | Jinja2 | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 3.1.6 | 3.1.6 |
 | jiter | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 0.16.0 | 0.16.0 |
-| lxml | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 6.1.2 | 6.1.2 |
+| lxml | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 6.1.3 | 6.1.3 |
 | magika | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 0.6.3 | 0.6.3 |
 | mammoth | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 1.11.0 | 1.11.0 |
 | markdown-it-py | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 4.2.0 | 4.2.0 |
@@ -85,7 +85,7 @@ No issues detected.
 | numpy | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 2.5.2 | 2.5.2 |
 | olefile | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 0.47 | 0.47 |
 | onnxruntime | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 1.20.1 | 1.20.1 |
-| openai | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 3.6.0 | 3.6.0 |
+| openai | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 3.8.0 | 3.8.0 |
 | openpyxl | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 3.1.5 | 3.1.5 |
 | orjson | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 3.12.0 | 3.12.0 |
 | packaging | `VERSION_OR_ARTIFACT_CHANGED_LICENSE_SAME` | 26.3 | 26.3 |

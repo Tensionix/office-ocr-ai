@@ -10,7 +10,7 @@
 
 **Version 1.8.1** · 2026-09-04 · 971.7 MB
 
-- [Direct download](https://dl.audion.dev/office-ocr-ai/1.8.1/Audion_Office_OCR_AI_v1.8.1_Full.zip) — unmetered, no rate limits
+- [Direct download](https://audion.dev/get/office-ocr-ai/1.8.1/Audion_Office_OCR_AI_v1.8.1_Full.zip) — unmetered, no rate limits
 - [Project page](https://audion.dev/downloads/office-ocr-ai) — every version and how to install
 
 <p align="center"><img src="docs/screenshot.png" alt="The program window" width="560"></p>
@@ -23,7 +23,16 @@ An **Audion** tool, published by [Tensionix](https://github.com/Tensionix).
 <!-- /audion:release -->
 
 
-[Русский](README_RU.md) · [User Guide](USER_GUIDE_EN.md) · [History](CHANGELOG_EN.md)
+[Русский](Docs/README_RU.md) · [User Guide](Docs/USER_GUIDE_EN.md) · [History](Docs/CHANGELOG_EN.md)
+
+**Contents**
+
+- [Why It Exists](#why-it-exists)
+- [What Is in the Package](#what-is-in-the-package)
+- [What Is Assembled From It](#what-is-assembled-from-it)
+- [Principles](#principles)
+- [Next](#next)
+- [Technical Reference](#technical-reference)
 
 Recognising scans and converting office documents: from paper to an editable
 document, a spreadsheet, a searchable PDF, and everything else — from a single
@@ -101,8 +110,8 @@ around it.
 
 ## Next
 
-* [User Guide](USER_GUIDE_EN.md) — step by step.
-* [History](CHANGELOG_EN.md) — what changed.
+* [User Guide](Docs/USER_GUIDE_EN.md) — step by step.
+* [History](Docs/CHANGELOG_EN.md) — what changed.
 
 ---
 

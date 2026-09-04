@@ -1,7 +1,7 @@
 {
   "schema": "audion.build_licenses.pack_manifest.v1",
-  "generated_utc": "2026-09-01T04:37:25Z",
-  "run_id": "20260901T043659Z_audion-office-ocr-ai_7043c95e",
+  "generated_utc": "2026-09-04T02:31:43Z",
+  "run_id": "20260904T023112Z_audion-office-ocr-ai_c2324ebd",
   "project_id": "audion-office-ocr-ai",
   "project_name": "Audion Office OCR AI",
   "scan_root": "S:\\Release\\Audion Office OCR AI",
@@ -9,8 +9,8 @@
   "files": [
     {
       "name": "THIRD_PARTY_NOTICES.txt",
-      "sha256": "c558dde3df02d3fd1ebe90b186fdf79361ee12f276e14b9556327c3ec5d03056",
-      "size": 1530643
+      "sha256": "b61db111c191c75597a5a0ef827be4d86347b22262fe6ba24a7470ef10731997",
+      "size": 1531817
     },
     {
       "name": "SOURCE_CODE_AVAILABILITY.txt",
@@ -19,17 +19,17 @@
     },
     {
       "name": "COMPONENTS.json",
-      "sha256": "e9b0f3fe6e8a3b47e3f12b568584708f36c047c96c451295fe2ca8a7f50c3203",
-      "size": 265726
+      "sha256": "ae69447a2a96185d8e8fa6774fcb0a775cbccdddc0501e67584ef1bfc4ea6cf9",
+      "size": 266550
     },
     {
       "name": "_records.json",
-      "sha256": "af2c3f7e4303641a97a04098fed421e8aba5113d83a859a1180fc56ce667388b",
-      "size": 64667
+      "sha256": "5f6d15c50c2c225fff0cb6b62fe0c29ec507b6d02c70b303d6722a06a0a7a215",
+      "size": 64850
     },
     {
       "name": "LICENSE_SCAN_REPORT.md",
-      "sha256": "5a0d7782f0499f64dd3cc1fd0dee6c2acc2c55a337806d26a8530bb85ad6fa8f",
+      "sha256": "16bee5f70cf7ae28ffed451483678830a5a513b6b2055042e834c87ebd9899c0",
       "size": 11363
     }
   ]

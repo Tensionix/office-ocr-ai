@@ -2,6 +2,18 @@
 
 [Русский](README_RU.md) · [User Guide](USER_GUIDE_EN.md) · [History](CHANGELOG_EN.md)
 
+**Contents**
+
+- [Why It Exists](#why-it-exists)
+- [What Is in the Package](#what-is-in-the-package)
+- [What Is Assembled From It](#what-is-assembled-from-it)
+- [Principles](#principles)
+- [Next](#next)
+- [Technical Reference](#technical-reference)
+  - [Workbench Naming](#workbench-naming)
+  - [Second Pass](#second-pass)
+  - [Full Archive](#full-archive)
+
 Recognising scans and converting office documents: from paper to an editable
 document, a spreadsheet, a searchable PDF, and everything else — from a single
 recognition pass.

@@ -1,5 +1,20 @@
 # Audion Office OCR AI - User Guide
 
+**Contents**
+
+- [Launch](#launch)
+- [Root Windows](#root-windows)
+- [Gemini Standard, Flex And Batch](#gemini-standard-flex-and-batch)
+- [Scan Cleanup](#scan-cleanup)
+- [API Keys](#api-keys)
+- [Before Large Runs](#before-large-runs)
+- [Engine Selection](#engine-selection)
+- [Scan Cleanup](#scan-cleanup-1)
+- [Tables And Requisites](#tables-and-requisites)
+- [Batch Control](#batch-control)
+- [Failure Recovery](#failure-recovery)
+- [Privacy](#privacy)
+
 Audion Office OCR AI converts office files, PDFs, images and scans into a provider-neutral `DocumentModel`, then immediately writes the selected office, archival and machine-readable results. Markdown is an optional audit/LLM export, not the center of the system.
 
 ## Launch
