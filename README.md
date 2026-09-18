@@ -8,14 +8,14 @@
   <a href="https://github.com/Tensionix/office-ocr-ai/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/Tensionix/office-ocr-ai?style=flat-square&color=5fd08a&logo=apache&logoColor=white&cacheSeconds=3600"></a>
 </p>
 
-**Version 1.8.1** · 2026-09-04 · 971.7 MB
+**Version 1.8.2** · 2026-09-18 · 978.3 MB
 
-- [Direct download](https://audion.dev/get/office-ocr-ai/1.8.1/Audion_Office_OCR_AI_v1.8.1_Full.zip) — unmetered, no rate limits
+- [Direct download](https://dl.audion.dev/office-ocr-ai/1.8.2/Audion_Office_OCR_AI_v1.8.2_Full.zip) — unmetered, no rate limits
 - [Project page](https://audion.dev/downloads/office-ocr-ai) — every version and how to install
 
 <p align="center"><img src="docs/screenshot.png" alt="The program window" width="560"></p>
 
-`SHA-256: ea27fcac1addf0c8e27bccd9ad1c1e189d9fc4202c4f683099ad2d5ace7ff940`
+`SHA-256: 88ff29efc88bc04173c923fa306c591340330a6c148e7ce39f7ca20fcd40ac9c`
 
 ---
 
