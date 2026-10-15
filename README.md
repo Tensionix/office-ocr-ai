@@ -3,19 +3,20 @@
 <!-- audion:release -->
 <p align="center">
   <a href="https://audion.dev/downloads/office-ocr-ai"><img alt="Windows" src="https://img.shields.io/badge/Windows-10%20%7C%2011-0b6db8?style=flat-square&logo=windows&logoColor=white"></a>
-  <a href="https://github.com/Tensionix/office-ocr-ai/releases/latest"><img alt="Release" src="https://img.shields.io/github/v/release/Tensionix/office-ocr-ai?style=flat-square&label=release&color=e08a63"></a>
+  <a href="https://github.com/Tensionix/office-ocr-ai/releases/latest"><img alt="Release" src="https://img.shields.io/github/v/release/Tensionix/office-ocr-ai?style=flat-square&label=release&color=2a7488"></a>
   <a href="https://github.com/Tensionix/office-ocr-ai/releases"><img alt="Downloads" src="https://img.shields.io/github/downloads/Tensionix/office-ocr-ai/total?style=flat-square&label=downloads&color=5fd08a"></a>
   <a href="https://github.com/Tensionix/office-ocr-ai/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/Tensionix/office-ocr-ai?style=flat-square&color=5fd08a&logo=apache&logoColor=white&cacheSeconds=3600"></a>
 </p>
 
-**Version 1.8.2** · 2026-09-20 · 978.3 MB
+**Version 2.0.0** · 2026-10-16 · 512.6 MB
 
-- [Direct download](https://audion.dev/get/office-ocr-ai/1.8.2/Audion_Office_OCR_AI_v1.8.2_Full.zip) — unmetered, no rate limits
+- [Direct download](https://dl.audion.dev/office-ocr-ai/2.0.0/Audion_Office_OCR_AI_v2.0.0_Full.zip) — unmetered, no rate limits
 - [Project page](https://audion.dev/downloads/office-ocr-ai) — every version and how to install
+- [GitHub release](https://github.com/Tensionix/office-ocr-ai/releases/tag/v2.0.0)
 
 <p align="center"><img src="docs/screenshot.png" alt="The program window" width="560"></p>
 
-`SHA-256: 88ff29efc88bc04173c923fa306c591340330a6c148e7ce39f7ca20fcd40ac9c`
+`SHA-256: 333a4c65196ca30971787b4f92867fa60ee6057a327b8197d9b8d7762b4ca1c2`
 
 ---
 
