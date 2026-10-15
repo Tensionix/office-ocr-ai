@@ -18,7 +18,7 @@ install\Build_Portable_Env_Build.cmd
 ```
 
 This is the main CMD build script.
-It normalizes project `.cmd` files, builds wheels with `pip wheel --prefer-binary --no-build-isolation`, installs from the local wheelhouse, then runs `doctor.py` and a NiceGUI smoke check.
+It normalizes project `.cmd` files, builds wheels with `pip wheel --prefer-binary --no-build-isolation`, installs from the local wheelhouse, then runs `doctor.py`.
 
 ### Template alignment
 
@@ -32,7 +32,7 @@ These files intentionally follow the portable GUI template structure:
 
 Project-specific differences are expected and should be preserved:
 
-- `builder_main.cmd` adds Playwright Chromium, portable Tesseract, Real-ESRGAN, llama.cpp, and optional Surya builder entries.
+- `builder_main.cmd` adds portable Tesseract, Real-ESRGAN, llama.cpp, and optional Surya builder entries.
 - `Build_Portable_Env_Build.cmd` and `Build_Portable_Env.ps1` build the core Python bundle without Tesseract, then print the optional component command before `doctor.py`.
 - `init_folders.cmd` creates OpenAI/Gemini key folders and `._runtime\tmp`.
 - `install\tools` is reserved for persistent installer helpers and is not cleared by `cleanup_project.cmd`.
@@ -53,15 +53,27 @@ The wrapper looks for PowerShell in:
 2. `pwsh.exe` in `PATH`
 3. `powershell.exe` in `PATH`
 
-To install a project-local PowerShell for portable picker dialogs and build helpers, run:
+## The window
+
+`App\` holds the window of the program (`AudionOfficeOcrAi.exe`, Avalonia, with its own .NET) and the PowerShell the
+program carries (`AudionPs.exe`). The install scripts and the layout service of Surya use `App\AudionPs.exe` first.
+`App\` is not a product of an environment build: it travels in a release as it is. Rebuild it only after a change in
+`Source\` (needs the .NET 10 SDK):
 
 ```bat
-install\Install-Portable-PowerShell.cmd
+install\Build-App.cmd
 ```
+
+It runs the checks of the console command, of the layout and of the dictionary of the window first, then publishes the
+window and `AudionPs.exe` into a staging folder, lets the built window check itself and only then replaces `App\`.
+`Start.exe` in the root opens `App\AudionOfficeOcrAi.exe`; rebuild it with `install\Build-StartLauncher.cmd`.
+
+`Source\Tools\release-walk.ps1 -Stand <new folder>` walks the built program by UI Automation on a copy of it in a
+temporary folder: the free operations are pressed by their own buttons, nothing of the program's folders is read or written.
 
 ## Reproducible payloads
 
-Python runtime, wheelhouse, portable PowerShell, FZF and optional portable components are reproducible tool payloads. Install/update scripts may resolve latest upstream artifacts and cleanly replace only their owned targets: `runtime\`, `wheelhouse\`, `system_core\powershell\`, `system_core\fzf.exe`, `runtime\tesseract\`, `tools\realesrgan-ncnn-vulkan\`, `tools\llama.cpp\`, and `tools\optional-ocr-engines\`.
+Python runtime, wheelhouse and optional portable components are reproducible tool payloads. Install/update scripts may resolve latest upstream artifacts and cleanly replace only their owned targets: `runtime\`, `wheelhouse\`, `runtime\tesseract\`, `tools\realesrgan-ncnn-vulkan\`, `tools\llama.cpp\`, and `tools\optional-ocr-engines\`.
 
 ## Portable flow
 
@@ -74,8 +86,6 @@ Python runtime, wheelhouse, portable PowerShell, FZF and optional portable compo
 7. Install packages into portable runtime
 8. Print optional component hints: Tesseract, Real-ESRGAN, llama.cpp, Surya
 9. Verify with `system_core\doctor.py`
-10. Run NiceGUI smoke check
-11. Optionally create a release ZIP in `release\`
 
 `install\init_folders.cmd` is intentionally limited to directories and `.gitkeep` markers. It does not create API key files, token placeholders, or default business configuration.
 
@@ -263,72 +273,29 @@ Practical combinations:
 
 Only one llama.cpp payload is active under `tools\llama.cpp`; installing Vulkan/CUDA replaces that payload with the selected variant. Do not install all llama.cpp variants on one machine. PyTorch CUDA payloads are large and should stay machine-local benchmark options, not default project dependencies.
 
-## Optional Chromium for DEV Markdown PDF
+## PDF from Markdown
 
-The office PDF pipeline remains Word-based and is launched from `launcher_project.cmd` as `BUILD PDF`
-or from `launcher_project_ru.cmd` as `СОБРАТЬ PDF`.
-
-The separate DEV Markdown PDF engine renders Markdown through Playwright Chromium into paired dark/light PDF files.
-It is launched from `launcher_project.cmd` / `launcher_project_ru.cmd` -> `[17] DEV Markdown PDF` or fallback key `[H]`.
-
-By default it scans only:
-
-```text
-input\
-```
-
-The CLI path is input-only unless `--source` or `--source-list` is passed. Internal project Markdown files are not converted by default.
-
-In the GUI, DEV Markdown PDF can scan project documentation, selected files/folders, existing PDF pairs, or outdated PDF pairs. The default output mode creates one shared `PDF` subfolder beside each Markdown folder; direct beside-source output, shared `docs/PDF`, and mirrored output into the current Workbench Target remain available. The command also exposes layout settings: left/right/top/bottom margins, page top/bottom reserve, and line height.
-
-Current defaults are:
-
-```text
-left/right margins: 17 mm
-top margin: 16 mm
-bottom margin: 20 mm
-page top/bottom reserve: 4 mm
-line height: 1.25
-```
-
-Tables are allowed to continue on the next page by rows; table headers are repeated where Chromium supports it.
-
-Install the portable Chromium runtime from:
-
-```bat
-builder_main.cmd
-```
-
-then choose:
-
-```text
-[05] PLAYWRIGHT CHROMIUM
-```
-
-Chromium is stored under:
-
-```text
-runtime\.playwright\
-```
+The PDF of the program is Word-based: `TOOLS` -> `Rebuild Markdown` -> `Build PDF` in the window, or
+`ocr_cli.cmd run --operation build_pdf`. The program carries no browser: paired dark and light PDFs of
+any Markdown are made by Audion Build PDF Render (`render_markdown.cmd`).
 
 ## Release licensing
 
-Third-party notices and license files are generated from the finalized staged release contents during `make_release_archive.cmd`. They are no longer generated during routine environment build/install steps.
+Third-party notices and license files are collected by Audion Build Licenses from the finalized release contents. They are not generated during routine environment build/install steps.
 
 ---
 
 ## Current Builder Order And Dependency Hygiene
 
-`builder_main.cmd` uses fixed numeric entries. Keep the bootstrap order stable: `[01] PYTHON ENV CMD`, `[02] PYTHON ENV PS`, `[03] FZF`, `[04] POWERSHELL`, `[05] PLAYWRIGHT CHROMIUM`, then project-specific payload installers and one-time maintenance/diagnostic actions below.
+`builder_main.cmd` uses fixed numeric entries. Keep the bootstrap order stable: `[01] PYTHON ENV CMD`, `[02] PYTHON ENV PS`, `[03] START LAUNCHER`, `[04] WINDOW`, then project-specific payload installers and one-time maintenance/diagnostic actions below.
 
 Current builder install/maintenance map:
 
 ```text
 [01] PYTHON ENV CMD
 [02] PYTHON ENV PS
-[03] FZF
-[04] POWERSHELL
-[05] PLAYWRIGHT CHROMIUM
+[03] START LAUNCHER
+[04] WINDOW
 [09] PORTABLE OFFLINE
 [10] TESSERACT
 [11] REAL-ESRGAN VULKAN
@@ -341,17 +308,11 @@ Current builder install/maintenance map:
 [70] CLEAN INSTALL CACHE
 [71] VERIFY / DOCTOR
 [72] CMD ENCODING CHECK
-[74] COLLECT LICENSES
-[75] PRUNE LICENSES
-[76] DEDUP LICENSES
-[77] MAKE RELEASE ARCHIVE
-[90] PROJECT LAUNCHER
-[94] OPEN tools
+[73] UPDATE REQUIREMENTS LOCK
 [95] OPEN install
 [96] OPEN runtime
 [97] OPEN wheelhouse
 [98] OPEN licenses
-[99] OPEN release
 [00] EXIT
 ```
 
@@ -371,13 +332,13 @@ Dependency hygiene rules:
 - Python Embedded tracks the latest `3.12.x`; do not pin a concrete patch version in docs or scripts.
 - Use the active embedded Python `_pth` file for path edits; do not hard-code a concrete filename.
 - Bootstrap installs must include `setuptools`, `wheel`, and `packaging` before building or installing project wheels.
-- `runtime\`, `wheelhouse\`, `system_core\powershell\`, `system_core\fzf.exe`, browser payloads, `runtime\tesseract\`, and root `tools\` external payload folders are reproducible payloads. Install/update scripts may cleanly replace only their owned targets.
-- GPL or unknown-license external tools are explicit install/update payloads. Prefer GUI install buttons where the project exposes them, or fixed builder entries otherwise; do not silently bundle them as default source contents.
+- `runtime\`, `wheelhouse\`, browser payloads, `runtime\tesseract\`, and root `tools\` external payload folders are reproducible payloads. Install/update scripts may cleanly replace only their owned targets.
+- GPL or unknown-license external tools are explicit install/update payloads. Prefer the install buttons of the window (`SETUP` in the header) where the project exposes them, or fixed builder entries otherwise; do not silently bundle them as default source contents.
 - `install\Clean-Install-Cache.cmd` / `.ps1` is the general install-cache cleanup. It removes transient `install\download\` artifacts (preserving `.gitkeep`, `get-pip.py`, and `7z*-extra.7z`), exact installer staging dirs under `system_core\` and root `tools\`, and Python bytecode caches outside runtime, wheelhouse, tools, and user-data zones.
 - `cleanup_project.cmd` is a separate source/release cleanup tool. It can remove runtime payloads, root `tools\` optional payloads, cache, and user-output zones after explicit confirmation; do not describe it as the general install-cache cleaner and do not wire it into install flow.
 
 Project-specific notes:
 
-- Portable Tesseract, Playwright Chromium, Real-ESRGAN, llama.cpp, and Surya are explicit installer entries. Keep them out of the core Python build and install them only when needed.
+- Portable Tesseract, Real-ESRGAN, llama.cpp, and Surya are explicit installer entries. Keep them out of the core Python build and install them only when needed.
 
 

@@ -8,15 +8,14 @@
   <a href="https://github.com/Tensionix/office-ocr-ai/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/Tensionix/office-ocr-ai?style=flat-square&color=5fd08a&logo=apache&logoColor=white&cacheSeconds=3600"></a>
 </p>
 
-**Version 2.0.0** · 2026-10-16 · 74.4 MB
+**Version 2.0.0** · 2026-10-16 · 512.6 MB
 
-- [Direct download](https://dl.audion.dev/office-ocr-ai/2.0.0/Audion_Office_OCR_AI_v2.0.0.zip) — unmetered, no rate limits
+- [Direct download](https://audion.dev/get/office-ocr-ai/2.0.0/Audion_Office_OCR_AI_v2.0.0_Full.zip) — unmetered, no rate limits
 - [Project page](https://audion.dev/downloads/office-ocr-ai) — every version and how to install
-- [GitHub release](https://github.com/Tensionix/office-ocr-ai/releases/tag/v2.0.0)
 
 <p align="center"><img src="docs/screenshot.png" alt="The program window" width="560"></p>
 
-`SHA-256: 967df35da23dcde503aeb9eba7d40676c11112f04318cf663c5113148447b073`
+`SHA-256: 333a4c65196ca30971787b4f92867fa60ee6057a327b8197d9b8d7762b4ca1c2`
 
 ---
 
@@ -24,7 +23,9 @@ An **Audion** tool, published by [Tensionix](https://github.com/Tensionix).
 <!-- /audion:release -->
 
 
-[Русский](docs/README_RU.md) · [User Guide](docs/USER_GUIDE_EN.md) · [History](docs/CHANGELOG_EN.md)
+[English README](docs/README_EN.md) · [User Guide](docs/USER_GUIDE_EN.md) | [Русский README](docs/README_RU.md) · [Руководство](docs/USER_GUIDE_RU.md)
+
+[History](docs/CHANGELOG_EN.md)
 
 **Contents**
 
@@ -34,7 +35,7 @@ An **Audion** tool, published by [Tensionix](https://github.com/Tensionix).
 - [Principles](#principles)
 - [Next](#next)
 - [Technical Reference](#technical-reference)
-  - [Workbench Naming](#workbench-naming)
+  - [Source and Target](#source-and-target)
   - [Second Pass](#second-pass)
   - [Full Archive](#full-archive)
 
@@ -112,6 +113,11 @@ error costs most, and a person should settle it.
 format and as input for language models, but the document package is not built
 around it.
 
+PDF files are read and written by the PyMuPDF library, which is distributed under
+the GNU AGPL 3.0. The program's own code stays under Apache 2.0, but the build as
+a whole — the program together with PyMuPDF — is offered under the terms of the
+GNU AGPL 3.0; see the `NOTICE` file.
+
 ## Next
 
 * [User Guide](docs/USER_GUIDE_EN.md) — step by step.
@@ -121,14 +127,17 @@ around it.
 
 ## Technical Reference
 
-### Workbench Naming
+### Source and Target
 
-The path rows are called **Source** and **Target**. The buttons are the same as in
-every Audion project: **Source**, **Add file…**, **Target**, **Reset**,
-**Delete**, **List**.
+The path rows are called **Source** and **Target**. The source may be a single
+file or a folder - picked, typed, or dropped on the window; the history of paths
+keeps pinned paths on top. **Reset** sets both back to the folders of the program,
+**List** names what lies in the source, the bin clears the source, the target or
+both into the Recycle Bin.
 
-The source may be a single file or a folder. An external path is mirrored into
-the managed working folder, and results are synchronised into the chosen target.
+An external source is copied into the managed `input` folder before a run, and
+the results are copied into the chosen target. The window asks first when `input`
+or `output` hold anything - they are cleared before the copy.
 
 ### Second Pass
 

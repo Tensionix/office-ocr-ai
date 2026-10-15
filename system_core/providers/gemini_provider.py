@@ -8,7 +8,6 @@ Handles transport disconnects, rate limits, and enforces JSON output.
 
 from __future__ import annotations
 
-import json
 import mimetypes
 import os
 import random
@@ -244,23 +243,6 @@ def _remaining_time(deadline_monotonic: Optional[float]) -> Optional[float]:
         return None
     return deadline_monotonic - time.monotonic()
 
-def _normalize_json_text(raw: str) -> str:
-    text = (raw or "").strip()
-    if not text:
-        return text
-
-    if text.startswith("```"):
-        text = text.strip("`")
-        if text.lower().startswith("json"):
-            text = text[4:].lstrip()
-
-    if text and not text.lstrip().startswith("{"):
-        left = text.find("{")
-        right = text.rfind("}")
-        if left != -1 and right != -1 and right > left:
-            text = text[left:right + 1]
-
-    return text.strip()
 
 
 def _guess_mime_type(path: str) -> str:
@@ -450,123 +432,3 @@ def call_markdown_vision(
 
     raise RuntimeError("Unreachable")
 
-def call_structured(
-    client: genai.Client,
-    *,
-    model: str,
-    model_chain: Optional[Iterable[str]] = None,
-    system_instruction: str,
-    user_prompt: str,
-    temperature: float = 0.0,
-    timeout_sec: Optional[float] = None,
-    deadline_monotonic: Optional[float] = None,
-    max_retries: int = 3,
-    sleep_after_sec: float = 0.0,
-    use_stream: Optional[bool] = None,
-    service_tier: Optional[str] = None,
-) -> Tuple[Dict[str, Any], Dict[str, int], str]:
-    
-    last_raw = ""
-    tier = _service_tier_value(service_tier)
-    config_kwargs: dict[str, Any] = {
-        "system_instruction": system_instruction,
-        "temperature": temperature,
-        "response_mime_type": "application/json",
-    }
-    if tier:
-        config_kwargs["service_tier"] = tier
-    config = types.GenerateContentConfig(**config_kwargs)
-    prefer_stream = _env_float("GEMINI_USE_STREAM", 1.0) > 0.0 if use_stream is None else bool(use_stream)
-
-    for attempt in range(1, max_retries + 1):
-        active_model = _MODEL_FAILOVER.current_model(model, model_chain)
-        try:
-            _REQUEST_GATE.before_request(active_model)
-            remaining = _remaining_time(deadline_monotonic)
-            if remaining is not None and remaining <= 0:
-                raise TimeoutError("Gemini file deadline exceeded.")
-            last_raw, usage, route = _generate_content_once(
-                client,
-                model=active_model,
-                contents=user_prompt,
-                config=config,
-                use_stream=prefer_stream,
-                timeout_sec=min(timeout_sec, remaining) if timeout_sec is not None and remaining is not None else (remaining if remaining is not None else timeout_sec),
-            )
-            normalized = _normalize_json_text(last_raw)
-            if not normalized:
-                raise ValueError("Empty model response text")
-
-            obj = json.loads(normalized)
-            
-            if sleep_after_sec > 0:
-                time.sleep(sleep_after_sec)
-                
-            _REQUEST_GATE.on_success(active_model)
-            _MODEL_FAILOVER.on_success(model, model_chain)
-            return obj, usage, f"{route}:{tier}" if tier else route
-
-        except Exception as exc:
-            msg = str(exc).lower()
-            if "finish_reason=recitation" in msg:
-                raise RuntimeError("Gemini returned empty response; finish_reason=RECITATION.") from exc
-            if prefer_stream and (
-                "generate_content_stream" in msg
-                or "not implemented" in msg
-                or "not supported" in msg
-                or "unexpected keyword" in msg
-            ):
-                prefer_stream = False
-                continue
-
-            if _is_timeout_or_transient(msg) or _is_rate_limited(msg) or _is_transport_error(exc):
-                if attempt < max_retries:
-                    retry_after = _extract_retry_after_sec(msg)
-                    if _is_rate_limited(msg):
-                        adaptive_sleep = _REQUEST_GATE.on_rate_limit(active_model, retry_after)
-                        switched_model = _MODEL_FAILOVER.on_rate_limit(model, model_chain)
-                        if switched_model:
-                            sleep_sec = min(5.0, max(0.5, adaptive_sleep))
-                            remaining = _remaining_time(deadline_monotonic)
-                            if remaining is not None:
-                                if remaining <= 0:
-                                    raise RuntimeError("Gemini file deadline exceeded.") from exc
-                                sleep_sec = min(sleep_sec, max(0.0, remaining))
-                                if sleep_sec <= 0:
-                                    raise RuntimeError("Gemini file deadline exceeded.") from exc
-                            print(f"  [429x2] switching Gemini model {active_model} -> {switched_model}")
-                            time.sleep(sleep_sec)
-                            continue
-                        if retry_after is not None:
-                            sleep_sec = max(adaptive_sleep, retry_after + random.uniform(0.2, 1.0))
-                        else:
-                            sleep_sec = adaptive_sleep
-                    elif retry_after is not None:
-                        sleep_sec = retry_after + random.uniform(0.2, 1.0)
-                    else:
-                        sleep_sec = min(180.0, 4.0 * (1.9 ** (attempt - 1))) + random.uniform(0.3, 1.2)
-                    remaining = _remaining_time(deadline_monotonic)
-                    if remaining is not None:
-                        if remaining <= 0:
-                            raise RuntimeError("Gemini file deadline exceeded.") from exc
-                        sleep_sec = min(sleep_sec, max(0.0, remaining))
-                        if sleep_sec <= 0:
-                            raise RuntimeError("Gemini file deadline exceeded.") from exc
-                    
-                    _print_retry(attempt, max_retries, sleep_sec, exc)
-                    time.sleep(sleep_sec)
-                    continue
-
-                if _is_rate_limited(msg):
-                    raise RuntimeError("Gemini rate limit exceeded and retries exhausted.") from exc
-
-                raise RuntimeError(f"Gemini transport/timeout failed ({exc.__class__.__name__}).") from exc
-
-            # Unknown API errors
-            if attempt < max_retries:
-                time.sleep(min(15.0, 3.0 * attempt))
-                continue
-
-            raise RuntimeError(f"Gemini call failed: {exc}\nRAW(head): {last_raw[:400]}") from exc
-
-    raise RuntimeError("Unreachable")

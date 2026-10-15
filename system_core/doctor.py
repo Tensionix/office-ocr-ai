@@ -24,8 +24,6 @@ REQUIRED_MODULES = [
     ("rich", "rich"),
     ("pydantic", "pydantic"),
     ("yaml", "pyyaml"),
-    ("nicegui", "nicegui"),
-    ("webview", "pywebview"),
     ("docx", "python-docx"),
     ("markitdown", "markitdown[all]"),
     ("markdown_it", "markdown-it-py"),
@@ -94,9 +92,10 @@ def detect_python_mode(root: Path) -> str:
     return "system-python"
 
 
-def check_picker_powershell(root: Path) -> tuple[bool, list[tuple[str, bool, str]]]:
+def check_script_powershell(root: Path) -> tuple[bool, list[tuple[str, bool, str]]]:
+    """The PowerShell the scripts of the program run with: its own (App\\AudionPs.exe) first."""
     candidates = [
-        ("portable pwsh", root / "system_core" / "powershell" / "pwsh.exe"),
+        ("program PowerShell", root / "App" / "AudionPs.exe"),
         ("PATH pwsh", "pwsh.exe"),
         ("Windows PowerShell", "powershell.exe"),
     ]
@@ -238,32 +237,6 @@ def check_sh_lf(root: Path) -> tuple[bool, list[tuple[str, bool, str]]]:
     return all_ok, rows
 
 
-def check_gui_theme_catalog(root: Path) -> tuple[bool, list[tuple[str, bool, str]]]:
-    if str(root) not in sys.path:
-        sys.path.insert(0, str(root))
-
-    try:
-        from system_core.core.config import load_yaml_or_json  # noqa: WPS433
-        from system_core.core.ui_theme_catalog import validate_theme_catalog  # noqa: WPS433
-    except Exception as exc:
-        return False, [("(loader)", False, f"{exc.__class__.__name__}: {exc}")]
-
-    try:
-        data = load_yaml_or_json(root / "config" / "ui_colors.yaml")
-    except Exception as exc:
-        return False, [("catalog", False, f"{exc.__class__.__name__}: {exc}")]
-
-    result = validate_theme_catalog(data)
-    if not result.ok:
-        return False, [("catalog", False, error) for error in result.errors]
-
-    rows = [
-        ("theme order", True, f"core prefix OK; {len(result.theme_ids)} theme(s)"),
-        ("extension themes", True, ", ".join(result.extra_theme_ids) or "none"),
-    ]
-    return True, rows
-
-
 def main() -> int:
     root = BASE_DIR
 
@@ -316,24 +289,13 @@ def main() -> int:
         print(f"  - {folder.relative_to(root)!s:<18} : {status_marker(exists)}")
 
     print()
-    print(section("[GUI portability]"))
-    picker_ok, picker_rows = check_picker_powershell(root)
-    for label, ok, detail in picker_rows:
+    print(section("[PowerShell of the scripts]"))
+    shell_ok, shell_rows = check_script_powershell(root)
+    for label, ok, detail in shell_rows:
         status = "OK" if ok else "MISS"
         print(f"  - {label:<18} : {status_marker(status)} {detail}")
-    if not picker_ok:
-        print(f"  - picker dialogs     : {status_marker('FAIL')} PowerShell was not found")
-        failed = True
-    else:
-        print(f"  - picker dialogs     : {status_marker('OK')} PowerShell-backed Windows dialogs available")
-
-    print()
-    print(section("[GUI themes]"))
-    themes_ok, theme_rows = check_gui_theme_catalog(root)
-    for label, ok, detail in theme_rows:
-        status = "OK" if ok else "FAIL"
-        print(f"  - {label:<18} : {status_marker(status)} {detail}")
-    if not themes_ok:
+    if not shell_ok:
+        print(f"  - scripts            : {status_marker('FAIL')} PowerShell was not found")
         failed = True
 
     print()

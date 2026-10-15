@@ -21,10 +21,6 @@ RELEASE_DIR = BASE_DIR / "release"
 INTERNAL_RUNTIME_DIR = BASE_DIR / "._runtime"
 TEMP_DIR = Path(tempfile.gettempdir()) / "audion_office_ocr_ai"
 
-# Legacy optional folders. Files can still be dropped directly into `input/`.
-INPUT_DOCS_DIR = INPUT_DIR / "docs"
-INPUT_MD_DIR = INPUT_DIR / "md"
-
 OUTPUT_MD_DIR = OUTPUT_DIR
 OUTPUT_IMAGES_DIR = OUTPUT_DIR
 OUTPUT_DOCX_DIR = OUTPUT_DIR
@@ -40,7 +36,6 @@ LEGACY_CONFIG_API_KEY_GEMINI_FILE = CONFIG_DIR / "api_gemini.txt"
 LEGACY_CONFIG_API_KEY_OPENAI_FILE = CONFIG_DIR / "api_openai.txt"
 LLM_SETTINGS_FILE = CONFIG_DIR / "llm_settings.yaml"
 MODELS_CACHE_FILE = DATA_DIR / "available_models_gemini.md"
-MODELS_CACHE_GEMINI_FILE = MODELS_CACHE_FILE
 MODELS_CACHE_OPENAI_FILE = DATA_DIR / "available_models_openai.md"
 
 EXCLUDED_TOP_LEVEL_DIRS = {

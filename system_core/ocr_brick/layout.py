@@ -1,6 +1,6 @@
 # layout.py
 # Reconstruct structure from a flat OCR word list (geometry only).
-# Used by render_docx (lines -> paragraphs) and render_xlsx (rows x columns grid).
+# Used by the exporters of DocumentModel and by the fusion of OCR (lines -> paragraphs, rows x columns grid).
 # HONEST LIMIT: a flat word list does not know "this is a table". These are
 # coordinate heuristics. For reliable tables, feed structured regions from a
 # layout engine (Surya / PP-Structure) instead of raw words. TODO(codex).
@@ -8,7 +8,6 @@
 
 from __future__ import annotations
 
-from typing import Any
 
 
 def _cy(w: dict) -> float:
@@ -43,28 +42,6 @@ def group_lines(words: list[dict], y_tol_factor: float = 0.6) -> list[list[dict]
             base = _cy(w)
     lines.append(sorted(current, key=lambda d: d["box"][0]))
     return lines
-
-
-def lines_to_paragraphs(lines: list[list[dict]], gap_factor: float = 1.6) -> list[list[list[dict]]]:
-    """Group consecutive lines into paragraphs by the vertical gap between them."""
-    if not lines:
-        return []
-    def line_top(ln): return min(w["box"][1] for w in ln)
-    def line_bot(ln): return max(w["box"][1] + w["box"][3] for w in ln)
-    med_h = sorted(_h(w) for ln in lines for w in ln)
-    med_h = med_h[len(med_h) // 2] if med_h else 1.0
-
-    paras: list[list[list[dict]]] = []
-    cur: list[list[dict]] = [lines[0]]
-    for prev, ln in zip(lines, lines[1:]):
-        gap = line_top(ln) - line_bot(prev)
-        if gap > med_h * gap_factor:
-            paras.append(cur)
-            cur = [ln]
-        else:
-            cur.append(ln)
-    paras.append(cur)
-    return paras
 
 
 def line_text(line: list[dict]) -> str:

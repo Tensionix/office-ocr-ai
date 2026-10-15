@@ -7,7 +7,6 @@ $runtimeDir = Join-Path $rootDir "runtime"
 $wheelhouseDir = Join-Path $rootDir "wheelhouse"
 $requirementsFile = Join-Path $installDir "requirements_full.in"
 $doctorScript = Join-Path $rootDir "system_core\doctor.py"
-$guiSmokeScript = Join-Path $rootDir "system_core\ui_nicegui\app.py"
 $cmdEncodingScript = Join-Path $installDir "Repair-CmdEncoding.ps1"
 $initFoldersScript = Join-Path $installDir "init_folders.cmd"
 
@@ -161,9 +160,6 @@ Write-Host "[INFO] Heavy Surya dependencies stay under tools\optional-ocr-engine
 
 Write-Host "[8/8] Verifying environment..."
 Invoke-Checked -Label "Verifying environment" -Command { & $pythonExe $doctorScript --project-root $rootDir }
-if (Test-Path $guiSmokeScript) {
-    Invoke-Checked -Label "Verifying NiceGUI smoke" -Command { & $pythonExe $guiSmokeScript --smoke }
-}
 
 Write-Host ""
 Write-Host "[SUCCESS] Portable environment is ready."

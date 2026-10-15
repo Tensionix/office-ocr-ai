@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import codecs
 import locale
 
 
@@ -194,5 +195,66 @@ def decode_process_bytes(data: bytes) -> str:
     return data.decode("utf-8", errors="replace")
 
 
-def decode_process_output(data: bytes) -> str:
-    return decode_process_bytes(data)
+def _high_bytes(part: bytes) -> int:
+    # The high byte of a character of UTF-16: NUL for a Latin letter, a space or a line end, 0x04 for Cyrillic.
+    return part.count(0) + part.count(4)
+
+
+def _looks_utf16(chunk: bytes) -> bool:
+    """No single-byte text and no UTF-8 holds NUL, nor the byte 0x04 at every other place."""
+    if b"\x00" in chunk:
+        return True
+    odd = chunk[1::2]
+    return len(odd) >= 2 and odd.count(4) * 2 >= len(odd)
+
+
+def _utf16_codec(chunk: bytes) -> str:
+    """The UTF-16 a chunk is written in: by its byte order mark, else by where its high bytes stand."""
+    if chunk.startswith((b"\xff\xfe", b"\xfe\xff")):
+        return "utf-16"
+    return "utf-16-le" if _high_bytes(chunk[1::2]) >= _high_bytes(chunk[0::2]) else "utf-16-be"
+
+
+class ProcessText:
+    """The text of a child process from the chunks a pipe gives, each ending at the byte \\n.
+
+    A chunk with a NUL byte, or with 0x04 at every other place (the high byte of Cyrillic), is
+    UTF-16: no single-byte text and no UTF-8 holds them. From it on the
+    bytes go to one UTF-16 decoder - a cut at the byte \\n splits a character of two bytes, and
+    decoded chunk by chunk every line after the first came out as rubbish. A chunk without NUL
+    that does not finish a character of UTF-16 ends that stretch: a script may run one program
+    after another, and the next one writes its own way. Any other chunk is decoded by itself, by
+    its best encoding (decode_process_bytes): UTF-8, the OEM page (cp866), the ANSI one (cp1251).
+    A byte order mark of UTF-8 or UTF-16 is not text and is dropped.
+    """
+
+    def __init__(self) -> None:
+        self._utf16: codecs.IncrementalDecoder | None = None
+
+    def feed(self, chunk: bytes) -> str:
+        if not chunk:
+            return ""
+        text = ""
+        if self._utf16 is not None:
+            # Half a character waits from the last chunk: the line end of UTF-16 is two bytes, and
+            # the pipe cut after the first.
+            if len(self._utf16.getstate()[0]) % 2:
+                text += self._utf16.decode(chunk[:1])
+                chunk = chunk[1:]
+            if not chunk:
+                return text
+            if _looks_utf16(chunk) or self._utf16.getstate()[0]:
+                return text + self._utf16.decode(chunk)
+            text += self._utf16.decode(b"", final=True)
+            self._utf16 = None
+        if _looks_utf16(chunk):
+            self._utf16 = codecs.getincrementaldecoder(_utf16_codec(chunk))(errors="replace")
+            return text + self._utf16.decode(chunk).lstrip("﻿")
+        return text + decode_process_bytes(chunk).lstrip("﻿")
+
+    def close(self) -> str:
+        """What the decoder still holds once the stream has ended."""
+        if self._utf16 is None:
+            return ""
+        rest, self._utf16 = self._utf16.decode(b"", final=True), None
+        return rest

@@ -63,14 +63,6 @@ class LayoutResult:
         return out
 
 
-def tables(layout: LayoutResult) -> list[TableRegion]:
-    return [r for r in layout.regions if isinstance(r, TableRegion)]
-
-
-def text_blocks(layout: LayoutResult) -> list[TextRegion]:
-    return [r for r in layout.regions if isinstance(r, TextRegion)]
-
-
 def _box(v) -> Box | None:
     return tuple(int(x) for x in v) if v else None  # list (from JSON) -> tuple
 

@@ -48,7 +48,9 @@ if ($Enable) {
 }
 
 if ($Disable) {
+    # Only the service of this copy of the program: another copy may run its own.
     Get-CimInstance Win32_Process -Filter "CommandLine LIKE '%system_core.ocr_brick.layout_service%'" |
+        Where-Object { $_.CommandLine -and $_.CommandLine.Contains($ProjectRoot) } |
         ForEach-Object { Stop-Process -Id $_.ProcessId -Force }
     "DISABLED"
     return

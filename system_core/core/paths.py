@@ -2,9 +2,6 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from pathlib import Path
-import os
-import subprocess
-import sys
 
 
 @dataclass(frozen=True)
@@ -52,12 +49,3 @@ def ensure_project_dirs(paths: ProjectPaths) -> None:
         directory.mkdir(parents=True, exist_ok=True)
 
 
-def open_folder(path: Path) -> None:
-    path.mkdir(parents=True, exist_ok=True)
-    if os.name == "nt":
-        os.startfile(str(path))  # type: ignore[attr-defined]
-        return
-    if sys.platform == "darwin":
-        subprocess.Popen(["open", str(path)])
-        return
-    subprocess.Popen(["xdg-open", str(path)])

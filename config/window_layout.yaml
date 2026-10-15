@@ -1,0 +1,236 @@
+# Where every operation stands in the window on Avalonia.
+#
+# config\tool_manifest.yaml says what an operation is: its service, its fields, its texts.
+# This file says where it stands: a section (a large button of the ribbon under the header), a page
+# of the section (the second ribbon), a card of the page. The console command (ocr_cli.cmd) hands it
+# to the window with `describe`; the window knows no section and no operation by its name.
+#
+#   cards:   a card is one operation with its form; `guests` are operations whose buttons stand in
+#            the same card and read the same fields
+#   choices: the row of switches over the form of a page, one of them on: each names the values the
+#            page fixes while it is on - the engine of Local OCR, the provider of API OCR
+#   fixed:   values the page sets for good - the fields named are not drawn
+#   block:   the logical block of a page an operation without a form stands in
+#   about:   what a section, a page or a choice is for - the second line of its button, its tooltip
+#   icon:    a name of the icon set of the window (Source\Tools\build_icons.py)
+#   tone:    "run" - the main action of its card; "burn" - it removes; on a choice - the tone of its
+#            engine in the manifest (local, yandex, vision, process, warn)
+#   place:   "header" - the section is a button of the header, before SETTINGS, not a button of the ribbon
+#   folders: the operations of the working area: buttons of the right column, beside SOURCE and TARGET
+#   shared:  the fields whose value is one for the whole window; every other field belongs to its page
+#
+# The two OCR operations of the window - `ocr_local_run` and `ocr_api_run` - are the one operation
+# `ocr_brick` of the manifest with the engines of each family, as the window on NiceGUI built them
+# (system_core\core\operation_model.py `family_nodes`); their journals keep these names.
+#
+# An operation of the manifest that stands nowhere here must be named in `pending` or `retired` -
+# tests\test_window_layout.py counts them.
+
+sections:
+  # What the machine needs before OCR: the first button of the header.
+  - id: setup
+    place: header
+    title: "SETUP"
+    title_ru: "SETUP"
+    about: "What this machine needs for local OCR: Tesseract, Real-ESRGAN, the acceleration of Surya"
+    about_ru: "Что нужно этой машине для локального OCR: Tesseract, Real-ESRGAN, ускорение Surya"
+    icon: download
+    pages:
+      - id: install
+        title: "Install"
+        title_ru: "Установка"
+        icon: download
+        about: "Local components: Tesseract, Real-ESRGAN, the acceleration of Surya."
+        about_ru: "Локальные компоненты: Tesseract, Real-ESRGAN, ускорение Surya."
+        cards:
+          - {op: install_tesseract, icon: download, block: "Components", block_ru: "Компоненты"}
+          - {op: install_realesrgan, icon: image-up, block: "Components", block_ru: "Компоненты"}
+          - {op: install_llamacpp_vulkan, icon: zap, block: "Acceleration of Surya", block_ru: "Ускорение Surya"}
+          - {op: install_llamacpp_cuda124, icon: zap, block: "Acceleration of Surya", block_ru: "Ускорение Surya"}
+          - {op: install_llamacpp_cuda133, icon: zap, block: "Acceleration of Surya", block_ru: "Ускорение Surya"}
+          - {op: install_surya_cpu, icon: cpu, block: "Acceleration of Surya", block_ru: "Ускорение Surya"}
+          - {op: install_surya_pytorch_cuda40, icon: zap, block: "Acceleration of Surya", block_ru: "Ускорение Surya"}
+          - {op: install_surya_pytorch_cuda50, icon: zap, block: "Acceleration of Surya", block_ru: "Ускорение Surya"}
+          - {op: install_llamacpp, icon: settings-2}
+          - {op: install_optional_ocr_engines, icon: settings-2}
+
+  - id: local_ocr
+    title: "LOCAL OCR"
+    title_ru: "ЛОКАЛЬНЫЙ OCR"
+    about: "Tesseract and Surya on this machine"
+    about_ru: "Tesseract и Surya на этой машине"
+    icon: cpu
+    pages:
+      - id: local
+        title: "Local OCR"
+        title_ru: "Локальный OCR"
+        icon: scan-text
+        about: "Free OCR of scans and images with cleaning of the page."
+        about_ru: "Бесплатный OCR сканов и картинок с очисткой страницы."
+        choices:
+          - id: tesseract
+            title: "TESSERACT"
+            title_ru: "TESSERACT"
+            icon: scan-text
+            tone: local
+            about: "Fast, free, on this machine: text with the boxes of its words."
+            about_ru: "Быстро, бесплатно, на этой машине: текст с рамками слов."
+            values: {ocr_engine: tesseract}
+          - id: surya
+            title: "SURYA"
+            title_ru: "SURYA"
+            icon: layout-panel-left
+            tone: local
+            about: "Heavy local OCR with the layout of the page; needs its runtime and the layout service."
+            about_ru: "Тяжёлый локальный OCR с раскладкой страницы; нужны его среда и служба раскладки."
+            values: {ocr_engine: surya}
+        cards:
+          - {op: ocr_local_run, icon: scan-text, tone: run, run_label: "RUN OCR", run_label_ru: "ЗАПУСТИТЬ OCR"}
+
+  - id: api_ocr
+    title: "API OCR"
+    title_ru: "API OCR"
+    about: "Paid models by key"
+    about_ru: "Платные модели по ключу"
+    icon: cloud
+    pages:
+      - id: api
+        title: "Paid API OCR"
+        title_ru: "Платный API OCR"
+        icon: cloud
+        about: "OCR and vision models of five providers; the page and the key go to the provider."
+        about_ru: "OCR- и vision-модели пяти поставщиков; страница и ключ уходят поставщику."
+        choices:
+          - {id: yandex, title: "YANDEX", title_ru: "YANDEX", icon: yandex, tone: yandex, values: {ocr_engine: yandex},
+             about: "Yandex Vision OCR: page, tables, handwriting, documents.", about_ru: "Yandex Vision OCR: страница, таблицы, рукопись, документы."}
+          - {id: mistral, title: "MISTRAL", title_ru: "MISTRAL", icon: mistral, tone: vision, values: {ocr_engine: mistral},
+             about: "Mistral OCR: Markdown with tables; a second pass by Yandex or Tesseract.", about_ru: "Mistral OCR: Markdown с таблицами; второй проход Yandex или Tesseract."}
+          - {id: xai, title: "XAI", title_ru: "XAI", icon: xai, tone: vision, values: {ocr_engine: xai},
+             about: "xAI Grok vision: reads the page as an image.", about_ru: "xAI Grok vision: читает страницу как картинку."}
+          - {id: gemini, title: "GEMINI", title_ru: "GEMINI", icon: gemini, tone: vision, values: {ocr_engine: gemini},
+             about: "Google Gemini vision: reads the page as an image.", about_ru: "Google Gemini vision: читает страницу как картинку."}
+          - {id: chatgpt, title: "CHATGPT", title_ru: "CHATGPT", icon: openai, tone: vision, values: {ocr_engine: chatgpt},
+             about: "OpenAI vision: reads the page as an image.", about_ru: "OpenAI vision: читает страницу как картинку."}
+        cards:
+          - {op: ocr_api_run, icon: cloud, tone: run, run_label: "RUN OCR", run_label_ru: "ЗАПУСТИТЬ OCR"}
+
+  - id: check_ocr
+    title: "OCR CHECK"
+    title_ru: "ПРОВЕРКА OCR"
+    about: "One page before a large batch"
+    about_ru: "Одна страница до большой пачки"
+    icon: badge-check
+    pages:
+      - id: compare
+        title: "Compare engines"
+        title_ru: "Сравнение движков"
+        icon: git-compare
+        about: "Raw and cleaned OCR of one page by several engines, side by side."
+        about_ru: "Сырой и очищенный OCR одной страницы несколькими движками рядом."
+        cards:
+          - {op: ocr_quality_benchmark, icon: git-compare, tone: run}
+      - id: numbers
+        title: "Check the numbers"
+        title_ru: "Проверка чисел"
+        icon: binary
+        about: "Numeric and legal lines of one page, read again by a vision model and compared."
+        about_ru: "Числовые и правовые строки одной страницы: перечитать vision-моделью и сверить."
+        cards:
+          - {op: numeric_check_pass, icon: binary, tone: run}
+
+  - id: tables
+    title: "TABLES"
+    title_ru: "ТАБЛИЦЫ"
+    about: "Coordinates, Markdown tables, Excel"
+    about_ru: "Координаты, Markdown-таблицы, Excel"
+    icon: table
+    pages:
+      - id: tables
+        title: "Tables"
+        title_ru: "Таблицы"
+        icon: table
+        about: "Three operations, each with its own settings and its own button."
+        about_ru: "Три операции, у каждой свои настройки и своя кнопка."
+        cards:
+          - {op: coordinate_tables, icon: map-pin}
+          - {op: inspect_tables, icon: table-properties}
+          - {op: build_xlsx, icon: sheet}
+
+  - id: tools
+    title: "TOOLS"
+    title_ru: "ИНСТРУМЕНТЫ"
+    about: "Markdown without OCR, checks, expert tools"
+    about_ru: "Markdown без OCR, проверки, экспертное"
+    icon: wrench
+    pages:
+      - id: convert
+        title: "To Markdown"
+        title_ru: "В Markdown"
+        icon: file-text
+        about: "DOCX, XLSX, PPTX, PDF, TXT, CSV and HTML whose text can be selected: into Markdown, without OCR."
+        about_ru: "DOCX, XLSX, PPTX, PDF, TXT, CSV и HTML с выделяемым текстом: в Markdown, без OCR."
+        cards:
+          - {op: extract_local, icon: file-text, tone: run}
+      - id: checks
+        title: "Checks"
+        title_ru: "Проверки"
+        icon: stethoscope
+        about: "The project, its environment, the keys and models of the providers, short OCR tests."
+        about_ru: "Проект, окружение, ключи и модели поставщиков, короткие проверки OCR."
+        cards:
+          - {op: project_status, icon: info, block: "Program", block_ru: "Программа"}
+          - {op: env_doctor, icon: stethoscope, block: "Program", block_ru: "Программа"}
+          - {op: ocr_brick_status, icon: activity, block: "Program", block_ru: "Программа"}
+          - {op: check_models_openai, icon: openai}
+          - {op: check_models_gemini, icon: gemini}
+          - {op: check_models_yandex, icon: yandex}
+          - {op: check_models_xai, icon: xai}
+          - {op: yandex_ocr_smoke, icon: yandex}
+          - {op: xai_ocr_smoke, icon: xai}
+          - {op: mistral_ocr_smoke, icon: mistral}
+      - id: workbench
+        title: "Workbench"
+        title_ru: "Workbench"
+        icon: microscope
+        about: "Local review of weak OCR, the AI resolver of doubtful crops, coordinates."
+        about_ru: "Локальное ревью слабого OCR, AI-ресолвер сомнительных фрагментов, координаты."
+        cards:
+          - {op: workbench_review, icon: microscope}
+          - {op: workbench_openai_resolver, icon: openai}
+          - {op: workbench_gemini_resolver, icon: gemini}
+          - {op: workbench_coordinates, icon: map-pin}
+      - id: rebuild
+        title: "Rebuild Markdown"
+        title_ru: "Пересборка Markdown"
+        icon: refresh-cw
+        about: "Expert compatibility: existing Markdown into office formats."
+        about_ru: "Экспертная совместимость: готовый Markdown в офисные форматы."
+        cards:
+          - {op: build_docx, icon: file-text}
+          - {op: build_docx_llm, icon: sparkles}
+          - {op: build_pdf, icon: file-type, block: "Without settings", block_ru: "Без настроек"}
+          - {op: build_pptx, icon: presentation, block: "Without settings", block_ru: "Без настроек"}
+      - id: gemini_batch
+        title: "Gemini Batch"
+        title_ru: "Gemini Batch"
+        icon: layers
+        about: "A batch of pages for Gemini at half the price: create it, then collect it."
+        about_ru: "Пакет страниц для Gemini за полцены: создать, потом забрать."
+        cards:
+          - {op: gemini_batch_create, icon: layers}
+          - {op: gemini_batch_collect, icon: download}
+
+# The operations of the working area: buttons of the right column. They run on the folders of
+# the program and are asked about before they run.
+folders:
+  - {op: copy_output_markdown_to_input, icon: arrow-left-right}
+  - {op: cleanup_document_model_artifacts, icon: eraser, tone: burn}
+
+pending: {}
+
+retired:
+  # The operation of the manifest the two families are built from: the window runs it as
+  # ocr_local_run and ocr_api_run; ocr_cli.cmd still takes it by its own name.
+  - ocr_brick_run
+  # Clearing input and output: the button CLEAR of the working area does it, into the Recycle Bin.
+  - cleanup_input_output

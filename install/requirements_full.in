@@ -9,8 +9,6 @@ tqdm
 pydantic
 pyyaml
 rich
-nicegui
-pywebview
 
 # Audion Office OCR AI
 google-genai
@@ -20,15 +18,9 @@ openai
 openpyxl
 numpy>=1.26
 Pillow
-playwright
 PyMuPDF
 pytesseract
 pywin32
 python-docx
 python-pptx
 lxml
-
-# Test and audit layer
-# NiceGUI's headless `user` fixture parses the rendered page with BeautifulSoup;
-# the Screen fixture would need selenium and is deliberately not used.
-beautifulsoup4

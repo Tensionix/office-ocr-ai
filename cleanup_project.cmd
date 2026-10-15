@@ -44,9 +44,9 @@ goto parse_args
 
 :args_done
 
-if not exist "%BASE_DIR%\system_core\ui_nicegui\app.py" (
+if not exist "%BASE_DIR%\system_core\cli.py" (
   echo [ERROR] Project marker not found:
-  echo %BASE_DIR%\system_core\ui_nicegui\app.py
+  echo %BASE_DIR%\system_core\cli.py
   echo.
   echo Cleanup aborted.
   if not "%NO_PAUSE%"=="1" call :WAIT_KEY
@@ -76,8 +76,6 @@ echo   - runtime, wheelhouse, tools, install\download contents
 echo   - optional OCR/preprocess payloads under tools\ (Real-ESRGAN, llama.cpp, Surya)
 echo   - all folders named .runtime, _runtime, ._runtime, __pycache__
 echo   - pytest/mypy/ruff caches, root build/dist folders
-echo   - system_core\fzf.exe and system_core\powershell contents
-echo   - system_core\_pwsh_tmp, system_core\_powershell_tmp, system_core\_fzf_tmp
 echo   - root licenses\ is preserved unchanged
 echo   - generated *.pyc, *.pyo, *.tmp, *.bak, *.log, Thumbs.db, desktop.ini
 echo.
@@ -121,14 +119,9 @@ call :ClearDir "%BASE_DIR%\release"
 call :ClearDir "%BASE_DIR%\runtime"
 call :ClearDir "%BASE_DIR%\wheelhouse"
 call :ClearDir "%BASE_DIR%\install\download"
-call :ClearDir "%BASE_DIR%\system_core\powershell"
-call :RemoveDir "%BASE_DIR%\system_core\_pwsh_tmp"
-call :RemoveDir "%BASE_DIR%\system_core\_powershell_tmp"
-call :RemoveDir "%BASE_DIR%\system_core\_fzf_tmp"
 rem licenses\ is intentionally preserved by release cleanup.
 call :RemoveDir "%BASE_DIR%\build"
 call :RemoveDir "%BASE_DIR%\dist"
-call :RemoveFile "%BASE_DIR%\system_core\fzf.exe"
 
 call :RemoveFilesByPattern "*.pyc"
 call :RemoveFilesByPattern "*.pyo"

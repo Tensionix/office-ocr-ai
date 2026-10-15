@@ -1,6 +1,8 @@
 # Audion Office OCR AI
 
-[Русский](README_RU.md) · [User Guide](USER_GUIDE_EN.md) · [History](CHANGELOG_EN.md)
+[English README](README_EN.md) · [User Guide](USER_GUIDE_EN.md) | [Русский README](README_RU.md) · [Руководство](USER_GUIDE_RU.md)
+
+[History](CHANGELOG_EN.md)
 
 **Contents**
 
@@ -10,7 +12,7 @@
 - [Principles](#principles)
 - [Next](#next)
 - [Technical Reference](#technical-reference)
-  - [Workbench Naming](#workbench-naming)
+  - [Source and Target](#source-and-target)
   - [Second Pass](#second-pass)
   - [Full Archive](#full-archive)
 
@@ -88,6 +90,11 @@ error costs most, and a person should settle it.
 format and as input for language models, but the document package is not built
 around it.
 
+PDF files are read and written by the PyMuPDF library, which is distributed under
+the GNU AGPL 3.0. The program's own code stays under Apache 2.0, but the build as
+a whole — the program together with PyMuPDF — is offered under the terms of the
+GNU AGPL 3.0; see the `NOTICE` file.
+
 ## Next
 
 * [User Guide](USER_GUIDE_EN.md) — step by step.
@@ -97,14 +104,17 @@ around it.
 
 ## Technical Reference
 
-### Workbench Naming
+### Source and Target
 
-The path rows are called **Source** and **Target**. The buttons are the same as in
-every Audion project: **Source**, **Add file…**, **Target**, **Reset**,
-**Delete**, **List**.
+The path rows are called **Source** and **Target**. The source may be a single
+file or a folder - picked, typed, or dropped on the window; the history of paths
+keeps pinned paths on top. **Reset** sets both back to the folders of the program,
+**List** names what lies in the source, the bin clears the source, the target or
+both into the Recycle Bin.
 
-The source may be a single file or a folder. An external path is mirrored into
-the managed working folder, and results are synchronised into the chosen target.
+An external source is copied into the managed `input` folder before a run, and
+the results are copied into the chosen target. The window asks first when `input`
+or `output` hold anything - they are cleared before the copy.
 
 ### Second Pass
 

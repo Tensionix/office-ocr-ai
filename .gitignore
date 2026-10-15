@@ -215,6 +215,27 @@ config/rclone/
 *.local.json
 *credential*
 
+# --- the window on Avalonia (Source) ---
+# Its markup, its project file and the fonts it carries are its source; what a build leaves
+# and the built program are not.
+!Source/**/*.axaml
+!Source/*.csproj
+# The PowerShell the program carries (App\AudionPs.exe) is a project of its own.
+!Source/Ps/*.csproj
+!Source/app.manifest
+!Source/Assets/**
+# The rule `tools/` above hides a folder of that name at any depth: the generator of the window's signs is source.
+!Source/Tools/
+Source/bin/
+Source/obj/
+Source/Ps/bin/
+Source/Ps/obj/
+/App/
+/config/window_settings.json*
+# What the window keeps of a person: the history of paths, the keys set aside.
+/config/path_history.json
+/config/deleted_keys/
+
 # Generated documents: rebuilt by Audion Build PDF Render, shipped in archives.
 Docs/PDF/
 docs/PDF/

@@ -17,14 +17,14 @@ shift
 goto ARG_LOOP
 :ARGS_DONE
 
-if exist "%~dp0..\system_core\powershell\pwsh.exe" set "PS_EXE=%~dp0..\system_core\powershell\pwsh.exe"
+if exist "%~dp0..\App\AudionPs.exe" set "PS_EXE=%~dp0..\App\AudionPs.exe"
 if not defined PS_EXE where pwsh.exe >nul 2>nul && set "PS_EXE=pwsh.exe"
 if not defined PS_EXE where powershell.exe >nul 2>nul && set "PS_EXE=powershell.exe"
 
 if not defined PS_EXE (
     echo [ERROR] PowerShell was not found.
     echo [INFO] Expected portable path:
-    echo %~dp0..\system_core\powershell\pwsh.exe
+    echo %~dp0..\App\AudionPs.exe
     if not "%NO_PAUSE%"=="1" pause
     exit /b 1
 )

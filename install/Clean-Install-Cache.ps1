@@ -9,8 +9,7 @@
   Removed when present:
     - cached files/folders inside install\download\, except the preserve list
       below;
-    - exact installer staging directories system_core\_pwsh_tmp and
-      system_core\_fzf_tmp, plus project-local tools staging directories;
+    - the staging directories of the project-local tools;
     - Python __pycache__ directories and *.pyc/*.pyo files outside payload and
       user-data zones.
 
@@ -20,7 +19,6 @@
     - 7z*-extra.7z
 
   The script does not touch runtime\, wheelhouse\, tools\ payloads,
-  system_core\powershell\, system_core\fzf.exe,
   input/output/logs/report/data/release/workspace, user config, or project
   business data.
 #>
@@ -184,8 +182,6 @@ else {
 }
 
 $stagingDirs = @(
-    (Join-ProjectPath 'system_core\_pwsh_tmp'),
-    (Join-ProjectPath 'system_core\_fzf_tmp'),
     (Join-ProjectPath 'tools\_llama.cpp_stage'),
     (Join-ProjectPath 'tools\_realesrgan-ncnn-vulkan_stage'),
     (Join-ProjectPath 'tools\optional-ocr-engines\_surya_stage')
@@ -202,7 +198,6 @@ if (-not $SkipBytecode) {
         (Join-ProjectPath 'runtime'),
         (Join-ProjectPath 'wheelhouse'),
         (Join-ProjectPath 'tools'),
-        (Join-ProjectPath 'system_core\powershell'),
         (Join-ProjectPath 'input'),
         (Join-ProjectPath 'output'),
         (Join-ProjectPath 'logs'),

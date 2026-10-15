@@ -1,0 +1,6665 @@
+{
+ "cases": {
+  "api_chatgpt": {
+   "deliverables": [
+    "page.document.json",
+    "page.document/document.json",
+    "page.document/pages/page-0001.ocr.png",
+    "page.document/pages/page-0001.source.png",
+    "page.document/providers/chatgpt/page-0001.json",
+    "page.document/source/page.png",
+    "page.docx",
+    "page.md"
+   ],
+   "message": "Operation finished.",
+   "ok": true,
+   "output": {
+    "page.document.json": {
+     "json": {
+      "created_at": "<VOLATILE>",
+      "document_id": "2f5818589fdda74fd29bc1f4",
+      "export_history": [
+       {
+        "created_at": "<VOLATILE>",
+        "files": {
+         "docx": "page.docx",
+         "json": "page.document.json",
+         "markdown": "page.md"
+        },
+        "formats": [
+         "docx",
+         "json",
+         "markdown"
+        ]
+       }
+      ],
+      "manual_corrections": [],
+      "metadata": {
+       "engine": "chatgpt",
+       "engine_params": {
+        "api_key_file": "[redacted]",
+        "max_retries": 3,
+        "model": "gpt-4.1",
+        "prompt": "Transcribe this document image to clean Markdown.\n\nRules:\n1. Preserve visible line order, headings, tables, numbers, dates, names, stamps, and handwritten notes.\n2. Use Markdown only for real document structure such as tables, headings, and lists.\n3. Do not add bold, italic, bullets, emphasis, or decorative formatting unless it is visibly present in the document.\n4. Never wrap recognized text in Markdown emphasis markers such as **bold**, __bold__, *italic*, or _italic_.\n5. Do not summarize, translate, normalize names, or rewrite the document.\n6. Preserve Cyrillic text as Cyrillic; do not replace Russian letters with similar Latin letters.\n7. If text is uncertain, keep only what can be read confidently.\n8. Return only the recognized content, with no explanation.",
+        "reasoning_effort": "minimal",
+        "timeout_sec": "<VOLATILE>",
+        "verbosity": "medium"
+       },
+       "lossless_package": true,
+       "preprocess": {
+        "enabled": false,
+        "sr_scale": 0
+       }
+      },
+      "pages": [
+       {
+        "dpi": 300,
+        "fused_regions": [],
+        "fused_text": "",
+        "fusion": {},
+        "height": 900,
+        "index": 0,
+        "manual_corrections": [],
+        "ocr_candidates": [
+         {
+          "engine": "chatgpt",
+          "may_rewrite": true,
+          "text": "АКТ ПРОВЕРКИ № 2026-117 (ChatGPT)\nОмская область, город Тара",
+          "words": []
+         }
+        ],
+        "ocr_page_image": "pages/page-0001.ocr.png",
+        "ocr_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+        "primary_engine": "chatgpt",
+        "primary_text": "АКТ ПРОВЕРКИ № 2026-117 (ChatGPT)\nОмская область, город Тара",
+        "primary_words": [],
+        "provider_verifications": {},
+        "raw_result": {
+         "assets": {
+          "ocr_page_image": "pages/page-0001.ocr.png",
+          "ocr_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+          "raster_dpi": 300,
+          "source_page_image": "pages/page-0001.source.png",
+          "source_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15"
+         },
+         "engine": "chatgpt:None:{'input_tokens': 100, 'output_tokens': 20, 'total_tokens': 120, 'reasoning_tokens': 0}",
+         "kind": "vision",
+         "may_rewrite": true,
+         "page": 0,
+         "text": "АКТ ПРОВЕРКИ № 2026-117 (ChatGPT)\nОмская область, город Тара",
+         "words": []
+        },
+        "reading_order": [],
+        "regions": [],
+        "source_page_image": "pages/page-0001.source.png",
+        "source_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+        "verification": {},
+        "width": 1600
+       }
+      ],
+      "source": {
+       "media_type": "image/png",
+       "name": "page.png",
+       "path": "source/page.png",
+       "sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+       "size_bytes": 49025
+      },
+      "version": "1.1"
+     }
+    },
+    "page.document/document.json": {
+     "json": {
+      "created_at": "<VOLATILE>",
+      "document_id": "2f5818589fdda74fd29bc1f4",
+      "export_history": [
+       {
+        "created_at": "<VOLATILE>",
+        "files": {
+         "docx": "page.docx",
+         "json": "page.document.json",
+         "markdown": "page.md"
+        },
+        "formats": [
+         "docx",
+         "json",
+         "markdown"
+        ]
+       }
+      ],
+      "manual_corrections": [],
+      "metadata": {
+       "engine": "chatgpt",
+       "engine_params": {
+        "api_key_file": "[redacted]",
+        "max_retries": 3,
+        "model": "gpt-4.1",
+        "prompt": "Transcribe this document image to clean Markdown.\n\nRules:\n1. Preserve visible line order, headings, tables, numbers, dates, names, stamps, and handwritten notes.\n2. Use Markdown only for real document structure such as tables, headings, and lists.\n3. Do not add bold, italic, bullets, emphasis, or decorative formatting unless it is visibly present in the document.\n4. Never wrap recognized text in Markdown emphasis markers such as **bold**, __bold__, *italic*, or _italic_.\n5. Do not summarize, translate, normalize names, or rewrite the document.\n6. Preserve Cyrillic text as Cyrillic; do not replace Russian letters with similar Latin letters.\n7. If text is uncertain, keep only what can be read confidently.\n8. Return only the recognized content, with no explanation.",
+        "reasoning_effort": "minimal",
+        "timeout_sec": "<VOLATILE>",
+        "verbosity": "medium"
+       },
+       "lossless_package": true,
+       "preprocess": {
+        "enabled": false,
+        "sr_scale": 0
+       }
+      },
+      "pages": [
+       {
+        "dpi": 300,
+        "fused_regions": [],
+        "fused_text": "",
+        "fusion": {},
+        "height": 900,
+        "index": 0,
+        "manual_corrections": [],
+        "ocr_candidates": [
+         {
+          "engine": "chatgpt",
+          "may_rewrite": true,
+          "text": "АКТ ПРОВЕРКИ № 2026-117 (ChatGPT)\nОмская область, город Тара",
+          "words": []
+         }
+        ],
+        "ocr_page_image": "pages/page-0001.ocr.png",
+        "ocr_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+        "primary_engine": "chatgpt",
+        "primary_text": "АКТ ПРОВЕРКИ № 2026-117 (ChatGPT)\nОмская область, город Тара",
+        "primary_words": [],
+        "provider_verifications": {},
+        "raw_result": {
+         "assets": {
+          "ocr_page_image": "pages/page-0001.ocr.png",
+          "ocr_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+          "raster_dpi": 300,
+          "source_page_image": "pages/page-0001.source.png",
+          "source_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15"
+         },
+         "engine": "chatgpt:None:{'input_tokens': 100, 'output_tokens': 20, 'total_tokens': 120, 'reasoning_tokens': 0}",
+         "kind": "vision",
+         "may_rewrite": true,
+         "page": 0,
+         "text": "АКТ ПРОВЕРКИ № 2026-117 (ChatGPT)\nОмская область, город Тара",
+         "words": []
+        },
+        "reading_order": [],
+        "regions": [],
+        "source_page_image": "pages/page-0001.source.png",
+        "source_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+        "verification": {},
+        "width": 1600
+       }
+      ],
+      "source": {
+       "media_type": "image/png",
+       "name": "page.png",
+       "path": "source/page.png",
+       "sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+       "size_bytes": 49025
+      },
+      "version": "1.1"
+     }
+    },
+    "page.document/pages/page-0001.ocr.png": {
+     "image": [
+      1600,
+      900,
+      "RGB"
+     ],
+     "pixels": "90130e5173096ae4"
+    },
+    "page.document/pages/page-0001.source.png": {
+     "image": [
+      1600,
+      900,
+      "RGB"
+     ],
+     "pixels": "90130e5173096ae4"
+    },
+    "page.document/providers/chatgpt/page-0001.json": {
+     "json": {
+      "assets": {
+       "ocr_page_image": "pages/page-0001.ocr.png",
+       "ocr_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+       "raster_dpi": 300,
+       "source_page_image": "pages/page-0001.source.png",
+       "source_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15"
+      },
+      "engine": "chatgpt:None:{'input_tokens': 100, 'output_tokens': 20, 'total_tokens': 120, 'reasoning_tokens': 0}",
+      "kind": "vision",
+      "may_rewrite": true,
+      "page": 0,
+      "text": "АКТ ПРОВЕРКИ № 2026-117 (ChatGPT)\nОмская область, город Тара",
+      "words": []
+     }
+    },
+    "page.document/source/page.png": {
+     "image": [
+      1600,
+      900,
+      "RGB"
+     ],
+     "pixels": "90130e5173096ae4"
+    },
+    "page.docx": {
+     "images": 0,
+     "page": [
+      279.4,
+      215.9,
+      "LANDSCAPE (1)"
+     ],
+     "paragraphs": "Normal|АКТ ПРОВЕРКИ № 2026-117 (ChatGPT)\nNormal|Омская область, город Тара",
+     "tables": []
+    },
+    "page.md": {
+     "text": "# page\n\n> OCR engine: `chatgpt`\n\n## Страница 1\n\nАКТ ПРОВЕРКИ № 2026-117 (ChatGPT)\nОмская область, город Тара\n"
+    }
+   },
+   "requests": [
+    {
+     "body": {
+      "input": [
+       {
+        "content": [
+         {
+          "text": "<text 772 sha 7eefc42d29b8>",
+          "type": "input_text"
+         },
+         {
+          "detail": "high",
+          "image_url": "<text 65390 sha 2f46835288af>",
+          "type": "input_image"
+         }
+        ],
+        "role": "user"
+       }
+      ],
+      "instructions": "You are a careful OCR transcription engine. Do not summarize.",
+      "max_output_tokens": 12000,
+      "model": "gpt-4.1",
+      "reasoning": {
+       "effort": "minimal"
+      },
+      "stream": true,
+      "text": {
+       "verbosity": "medium"
+      }
+     },
+     "method": "POST",
+     "url": "https://api.openai.com/v1/responses",
+     "via": "httpx"
+    }
+   ],
+   "result": {
+    "engine": "chatgpt",
+    "exit_code": 0,
+    "files": 1,
+    "formats": [
+     "docx",
+     "json",
+     "markdown"
+    ],
+    "output": "text",
+    "pages": 1
+   }
+  },
+  "api_gemini": {
+   "deliverables": [
+    "page.document.json",
+    "page.document/document.json",
+    "page.document/pages/page-0001.ocr.png",
+    "page.document/pages/page-0001.source.png",
+    "page.document/providers/gemini/page-0001.json",
+    "page.document/source/page.png",
+    "page.docx",
+    "page.md"
+   ],
+   "message": "Operation finished.",
+   "ok": true,
+   "output": {
+    "page.document.json": {
+     "json": {
+      "created_at": "<VOLATILE>",
+      "document_id": "2f5818589fdda74fd29bc1f4",
+      "export_history": [
+       {
+        "created_at": "<VOLATILE>",
+        "files": {
+         "docx": "page.docx",
+         "json": "page.document.json",
+         "markdown": "page.md"
+        },
+        "formats": [
+         "docx",
+         "json",
+         "markdown"
+        ]
+       }
+      ],
+      "manual_corrections": [],
+      "metadata": {
+       "engine": "gemini",
+       "engine_params": {
+        "api_key_file": "[redacted]",
+        "max_retries": 3,
+        "model": "gemini-3.5-flash",
+        "prompt": "Transcribe this document image to clean Markdown.\n\nRules:\n1. Preserve visible line order, headings, tables, numbers, dates, names, stamps, and handwritten notes.\n2. Use Markdown only for real document structure such as tables, headings, and lists.\n3. Do not add bold, italic, bullets, emphasis, or decorative formatting unless it is visibly present in the document.\n4. Never wrap recognized text in Markdown emphasis markers such as **bold**, __bold__, *italic*, or _italic_.\n5. Do not summarize, translate, normalize names, or rewrite the document.\n6. Preserve Cyrillic text as Cyrillic; do not replace Russian letters with similar Latin letters.\n7. If text is uncertain, keep only what can be read confidently.\n8. Return only the recognized content, with no explanation.",
+        "service_tier": "standard",
+        "timeout_sec": "<VOLATILE>",
+        "use_stream": false
+       },
+       "lossless_package": true,
+       "preprocess": {
+        "enabled": false,
+        "sr_scale": 0
+       }
+      },
+      "pages": [
+       {
+        "dpi": 300,
+        "fused_regions": [],
+        "fused_text": "",
+        "fusion": {},
+        "height": 900,
+        "index": 0,
+        "manual_corrections": [],
+        "ocr_candidates": [
+         {
+          "engine": "gemini",
+          "may_rewrite": true,
+          "text": "АКТ ПРОВЕРКИ № 2026-117 (Gemini)\nОмская область, город Тара",
+          "words": []
+         }
+        ],
+        "ocr_page_image": "pages/page-0001.ocr.png",
+        "ocr_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+        "primary_engine": "gemini",
+        "primary_text": "АКТ ПРОВЕРКИ № 2026-117 (Gemini)\nОмская область, город Тара",
+        "primary_words": [],
+        "provider_verifications": {},
+        "raw_result": {
+         "assets": {
+          "ocr_page_image": "pages/page-0001.ocr.png",
+          "ocr_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+          "raster_dpi": 300,
+          "source_page_image": "pages/page-0001.source.png",
+          "source_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15"
+         },
+         "engine": "gemini:default:{'input_tokens': 100, 'output_tokens': 20, 'total_tokens': 120, 'reasoning_tokens': 0}",
+         "kind": "vision",
+         "may_rewrite": true,
+         "page": 0,
+         "text": "АКТ ПРОВЕРКИ № 2026-117 (Gemini)\nОмская область, город Тара",
+         "words": []
+        },
+        "reading_order": [],
+        "regions": [],
+        "source_page_image": "pages/page-0001.source.png",
+        "source_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+        "verification": {},
+        "width": 1600
+       }
+      ],
+      "source": {
+       "media_type": "image/png",
+       "name": "page.png",
+       "path": "source/page.png",
+       "sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+       "size_bytes": 49025
+      },
+      "version": "1.1"
+     }
+    },
+    "page.document/document.json": {
+     "json": {
+      "created_at": "<VOLATILE>",
+      "document_id": "2f5818589fdda74fd29bc1f4",
+      "export_history": [
+       {
+        "created_at": "<VOLATILE>",
+        "files": {
+         "docx": "page.docx",
+         "json": "page.document.json",
+         "markdown": "page.md"
+        },
+        "formats": [
+         "docx",
+         "json",
+         "markdown"
+        ]
+       }
+      ],
+      "manual_corrections": [],
+      "metadata": {
+       "engine": "gemini",
+       "engine_params": {
+        "api_key_file": "[redacted]",
+        "max_retries": 3,
+        "model": "gemini-3.5-flash",
+        "prompt": "Transcribe this document image to clean Markdown.\n\nRules:\n1. Preserve visible line order, headings, tables, numbers, dates, names, stamps, and handwritten notes.\n2. Use Markdown only for real document structure such as tables, headings, and lists.\n3. Do not add bold, italic, bullets, emphasis, or decorative formatting unless it is visibly present in the document.\n4. Never wrap recognized text in Markdown emphasis markers such as **bold**, __bold__, *italic*, or _italic_.\n5. Do not summarize, translate, normalize names, or rewrite the document.\n6. Preserve Cyrillic text as Cyrillic; do not replace Russian letters with similar Latin letters.\n7. If text is uncertain, keep only what can be read confidently.\n8. Return only the recognized content, with no explanation.",
+        "service_tier": "standard",
+        "timeout_sec": "<VOLATILE>",
+        "use_stream": false
+       },
+       "lossless_package": true,
+       "preprocess": {
+        "enabled": false,
+        "sr_scale": 0
+       }
+      },
+      "pages": [
+       {
+        "dpi": 300,
+        "fused_regions": [],
+        "fused_text": "",
+        "fusion": {},
+        "height": 900,
+        "index": 0,
+        "manual_corrections": [],
+        "ocr_candidates": [
+         {
+          "engine": "gemini",
+          "may_rewrite": true,
+          "text": "АКТ ПРОВЕРКИ № 2026-117 (Gemini)\nОмская область, город Тара",
+          "words": []
+         }
+        ],
+        "ocr_page_image": "pages/page-0001.ocr.png",
+        "ocr_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+        "primary_engine": "gemini",
+        "primary_text": "АКТ ПРОВЕРКИ № 2026-117 (Gemini)\nОмская область, город Тара",
+        "primary_words": [],
+        "provider_verifications": {},
+        "raw_result": {
+         "assets": {
+          "ocr_page_image": "pages/page-0001.ocr.png",
+          "ocr_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+          "raster_dpi": 300,
+          "source_page_image": "pages/page-0001.source.png",
+          "source_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15"
+         },
+         "engine": "gemini:default:{'input_tokens': 100, 'output_tokens': 20, 'total_tokens': 120, 'reasoning_tokens': 0}",
+         "kind": "vision",
+         "may_rewrite": true,
+         "page": 0,
+         "text": "АКТ ПРОВЕРКИ № 2026-117 (Gemini)\nОмская область, город Тара",
+         "words": []
+        },
+        "reading_order": [],
+        "regions": [],
+        "source_page_image": "pages/page-0001.source.png",
+        "source_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+        "verification": {},
+        "width": 1600
+       }
+      ],
+      "source": {
+       "media_type": "image/png",
+       "name": "page.png",
+       "path": "source/page.png",
+       "sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+       "size_bytes": 49025
+      },
+      "version": "1.1"
+     }
+    },
+    "page.document/pages/page-0001.ocr.png": {
+     "image": [
+      1600,
+      900,
+      "RGB"
+     ],
+     "pixels": "90130e5173096ae4"
+    },
+    "page.document/pages/page-0001.source.png": {
+     "image": [
+      1600,
+      900,
+      "RGB"
+     ],
+     "pixels": "90130e5173096ae4"
+    },
+    "page.document/providers/gemini/page-0001.json": {
+     "json": {
+      "assets": {
+       "ocr_page_image": "pages/page-0001.ocr.png",
+       "ocr_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+       "raster_dpi": 300,
+       "source_page_image": "pages/page-0001.source.png",
+       "source_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15"
+      },
+      "engine": "gemini:default:{'input_tokens': 100, 'output_tokens': 20, 'total_tokens': 120, 'reasoning_tokens': 0}",
+      "kind": "vision",
+      "may_rewrite": true,
+      "page": 0,
+      "text": "АКТ ПРОВЕРКИ № 2026-117 (Gemini)\nОмская область, город Тара",
+      "words": []
+     }
+    },
+    "page.document/source/page.png": {
+     "image": [
+      1600,
+      900,
+      "RGB"
+     ],
+     "pixels": "90130e5173096ae4"
+    },
+    "page.docx": {
+     "images": 0,
+     "page": [
+      279.4,
+      215.9,
+      "LANDSCAPE (1)"
+     ],
+     "paragraphs": "Normal|АКТ ПРОВЕРКИ № 2026-117 (Gemini)\nNormal|Омская область, город Тара",
+     "tables": []
+    },
+    "page.md": {
+     "text": "# page\n\n> OCR engine: `gemini`\n\n## Страница 1\n\nАКТ ПРОВЕРКИ № 2026-117 (Gemini)\nОмская область, город Тара\n"
+    }
+   },
+   "requests": [
+    {
+     "body": {
+      "contents": [
+       {
+        "parts": [
+         {
+          "text": "<text 772 sha 7eefc42d29b8>"
+         },
+         {
+          "inlineData": {
+           "data": "<text 65368 sha 61c9e2f8d501>",
+           "mime_type": "image/png"
+          }
+         }
+        ],
+        "role": "user"
+       }
+      ],
+      "generationConfig": {
+       "temperature": 0.0
+      },
+      "systemInstruction": {
+       "parts": [
+        {
+         "text": "You are a careful OCR transcription engine. Do not summarize."
+        }
+       ],
+       "role": "user"
+      }
+     },
+     "method": "POST",
+     "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent",
+     "via": "httpx"
+    }
+   ],
+   "result": {
+    "engine": "gemini",
+    "exit_code": 0,
+    "files": 1,
+    "formats": [
+     "docx",
+     "json",
+     "markdown"
+    ],
+    "output": "text",
+    "pages": 1
+   }
+  },
+  "api_mistral": {
+   "deliverables": [
+    "page.document.json",
+    "page.document/document.json",
+    "page.document/pages/page-0001.ocr.png",
+    "page.document/pages/page-0001.source.png",
+    "page.document/providers/mistral/page-0001.json",
+    "page.document/source/page.png",
+    "page.docx",
+    "page.md"
+   ],
+   "message": "Operation finished.",
+   "ok": true,
+   "output": {
+    "page.document.json": {
+     "json": {
+      "created_at": "<VOLATILE>",
+      "document_id": "2f5818589fdda74fd29bc1f4",
+      "export_history": [
+       {
+        "created_at": "<VOLATILE>",
+        "files": {
+         "docx": "page.docx",
+         "json": "page.document.json",
+         "markdown": "page.md"
+        },
+        "formats": [
+         "docx",
+         "json",
+         "markdown"
+        ]
+       }
+      ],
+      "manual_corrections": [],
+      "metadata": {
+       "engine": "mistral",
+       "engine_params": {
+        "adapter_version": 1,
+        "api_key_file": "[redacted]",
+        "confidence_granularity": "word",
+        "extract_footer": false,
+        "extract_header": false,
+        "include_blocks": true,
+        "model": "mistral-ocr-4-0",
+        "secondary_pass": "none",
+        "table_format": "html",
+        "tesseract_verify": true,
+        "tesseract_verify_threshold": "0.9"
+       },
+       "lossless_package": true,
+       "preprocess": {
+        "enabled": false,
+        "sr_scale": 0
+       }
+      },
+      "pages": [
+       {
+        "dpi": 300,
+        "fused_regions": [],
+        "fused_text": "",
+        "fusion": {},
+        "height": 900,
+        "index": 0,
+        "manual_corrections": [],
+        "ocr_candidates": [
+         {
+          "engine": "mistral",
+          "may_rewrite": false,
+          "text": "АКТ ПРОВЕРКИ № 2026-117\n\nОмская область, город Тара\n\n| № | X | Y |\n|---|---|---|\n| 1 | 452 123,45 | 2 312 456,78 |",
+          "words": []
+         }
+        ],
+        "ocr_page_image": "pages/page-0001.ocr.png",
+        "ocr_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+        "primary_engine": "mistral",
+        "primary_text": "АКТ ПРОВЕРКИ № 2026-117\n\nОмская область, город Тара\n\n| № | X | Y |\n|---|---|---|\n| 1 | 452 123,45 | 2 312 456,78 |",
+        "primary_words": [],
+        "provider_verifications": {},
+        "raw_result": {
+         "assets": {
+          "ocr_page_image": "pages/page-0001.ocr.png",
+          "ocr_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+          "raster_dpi": 300,
+          "source_page_image": "pages/page-0001.source.png",
+          "source_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15"
+         },
+         "engine": "mistral",
+         "kind": "mistral",
+         "may_rewrite": false,
+         "mistral_page": {
+          "blocks": [],
+          "dimensions": {
+           "dpi": 200,
+           "height": 900,
+           "width": 1600
+          },
+          "index": 0,
+          "markdown": "АКТ ПРОВЕРКИ № 2026-117\n\nОмская область, город Тара\n\n| № | X | Y |\n|---|---|---|\n| 1 | 452 123,45 | 2 312 456,78 |",
+          "tables": []
+         },
+         "page": 0,
+         "text": "АКТ ПРОВЕРКИ № 2026-117\n\nОмская область, город Тара\n\n| № | X | Y |\n|---|---|---|\n| 1 | 452 123,45 | 2 312 456,78 |",
+         "usage_info": {
+          "pages_processed": 1
+         },
+         "words": []
+        },
+        "reading_order": [],
+        "regions": [],
+        "source_page_image": "pages/page-0001.source.png",
+        "source_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+        "verification": {},
+        "width": 1600
+       }
+      ],
+      "source": {
+       "media_type": "image/png",
+       "name": "page.png",
+       "path": "source/page.png",
+       "sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+       "size_bytes": 49025
+      },
+      "version": "1.1"
+     }
+    },
+    "page.document/document.json": {
+     "json": {
+      "created_at": "<VOLATILE>",
+      "document_id": "2f5818589fdda74fd29bc1f4",
+      "export_history": [
+       {
+        "created_at": "<VOLATILE>",
+        "files": {
+         "docx": "page.docx",
+         "json": "page.document.json",
+         "markdown": "page.md"
+        },
+        "formats": [
+         "docx",
+         "json",
+         "markdown"
+        ]
+       }
+      ],
+      "manual_corrections": [],
+      "metadata": {
+       "engine": "mistral",
+       "engine_params": {
+        "adapter_version": 1,
+        "api_key_file": "[redacted]",
+        "confidence_granularity": "word",
+        "extract_footer": false,
+        "extract_header": false,
+        "include_blocks": true,
+        "model": "mistral-ocr-4-0",
+        "secondary_pass": "none",
+        "table_format": "html",
+        "tesseract_verify": true,
+        "tesseract_verify_threshold": "0.9"
+       },
+       "lossless_package": true,
+       "preprocess": {
+        "enabled": false,
+        "sr_scale": 0
+       }
+      },
+      "pages": [
+       {
+        "dpi": 300,
+        "fused_regions": [],
+        "fused_text": "",
+        "fusion": {},
+        "height": 900,
+        "index": 0,
+        "manual_corrections": [],
+        "ocr_candidates": [
+         {
+          "engine": "mistral",
+          "may_rewrite": false,
+          "text": "АКТ ПРОВЕРКИ № 2026-117\n\nОмская область, город Тара\n\n| № | X | Y |\n|---|---|---|\n| 1 | 452 123,45 | 2 312 456,78 |",
+          "words": []
+         }
+        ],
+        "ocr_page_image": "pages/page-0001.ocr.png",
+        "ocr_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+        "primary_engine": "mistral",
+        "primary_text": "АКТ ПРОВЕРКИ № 2026-117\n\nОмская область, город Тара\n\n| № | X | Y |\n|---|---|---|\n| 1 | 452 123,45 | 2 312 456,78 |",
+        "primary_words": [],
+        "provider_verifications": {},
+        "raw_result": {
+         "assets": {
+          "ocr_page_image": "pages/page-0001.ocr.png",
+          "ocr_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+          "raster_dpi": 300,
+          "source_page_image": "pages/page-0001.source.png",
+          "source_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15"
+         },
+         "engine": "mistral",
+         "kind": "mistral",
+         "may_rewrite": false,
+         "mistral_page": {
+          "blocks": [],
+          "dimensions": {
+           "dpi": 200,
+           "height": 900,
+           "width": 1600
+          },
+          "index": 0,
+          "markdown": "АКТ ПРОВЕРКИ № 2026-117\n\nОмская область, город Тара\n\n| № | X | Y |\n|---|---|---|\n| 1 | 452 123,45 | 2 312 456,78 |",
+          "tables": []
+         },
+         "page": 0,
+         "text": "АКТ ПРОВЕРКИ № 2026-117\n\nОмская область, город Тара\n\n| № | X | Y |\n|---|---|---|\n| 1 | 452 123,45 | 2 312 456,78 |",
+         "usage_info": {
+          "pages_processed": 1
+         },
+         "words": []
+        },
+        "reading_order": [],
+        "regions": [],
+        "source_page_image": "pages/page-0001.source.png",
+        "source_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+        "verification": {},
+        "width": 1600
+       }
+      ],
+      "source": {
+       "media_type": "image/png",
+       "name": "page.png",
+       "path": "source/page.png",
+       "sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+       "size_bytes": 49025
+      },
+      "version": "1.1"
+     }
+    },
+    "page.document/pages/page-0001.ocr.png": {
+     "image": [
+      1600,
+      900,
+      "RGB"
+     ],
+     "pixels": "90130e5173096ae4"
+    },
+    "page.document/pages/page-0001.source.png": {
+     "image": [
+      1600,
+      900,
+      "RGB"
+     ],
+     "pixels": "90130e5173096ae4"
+    },
+    "page.document/providers/mistral/page-0001.json": {
+     "json": {
+      "assets": {
+       "ocr_page_image": "pages/page-0001.ocr.png",
+       "ocr_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+       "raster_dpi": 300,
+       "source_page_image": "pages/page-0001.source.png",
+       "source_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15"
+      },
+      "engine": "mistral",
+      "kind": "mistral",
+      "may_rewrite": false,
+      "mistral_page": {
+       "blocks": [],
+       "dimensions": {
+        "dpi": 200,
+        "height": 900,
+        "width": 1600
+       },
+       "index": 0,
+       "markdown": "АКТ ПРОВЕРКИ № 2026-117\n\nОмская область, город Тара\n\n| № | X | Y |\n|---|---|---|\n| 1 | 452 123,45 | 2 312 456,78 |",
+       "tables": []
+      },
+      "page": 0,
+      "text": "АКТ ПРОВЕРКИ № 2026-117\n\nОмская область, город Тара\n\n| № | X | Y |\n|---|---|---|\n| 1 | 452 123,45 | 2 312 456,78 |",
+      "usage_info": {
+       "pages_processed": 1
+      },
+      "words": []
+     }
+    },
+    "page.document/source/page.png": {
+     "image": [
+      1600,
+      900,
+      "RGB"
+     ],
+     "pixels": "90130e5173096ae4"
+    },
+    "page.docx": {
+     "images": 0,
+     "page": [
+      279.4,
+      215.9,
+      "LANDSCAPE (1)"
+     ],
+     "paragraphs": "Normal|АКТ ПРОВЕРКИ № 2026-117\nNormal|Омская область, город Тара\nNormal|| № | X | Y |\nNormal||---|---|---|\nNormal|| 1 | 452 123,45 | 2 312 456,78 |",
+     "tables": []
+    },
+    "page.md": {
+     "text": "# page\n\n> OCR engine: `mistral`\n\n## Страница 1\n\nАКТ ПРОВЕРКИ № 2026-117\n\nОмская область, город Тара\n\n| № | X | Y |\n|---|---|---|\n| 1 | 452 123,45 | 2 312 456,78 |\n"
+    }
+   },
+   "requests": [
+    {
+     "body": {
+      "confidence_scores_granularity": "word",
+      "document": {
+       "image_url": "<text 65390 sha 2f46835288af>",
+       "type": "image_url"
+      },
+      "extract_footer": false,
+      "extract_header": false,
+      "include_blocks": true,
+      "model": "mistral-ocr-4-0",
+      "table_format": "html"
+     },
+     "method": "POST",
+     "url": "https://api.mistral.ai/v1/ocr",
+     "via": "requests"
+    }
+   ],
+   "result": {
+    "engine": "mistral",
+    "exit_code": 0,
+    "files": 1,
+    "formats": [
+     "docx",
+     "json",
+     "markdown"
+    ],
+    "output": "text",
+    "pages": 1
+   }
+  },
+  "api_xai": {
+   "deliverables": [
+    "page.document.json",
+    "page.document/document.json",
+    "page.document/pages/page-0001.ocr.png",
+    "page.document/pages/page-0001.source.png",
+    "page.document/providers/xai/page-0001.json",
+    "page.document/source/page.png",
+    "page.docx",
+    "page.md"
+   ],
+   "message": "Operation finished.",
+   "ok": true,
+   "output": {
+    "page.document.json": {
+     "json": {
+      "created_at": "<VOLATILE>",
+      "document_id": "2f5818589fdda74fd29bc1f4",
+      "export_history": [
+       {
+        "created_at": "<VOLATILE>",
+        "files": {
+         "docx": "page.docx",
+         "json": "page.document.json",
+         "markdown": "page.md"
+        },
+        "formats": [
+         "docx",
+         "json",
+         "markdown"
+        ]
+       }
+      ],
+      "manual_corrections": [],
+      "metadata": {
+       "engine": "xai",
+       "engine_params": {
+        "api_key_file": "[redacted]",
+        "model": "grok-4.3",
+        "prompt": "Transcribe this document image to clean Markdown.\n\nRules:\n1. Preserve visible line order, headings, tables, numbers, dates, names, stamps, and handwritten notes.\n2. Use Markdown only for real document structure such as tables, headings, and lists.\n3. Do not add bold, italic, bullets, emphasis, or decorative formatting unless it is visibly present in the document.\n4. Never wrap recognized text in Markdown emphasis markers such as **bold**, __bold__, *italic*, or _italic_.\n5. Do not summarize, translate, normalize names, or rewrite the document.\n6. Preserve Cyrillic text as Cyrillic; do not replace Russian letters with similar Latin letters.\n7. If text is uncertain, keep only what can be read confidently.\n8. Return only the recognized content, with no explanation.",
+        "russian_review_enabled": false,
+        "russian_review_model": "grok-4.20-reasoning-latest",
+        "russian_review_prompt": ""
+       },
+       "lossless_package": true,
+       "preprocess": {
+        "enabled": false,
+        "sr_scale": 0
+       }
+      },
+      "pages": [
+       {
+        "dpi": 300,
+        "fused_regions": [],
+        "fused_text": "",
+        "fusion": {},
+        "height": 900,
+        "index": 0,
+        "manual_corrections": [],
+        "ocr_candidates": [
+         {
+          "engine": "xai",
+          "may_rewrite": true,
+          "text": "АКТ ПРОВЕРКИ № 2026-117 (xAI)\nОмская область, город Тара\nИтого: 1 234 567,89 руб.",
+          "words": []
+         }
+        ],
+        "ocr_page_image": "pages/page-0001.ocr.png",
+        "ocr_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+        "primary_engine": "xai",
+        "primary_text": "АКТ ПРОВЕРКИ № 2026-117 (xAI)\nОмская область, город Тара\nИтого: 1 234 567,89 руб.",
+        "primary_words": [],
+        "provider_verifications": {},
+        "raw_result": {
+         "assets": {
+          "ocr_page_image": "pages/page-0001.ocr.png",
+          "ocr_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+          "raster_dpi": 300,
+          "source_page_image": "pages/page-0001.source.png",
+          "source_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15"
+         },
+         "engine": "xai",
+         "kind": "vision",
+         "may_rewrite": true,
+         "page": 0,
+         "russian_review": {
+          "applied": false,
+          "enabled": false,
+          "flags": []
+         },
+         "text": "АКТ ПРОВЕРКИ № 2026-117 (xAI)\nОмская область, город Тара\nИтого: 1 234 567,89 руб.",
+         "words": []
+        },
+        "reading_order": [],
+        "regions": [],
+        "source_page_image": "pages/page-0001.source.png",
+        "source_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+        "verification": {},
+        "width": 1600
+       }
+      ],
+      "source": {
+       "media_type": "image/png",
+       "name": "page.png",
+       "path": "source/page.png",
+       "sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+       "size_bytes": 49025
+      },
+      "version": "1.1"
+     }
+    },
+    "page.document/document.json": {
+     "json": {
+      "created_at": "<VOLATILE>",
+      "document_id": "2f5818589fdda74fd29bc1f4",
+      "export_history": [
+       {
+        "created_at": "<VOLATILE>",
+        "files": {
+         "docx": "page.docx",
+         "json": "page.document.json",
+         "markdown": "page.md"
+        },
+        "formats": [
+         "docx",
+         "json",
+         "markdown"
+        ]
+       }
+      ],
+      "manual_corrections": [],
+      "metadata": {
+       "engine": "xai",
+       "engine_params": {
+        "api_key_file": "[redacted]",
+        "model": "grok-4.3",
+        "prompt": "Transcribe this document image to clean Markdown.\n\nRules:\n1. Preserve visible line order, headings, tables, numbers, dates, names, stamps, and handwritten notes.\n2. Use Markdown only for real document structure such as tables, headings, and lists.\n3. Do not add bold, italic, bullets, emphasis, or decorative formatting unless it is visibly present in the document.\n4. Never wrap recognized text in Markdown emphasis markers such as **bold**, __bold__, *italic*, or _italic_.\n5. Do not summarize, translate, normalize names, or rewrite the document.\n6. Preserve Cyrillic text as Cyrillic; do not replace Russian letters with similar Latin letters.\n7. If text is uncertain, keep only what can be read confidently.\n8. Return only the recognized content, with no explanation.",
+        "russian_review_enabled": false,
+        "russian_review_model": "grok-4.20-reasoning-latest",
+        "russian_review_prompt": ""
+       },
+       "lossless_package": true,
+       "preprocess": {
+        "enabled": false,
+        "sr_scale": 0
+       }
+      },
+      "pages": [
+       {
+        "dpi": 300,
+        "fused_regions": [],
+        "fused_text": "",
+        "fusion": {},
+        "height": 900,
+        "index": 0,
+        "manual_corrections": [],
+        "ocr_candidates": [
+         {
+          "engine": "xai",
+          "may_rewrite": true,
+          "text": "АКТ ПРОВЕРКИ № 2026-117 (xAI)\nОмская область, город Тара\nИтого: 1 234 567,89 руб.",
+          "words": []
+         }
+        ],
+        "ocr_page_image": "pages/page-0001.ocr.png",
+        "ocr_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+        "primary_engine": "xai",
+        "primary_text": "АКТ ПРОВЕРКИ № 2026-117 (xAI)\nОмская область, город Тара\nИтого: 1 234 567,89 руб.",
+        "primary_words": [],
+        "provider_verifications": {},
+        "raw_result": {
+         "assets": {
+          "ocr_page_image": "pages/page-0001.ocr.png",
+          "ocr_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+          "raster_dpi": 300,
+          "source_page_image": "pages/page-0001.source.png",
+          "source_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15"
+         },
+         "engine": "xai",
+         "kind": "vision",
+         "may_rewrite": true,
+         "page": 0,
+         "russian_review": {
+          "applied": false,
+          "enabled": false,
+          "flags": []
+         },
+         "text": "АКТ ПРОВЕРКИ № 2026-117 (xAI)\nОмская область, город Тара\nИтого: 1 234 567,89 руб.",
+         "words": []
+        },
+        "reading_order": [],
+        "regions": [],
+        "source_page_image": "pages/page-0001.source.png",
+        "source_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+        "verification": {},
+        "width": 1600
+       }
+      ],
+      "source": {
+       "media_type": "image/png",
+       "name": "page.png",
+       "path": "source/page.png",
+       "sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+       "size_bytes": 49025
+      },
+      "version": "1.1"
+     }
+    },
+    "page.document/pages/page-0001.ocr.png": {
+     "image": [
+      1600,
+      900,
+      "RGB"
+     ],
+     "pixels": "90130e5173096ae4"
+    },
+    "page.document/pages/page-0001.source.png": {
+     "image": [
+      1600,
+      900,
+      "RGB"
+     ],
+     "pixels": "90130e5173096ae4"
+    },
+    "page.document/providers/xai/page-0001.json": {
+     "json": {
+      "assets": {
+       "ocr_page_image": "pages/page-0001.ocr.png",
+       "ocr_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+       "raster_dpi": 300,
+       "source_page_image": "pages/page-0001.source.png",
+       "source_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15"
+      },
+      "engine": "xai",
+      "kind": "vision",
+      "may_rewrite": true,
+      "page": 0,
+      "russian_review": {
+       "applied": false,
+       "enabled": false,
+       "flags": []
+      },
+      "text": "АКТ ПРОВЕРКИ № 2026-117 (xAI)\nОмская область, город Тара\nИтого: 1 234 567,89 руб.",
+      "words": []
+     }
+    },
+    "page.document/source/page.png": {
+     "image": [
+      1600,
+      900,
+      "RGB"
+     ],
+     "pixels": "90130e5173096ae4"
+    },
+    "page.docx": {
+     "images": 0,
+     "page": [
+      279.4,
+      215.9,
+      "LANDSCAPE (1)"
+     ],
+     "paragraphs": "Normal|АКТ ПРОВЕРКИ № 2026-117 (xAI)\nNormal|Омская область, город Тара\nNormal|Итого: 1 234 567,89 руб.",
+     "tables": []
+    },
+    "page.md": {
+     "text": "# page\n\n> OCR engine: `xai`\n\n## Страница 1\n\nАКТ ПРОВЕРКИ № 2026-117 (xAI)\nОмская область, город Тара\nИтого: 1 234 567,89 руб.\n"
+    }
+   },
+   "requests": [
+    {
+     "body": {
+      "messages": [
+       {
+        "content": [
+         {
+          "text": "<text 772 sha 7eefc42d29b8>",
+          "type": "text"
+         },
+         {
+          "image_url": {
+           "detail": "high",
+           "url": "<text 65390 sha 2f46835288af>"
+          },
+          "type": "image_url"
+         }
+        ],
+        "role": "user"
+       }
+      ],
+      "model": "grok-4.3",
+      "temperature": 0
+     },
+     "method": "POST",
+     "url": "https://api.x.ai/v1/chat/completions",
+     "via": "requests"
+    }
+   ],
+   "result": {
+    "engine": "xai",
+    "exit_code": 0,
+    "files": 1,
+    "formats": [
+     "docx",
+     "json",
+     "markdown"
+    ],
+    "output": "text",
+    "pages": 1
+   }
+  },
+  "api_xai_tesseract_2pass": {
+   "deliverables": [
+    "page.document.json",
+    "page.document/document.json",
+    "page.document/pages/page-0001.ocr.png",
+    "page.document/pages/page-0001.source.png",
+    "page.document/providers/tesseract/page-0001.json",
+    "page.document/providers/xai/page-0001.json",
+    "page.document/source/page.png",
+    "page.md"
+   ],
+   "message": "Operation finished.",
+   "ok": true,
+   "output": {
+    "page.document.json": {
+     "json": {
+      "chars": 7422,
+      "keys": [
+       "created_at",
+       "document_id",
+       "export_history",
+       "manual_corrections",
+       "metadata",
+       "pages",
+       "source",
+       "version"
+      ],
+      "sha": "33fa7eb24853bf73"
+     }
+    },
+    "page.document/document.json": {
+     "json": {
+      "chars": 7422,
+      "keys": [
+       "created_at",
+       "document_id",
+       "export_history",
+       "manual_corrections",
+       "metadata",
+       "pages",
+       "source",
+       "version"
+      ],
+      "sha": "33fa7eb24853bf73"
+     }
+    },
+    "page.document/pages/page-0001.ocr.png": {
+     "image": [
+      1600,
+      900,
+      "RGB"
+     ],
+     "pixels": "90130e5173096ae4"
+    },
+    "page.document/pages/page-0001.source.png": {
+     "image": [
+      1600,
+      900,
+      "RGB"
+     ],
+     "pixels": "90130e5173096ae4"
+    },
+    "page.document/providers/tesseract/page-0001.json": {
+     "json": {
+      "engine": "tesseract",
+      "lang": "rus+eng",
+      "ok": true,
+      "psm": 6,
+      "text": "АКТ ПРОВЕРКИ № 2026-117\nОмская область, город Тара\nContract No 2026-117 dated 15.10.2026\nИтого: 1 234 567,89 руб.\n1 452 123,45 2312 456,78\n2 452 130,10 2312 470,05",
+      "words": [
+       {
+        "box": [
+         80,
+         88,
+         74,
+         29
+        ],
+        "confidence": 0.9594,
+        "text": "АКТ"
+       },
+       {
+        "box": [
+         168,
+         88,
+         214,
+         29
+        ],
+        "confidence": 0.9594,
+        "text": "ПРОВЕРКИ"
+       },
+       {
+        "box": [
+         399,
+         88,
+         38,
+         29
+        ],
+        "confidence": 0.9071,
+        "text": "№"
+       },
+       {
+        "box": [
+         451,
+         88,
+         164,
+         29
+        ],
+        "confidence": 0.9071,
+        "text": "2026-117"
+       },
+       {
+        "box": [
+         82,
+         178,
+         136,
+         29
+        ],
+        "confidence": 0.9634,
+        "text": "Омская"
+       },
+       {
+        "box": [
+         233,
+         177,
+         156,
+         36
+        ],
+        "confidence": 0.9572,
+        "text": "область,"
+       },
+       {
+        "box": [
+         406,
+         186,
+         100,
+         29
+        ],
+        "confidence": 0.9688,
+        "text": "город"
+       },
+       {
+        "box": [
+         519,
+         178,
+         87,
+         37
+        ],
+        "confidence": 0.9658,
+        "text": "Тара"
+       },
+       {
+        "box": [
+         82,
+         268,
+         148,
+         29
+        ],
+        "confidence": 0.963,
+        "text": "Contract"
+       },
+       {
+        "box": [
+         244,
+         268,
+         47,
+         29
+        ],
+        "confidence": 0.9696,
+        "text": "No"
+       },
+       {
+        "box": [
+         304,
+         268,
+         164,
+         29
+        ],
+        "confidence": 0.9653,
+        "text": "2026-117"
+       },
+       {
+        "box": [
+         482,
+         268,
+         95,
+         29
+        ],
+        "confidence": 0.9662,
+        "text": "dated"
+       },
+       {
+        "box": [
+         595,
+         268,
+         192,
+         29
+        ],
+        "confidence": 0.9648,
+        "text": "15.10.2026"
+       },
+       {
+        "box": [
+         83,
+         358,
+         111,
+         29
+        ],
+        "confidence": 0.9605,
+        "text": "Итого:"
+       },
+       {
+        "box": [
+         212,
+         358,
+         11,
+         29
+        ],
+        "confidence": 0.9646,
+        "text": "1"
+       },
+       {
+        "box": [
+         242,
+         358,
+         63,
+         29
+        ],
+        "confidence": 0.9676,
+        "text": "234"
+       },
+       {
+        "box": [
+         320,
+         358,
+         118,
+         35
+        ],
+        "confidence": 0.9329,
+        "text": "567,89"
+       },
+       {
+        "box": [
+         453,
+         357,
+         70,
+         38
+        ],
+        "confidence": 0.9653,
+        "text": "руб."
+       },
+       {
+        "box": [
+         84,
+         528,
+         11,
+         29
+        ],
+        "confidence": 0.9684,
+        "text": "1"
+       },
+       {
+        "box": [
+         146,
+         528,
+         64,
+         29
+        ],
+        "confidence": 0.4257,
+        "text": "452"
+       },
+       {
+        "box": [
+         227,
+         528,
+         116,
+         35
+        ],
+        "confidence": 0.4257,
+        "text": "123,45"
+       },
+       {
+        "box": [
+         389,
+         528,
+         96,
+         29
+        ],
+        "confidence": 0.5383,
+        "text": "2312"
+       },
+       {
+        "box": [
+         498,
+         528,
+         119,
+         35
+        ],
+        "confidence": 0.9003,
+        "text": "456,78"
+       },
+       {
+        "box": [
+         81,
+         598,
+         19,
+         29
+        ],
+        "confidence": 0.9568,
+        "text": "2"
+       },
+       {
+        "box": [
+         146,
+         598,
+         64,
+         29
+        ],
+        "confidence": 0.3836,
+        "text": "452"
+       },
+       {
+        "box": [
+         227,
+         598,
+         115,
+         35
+        ],
+        "confidence": 0.3836,
+        "text": "130,10"
+       },
+       {
+        "box": [
+         389,
+         598,
+         96,
+         29
+        ],
+        "confidence": 0.8772,
+        "text": "2312"
+       },
+       {
+        "box": [
+         498,
+         598,
+         120,
+         35
+        ],
+        "confidence": 0.8772,
+        "text": "470,05"
+       }
+      ],
+      "words_count": 28
+     }
+    },
+    "page.document/providers/xai/page-0001.json": {
+     "json": {
+      "assets": {
+       "ocr_page_image": "pages/page-0001.ocr.png",
+       "ocr_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+       "raster_dpi": 300,
+       "source_page_image": "pages/page-0001.source.png",
+       "source_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15"
+      },
+      "engine": "xai",
+      "kind": "vision",
+      "may_rewrite": true,
+      "page": 0,
+      "russian_review": {
+       "applied": false,
+       "enabled": false,
+       "flags": []
+      },
+      "tesseract_2pass": {
+       "engine": "tesseract",
+       "lang": "rus+eng",
+       "ok": true,
+       "psm": 6,
+       "text": "АКТ ПРОВЕРКИ № 2026-117\nОмская область, город Тара\nContract No 2026-117 dated 15.10.2026\nИтого: 1 234 567,89 руб.\n1 452 123,45 2312 456,78\n2 452 130,10 2312 470,05",
+       "words": [
+        {
+         "box": [
+          80,
+          88,
+          74,
+          29
+         ],
+         "confidence": 0.9594,
+         "text": "АКТ"
+        },
+        {
+         "box": [
+          168,
+          88,
+          214,
+          29
+         ],
+         "confidence": 0.9594,
+         "text": "ПРОВЕРКИ"
+        },
+        {
+         "box": [
+          399,
+          88,
+          38,
+          29
+         ],
+         "confidence": 0.9071,
+         "text": "№"
+        },
+        {
+         "box": [
+          451,
+          88,
+          164,
+          29
+         ],
+         "confidence": 0.9071,
+         "text": "2026-117"
+        },
+        {
+         "box": [
+          82,
+          178,
+          136,
+          29
+         ],
+         "confidence": 0.9634,
+         "text": "Омская"
+        },
+        {
+         "box": [
+          233,
+          177,
+          156,
+          36
+         ],
+         "confidence": 0.9572,
+         "text": "область,"
+        },
+        {
+         "box": [
+          406,
+          186,
+          100,
+          29
+         ],
+         "confidence": 0.9688,
+         "text": "город"
+        },
+        {
+         "box": [
+          519,
+          178,
+          87,
+          37
+         ],
+         "confidence": 0.9658,
+         "text": "Тара"
+        },
+        {
+         "box": [
+          82,
+          268,
+          148,
+          29
+         ],
+         "confidence": 0.963,
+         "text": "Contract"
+        },
+        {
+         "box": [
+          244,
+          268,
+          47,
+          29
+         ],
+         "confidence": 0.9696,
+         "text": "No"
+        },
+        {
+         "box": [
+          304,
+          268,
+          164,
+          29
+         ],
+         "confidence": 0.9653,
+         "text": "2026-117"
+        },
+        {
+         "box": [
+          482,
+          268,
+          95,
+          29
+         ],
+         "confidence": 0.9662,
+         "text": "dated"
+        },
+        {
+         "box": [
+          595,
+          268,
+          192,
+          29
+         ],
+         "confidence": 0.9648,
+         "text": "15.10.2026"
+        },
+        {
+         "box": [
+          83,
+          358,
+          111,
+          29
+         ],
+         "confidence": 0.9605,
+         "text": "Итого:"
+        },
+        {
+         "box": [
+          212,
+          358,
+          11,
+          29
+         ],
+         "confidence": 0.9646,
+         "text": "1"
+        },
+        {
+         "box": [
+          242,
+          358,
+          63,
+          29
+         ],
+         "confidence": 0.9676,
+         "text": "234"
+        },
+        {
+         "box": [
+          320,
+          358,
+          118,
+          35
+         ],
+         "confidence": 0.9329,
+         "text": "567,89"
+        },
+        {
+         "box": [
+          453,
+          357,
+          70,
+          38
+         ],
+         "confidence": 0.9653,
+         "text": "руб."
+        },
+        {
+         "box": [
+          84,
+          528,
+          11,
+          29
+         ],
+         "confidence": 0.9684,
+         "text": "1"
+        },
+        {
+         "box": [
+          146,
+          528,
+          64,
+          29
+         ],
+         "confidence": 0.4257,
+         "text": "452"
+        },
+        {
+         "box": [
+          227,
+          528,
+          116,
+          35
+         ],
+         "confidence": 0.4257,
+         "text": "123,45"
+        },
+        {
+         "box": [
+          389,
+          528,
+          96,
+          29
+         ],
+         "confidence": 0.5383,
+         "text": "2312"
+        },
+        {
+         "box": [
+          498,
+          528,
+          119,
+          35
+         ],
+         "confidence": 0.9003,
+         "text": "456,78"
+        },
+        {
+         "box": [
+          81,
+          598,
+          19,
+          29
+         ],
+         "confidence": 0.9568,
+         "text": "2"
+        },
+        {
+         "box": [
+          146,
+          598,
+          64,
+          29
+         ],
+         "confidence": 0.3836,
+         "text": "452"
+        },
+        {
+         "box": [
+          227,
+          598,
+          115,
+          35
+         ],
+         "confidence": 0.3836,
+         "text": "130,10"
+        },
+        {
+         "box": [
+          389,
+          598,
+          96,
+          29
+         ],
+         "confidence": 0.8772,
+         "text": "2312"
+        },
+        {
+         "box": [
+          498,
+          598,
+          120,
+          35
+         ],
+         "confidence": 0.8772,
+         "text": "470,05"
+        }
+       ],
+       "words_count": 28
+      },
+      "text": "АКТ ПРОВЕРКИ № 2026-117 (xAI)\nОмская область, город Тара\nИтого: 1 234 567,89 руб.",
+      "words": []
+     }
+    },
+    "page.document/source/page.png": {
+     "image": [
+      1600,
+      900,
+      "RGB"
+     ],
+     "pixels": "90130e5173096ae4"
+    },
+    "page.md": {
+     "text": "# page\n\n> OCR engine: `xai`\n\n## Страница 1\n\nАКТ ПРОВЕРКИ № 2026-117 (xAI)\nОмская область, город Тара\nИтого: 1 234 567,89 руб.\n"
+    }
+   },
+   "requests": [
+    {
+     "body": {
+      "messages": [
+       {
+        "content": [
+         {
+          "text": "<text 772 sha 7eefc42d29b8>",
+          "type": "text"
+         },
+         {
+          "image_url": {
+           "detail": "high",
+           "url": "<text 65390 sha 2f46835288af>"
+          },
+          "type": "image_url"
+         }
+        ],
+        "role": "user"
+       }
+      ],
+      "model": "grok-4.3",
+      "temperature": 0
+     },
+     "method": "POST",
+     "url": "https://api.x.ai/v1/chat/completions",
+     "via": "requests"
+    }
+   ],
+   "result": {
+    "engine": "xai",
+    "exit_code": 0,
+    "files": 1,
+    "formats": [
+     "json",
+     "markdown"
+    ],
+    "output": "text",
+    "pages": 1
+   }
+  },
+  "api_yandex": {
+   "deliverables": [
+    "page.document.json",
+    "page.document/document.json",
+    "page.document/pages/page-0001.ocr.png",
+    "page.document/pages/page-0001.source.png",
+    "page.document/providers/yandex/page-0001.json",
+    "page.document/source/page.png",
+    "page.docx",
+    "page.md"
+   ],
+   "message": "Operation finished.",
+   "ok": true,
+   "output": {
+    "page.document.json": {
+     "json": {
+      "created_at": "<VOLATILE>",
+      "document_id": "2f5818589fdda74fd29bc1f4",
+      "export_history": [
+       {
+        "created_at": "<VOLATILE>",
+        "files": {
+         "docx": "page.docx",
+         "json": "page.document.json",
+         "markdown": "page.md"
+        },
+        "formats": [
+         "docx",
+         "json",
+         "markdown"
+        ]
+       }
+      ],
+      "manual_corrections": [],
+      "metadata": {
+       "engine": "yandex",
+       "engine_params": {
+        "languageCodes": [
+         "ru",
+         "en"
+        ],
+        "mode": "sync",
+        "model": "page"
+       },
+       "lossless_package": true,
+       "preprocess": {
+        "enabled": false,
+        "sr_scale": 0
+       }
+      },
+      "pages": [
+       {
+        "dpi": 300,
+        "fused_regions": [],
+        "fused_text": "",
+        "fusion": {},
+        "height": 900,
+        "index": 0,
+        "manual_corrections": [],
+        "ocr_candidates": [
+         {
+          "engine": "yandex",
+          "may_rewrite": false,
+          "text": "АКТ ПРОВЕРКИ № 2026-117\nОмская область, город Тара\nИтого: 1 234 567,89 руб.",
+          "words": [
+           {
+            "box": [
+             80,
+             80,
+             140,
+             40
+            ],
+            "confidence": 0.98,
+            "text": "АКТ"
+           },
+           {
+            "box": [
+             240,
+             80,
+             140,
+             40
+            ],
+            "confidence": 0.98,
+            "text": "ПРОВЕРКИ"
+           },
+           {
+            "box": [
+             400,
+             80,
+             140,
+             40
+            ],
+            "confidence": 0.98,
+            "text": "№"
+           },
+           {
+            "box": [
+             560,
+             80,
+             140,
+             40
+            ],
+            "confidence": 0.98,
+            "text": "2026-117"
+           },
+           {
+            "box": [
+             80,
+             170,
+             140,
+             40
+            ],
+            "confidence": 0.98,
+            "text": "Омская"
+           },
+           {
+            "box": [
+             240,
+             170,
+             140,
+             40
+            ],
+            "confidence": 0.98,
+            "text": "область,"
+           },
+           {
+            "box": [
+             400,
+             170,
+             140,
+             40
+            ],
+            "confidence": 0.98,
+            "text": "город"
+           },
+           {
+            "box": [
+             560,
+             170,
+             140,
+             40
+            ],
+            "confidence": 0.98,
+            "text": "Тара"
+           },
+           {
+            "box": [
+             80,
+             260,
+             140,
+             40
+            ],
+            "confidence": 0.98,
+            "text": "Итого:"
+           },
+           {
+            "box": [
+             240,
+             260,
+             140,
+             40
+            ],
+            "confidence": 0.98,
+            "text": "1"
+           },
+           {
+            "box": [
+             400,
+             260,
+             140,
+             40
+            ],
+            "confidence": 0.98,
+            "text": "234"
+           },
+           {
+            "box": [
+             560,
+             260,
+             140,
+             40
+            ],
+            "confidence": 0.98,
+            "text": "567,89"
+           },
+           {
+            "box": [
+             720,
+             260,
+             140,
+             40
+            ],
+            "confidence": 0.98,
+            "text": "руб."
+           }
+          ]
+         }
+        ],
+        "ocr_page_image": "pages/page-0001.ocr.png",
+        "ocr_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+        "primary_engine": "yandex",
+        "primary_text": "АКТ ПРОВЕРКИ № 2026-117\nОмская область, город Тара\nИтого: 1 234 567,89 руб.",
+        "primary_words": [
+         {
+          "box": [
+           80,
+           80,
+           140,
+           40
+          ],
+          "confidence": 0.98,
+          "text": "АКТ"
+         },
+         {
+          "box": [
+           240,
+           80,
+           140,
+           40
+          ],
+          "confidence": 0.98,
+          "text": "ПРОВЕРКИ"
+         },
+         {
+          "box": [
+           400,
+           80,
+           140,
+           40
+          ],
+          "confidence": 0.98,
+          "text": "№"
+         },
+         {
+          "box": [
+           560,
+           80,
+           140,
+           40
+          ],
+          "confidence": 0.98,
+          "text": "2026-117"
+         },
+         {
+          "box": [
+           80,
+           170,
+           140,
+           40
+          ],
+          "confidence": 0.98,
+          "text": "Омская"
+         },
+         {
+          "box": [
+           240,
+           170,
+           140,
+           40
+          ],
+          "confidence": 0.98,
+          "text": "область,"
+         },
+         {
+          "box": [
+           400,
+           170,
+           140,
+           40
+          ],
+          "confidence": 0.98,
+          "text": "город"
+         },
+         {
+          "box": [
+           560,
+           170,
+           140,
+           40
+          ],
+          "confidence": 0.98,
+          "text": "Тара"
+         },
+         {
+          "box": [
+           80,
+           260,
+           140,
+           40
+          ],
+          "confidence": 0.98,
+          "text": "Итого:"
+         },
+         {
+          "box": [
+           240,
+           260,
+           140,
+           40
+          ],
+          "confidence": 0.98,
+          "text": "1"
+         },
+         {
+          "box": [
+           400,
+           260,
+           140,
+           40
+          ],
+          "confidence": 0.98,
+          "text": "234"
+         },
+         {
+          "box": [
+           560,
+           260,
+           140,
+           40
+          ],
+          "confidence": 0.98,
+          "text": "567,89"
+         },
+         {
+          "box": [
+           720,
+           260,
+           140,
+           40
+          ],
+          "confidence": 0.98,
+          "text": "руб."
+         }
+        ],
+        "provider_verifications": {},
+        "raw_result": {
+         "assets": {
+          "ocr_page_image": "pages/page-0001.ocr.png",
+          "ocr_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+          "raster_dpi": 300,
+          "source_page_image": "pages/page-0001.source.png",
+          "source_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15"
+         },
+         "engine": "yandex",
+         "kind": "yandex",
+         "may_rewrite": false,
+         "page": 0,
+         "text": "АКТ ПРОВЕРКИ № 2026-117\nОмская область, город Тара\nИтого: 1 234 567,89 руб.",
+         "words": [
+          {
+           "box": [
+            80,
+            80,
+            140,
+            40
+           ],
+           "confidence": 0.98,
+           "text": "АКТ"
+          },
+          {
+           "box": [
+            240,
+            80,
+            140,
+            40
+           ],
+           "confidence": 0.98,
+           "text": "ПРОВЕРКИ"
+          },
+          {
+           "box": [
+            400,
+            80,
+            140,
+            40
+           ],
+           "confidence": 0.98,
+           "text": "№"
+          },
+          {
+           "box": [
+            560,
+            80,
+            140,
+            40
+           ],
+           "confidence": 0.98,
+           "text": "2026-117"
+          },
+          {
+           "box": [
+            80,
+            170,
+            140,
+            40
+           ],
+           "confidence": 0.98,
+           "text": "Омская"
+          },
+          {
+           "box": [
+            240,
+            170,
+            140,
+            40
+           ],
+           "confidence": 0.98,
+           "text": "область,"
+          },
+          {
+           "box": [
+            400,
+            170,
+            140,
+            40
+           ],
+           "confidence": 0.98,
+           "text": "город"
+          },
+          {
+           "box": [
+            560,
+            170,
+            140,
+            40
+           ],
+           "confidence": 0.98,
+           "text": "Тара"
+          },
+          {
+           "box": [
+            80,
+            260,
+            140,
+            40
+           ],
+           "confidence": 0.98,
+           "text": "Итого:"
+          },
+          {
+           "box": [
+            240,
+            260,
+            140,
+            40
+           ],
+           "confidence": 0.98,
+           "text": "1"
+          },
+          {
+           "box": [
+            400,
+            260,
+            140,
+            40
+           ],
+           "confidence": 0.98,
+           "text": "234"
+          },
+          {
+           "box": [
+            560,
+            260,
+            140,
+            40
+           ],
+           "confidence": 0.98,
+           "text": "567,89"
+          },
+          {
+           "box": [
+            720,
+            260,
+            140,
+            40
+           ],
+           "confidence": 0.98,
+           "text": "руб."
+          }
+         ]
+        },
+        "reading_order": [],
+        "regions": [],
+        "source_page_image": "pages/page-0001.source.png",
+        "source_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+        "verification": {},
+        "width": 1600
+       }
+      ],
+      "source": {
+       "media_type": "image/png",
+       "name": "page.png",
+       "path": "source/page.png",
+       "sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+       "size_bytes": 49025
+      },
+      "version": "1.1"
+     }
+    },
+    "page.document/document.json": {
+     "json": {
+      "created_at": "<VOLATILE>",
+      "document_id": "2f5818589fdda74fd29bc1f4",
+      "export_history": [
+       {
+        "created_at": "<VOLATILE>",
+        "files": {
+         "docx": "page.docx",
+         "json": "page.document.json",
+         "markdown": "page.md"
+        },
+        "formats": [
+         "docx",
+         "json",
+         "markdown"
+        ]
+       }
+      ],
+      "manual_corrections": [],
+      "metadata": {
+       "engine": "yandex",
+       "engine_params": {
+        "languageCodes": [
+         "ru",
+         "en"
+        ],
+        "mode": "sync",
+        "model": "page"
+       },
+       "lossless_package": true,
+       "preprocess": {
+        "enabled": false,
+        "sr_scale": 0
+       }
+      },
+      "pages": [
+       {
+        "dpi": 300,
+        "fused_regions": [],
+        "fused_text": "",
+        "fusion": {},
+        "height": 900,
+        "index": 0,
+        "manual_corrections": [],
+        "ocr_candidates": [
+         {
+          "engine": "yandex",
+          "may_rewrite": false,
+          "text": "АКТ ПРОВЕРКИ № 2026-117\nОмская область, город Тара\nИтого: 1 234 567,89 руб.",
+          "words": [
+           {
+            "box": [
+             80,
+             80,
+             140,
+             40
+            ],
+            "confidence": 0.98,
+            "text": "АКТ"
+           },
+           {
+            "box": [
+             240,
+             80,
+             140,
+             40
+            ],
+            "confidence": 0.98,
+            "text": "ПРОВЕРКИ"
+           },
+           {
+            "box": [
+             400,
+             80,
+             140,
+             40
+            ],
+            "confidence": 0.98,
+            "text": "№"
+           },
+           {
+            "box": [
+             560,
+             80,
+             140,
+             40
+            ],
+            "confidence": 0.98,
+            "text": "2026-117"
+           },
+           {
+            "box": [
+             80,
+             170,
+             140,
+             40
+            ],
+            "confidence": 0.98,
+            "text": "Омская"
+           },
+           {
+            "box": [
+             240,
+             170,
+             140,
+             40
+            ],
+            "confidence": 0.98,
+            "text": "область,"
+           },
+           {
+            "box": [
+             400,
+             170,
+             140,
+             40
+            ],
+            "confidence": 0.98,
+            "text": "город"
+           },
+           {
+            "box": [
+             560,
+             170,
+             140,
+             40
+            ],
+            "confidence": 0.98,
+            "text": "Тара"
+           },
+           {
+            "box": [
+             80,
+             260,
+             140,
+             40
+            ],
+            "confidence": 0.98,
+            "text": "Итого:"
+           },
+           {
+            "box": [
+             240,
+             260,
+             140,
+             40
+            ],
+            "confidence": 0.98,
+            "text": "1"
+           },
+           {
+            "box": [
+             400,
+             260,
+             140,
+             40
+            ],
+            "confidence": 0.98,
+            "text": "234"
+           },
+           {
+            "box": [
+             560,
+             260,
+             140,
+             40
+            ],
+            "confidence": 0.98,
+            "text": "567,89"
+           },
+           {
+            "box": [
+             720,
+             260,
+             140,
+             40
+            ],
+            "confidence": 0.98,
+            "text": "руб."
+           }
+          ]
+         }
+        ],
+        "ocr_page_image": "pages/page-0001.ocr.png",
+        "ocr_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+        "primary_engine": "yandex",
+        "primary_text": "АКТ ПРОВЕРКИ № 2026-117\nОмская область, город Тара\nИтого: 1 234 567,89 руб.",
+        "primary_words": [
+         {
+          "box": [
+           80,
+           80,
+           140,
+           40
+          ],
+          "confidence": 0.98,
+          "text": "АКТ"
+         },
+         {
+          "box": [
+           240,
+           80,
+           140,
+           40
+          ],
+          "confidence": 0.98,
+          "text": "ПРОВЕРКИ"
+         },
+         {
+          "box": [
+           400,
+           80,
+           140,
+           40
+          ],
+          "confidence": 0.98,
+          "text": "№"
+         },
+         {
+          "box": [
+           560,
+           80,
+           140,
+           40
+          ],
+          "confidence": 0.98,
+          "text": "2026-117"
+         },
+         {
+          "box": [
+           80,
+           170,
+           140,
+           40
+          ],
+          "confidence": 0.98,
+          "text": "Омская"
+         },
+         {
+          "box": [
+           240,
+           170,
+           140,
+           40
+          ],
+          "confidence": 0.98,
+          "text": "область,"
+         },
+         {
+          "box": [
+           400,
+           170,
+           140,
+           40
+          ],
+          "confidence": 0.98,
+          "text": "город"
+         },
+         {
+          "box": [
+           560,
+           170,
+           140,
+           40
+          ],
+          "confidence": 0.98,
+          "text": "Тара"
+         },
+         {
+          "box": [
+           80,
+           260,
+           140,
+           40
+          ],
+          "confidence": 0.98,
+          "text": "Итого:"
+         },
+         {
+          "box": [
+           240,
+           260,
+           140,
+           40
+          ],
+          "confidence": 0.98,
+          "text": "1"
+         },
+         {
+          "box": [
+           400,
+           260,
+           140,
+           40
+          ],
+          "confidence": 0.98,
+          "text": "234"
+         },
+         {
+          "box": [
+           560,
+           260,
+           140,
+           40
+          ],
+          "confidence": 0.98,
+          "text": "567,89"
+         },
+         {
+          "box": [
+           720,
+           260,
+           140,
+           40
+          ],
+          "confidence": 0.98,
+          "text": "руб."
+         }
+        ],
+        "provider_verifications": {},
+        "raw_result": {
+         "assets": {
+          "ocr_page_image": "pages/page-0001.ocr.png",
+          "ocr_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+          "raster_dpi": 300,
+          "source_page_image": "pages/page-0001.source.png",
+          "source_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15"
+         },
+         "engine": "yandex",
+         "kind": "yandex",
+         "may_rewrite": false,
+         "page": 0,
+         "text": "АКТ ПРОВЕРКИ № 2026-117\nОмская область, город Тара\nИтого: 1 234 567,89 руб.",
+         "words": [
+          {
+           "box": [
+            80,
+            80,
+            140,
+            40
+           ],
+           "confidence": 0.98,
+           "text": "АКТ"
+          },
+          {
+           "box": [
+            240,
+            80,
+            140,
+            40
+           ],
+           "confidence": 0.98,
+           "text": "ПРОВЕРКИ"
+          },
+          {
+           "box": [
+            400,
+            80,
+            140,
+            40
+           ],
+           "confidence": 0.98,
+           "text": "№"
+          },
+          {
+           "box": [
+            560,
+            80,
+            140,
+            40
+           ],
+           "confidence": 0.98,
+           "text": "2026-117"
+          },
+          {
+           "box": [
+            80,
+            170,
+            140,
+            40
+           ],
+           "confidence": 0.98,
+           "text": "Омская"
+          },
+          {
+           "box": [
+            240,
+            170,
+            140,
+            40
+           ],
+           "confidence": 0.98,
+           "text": "область,"
+          },
+          {
+           "box": [
+            400,
+            170,
+            140,
+            40
+           ],
+           "confidence": 0.98,
+           "text": "город"
+          },
+          {
+           "box": [
+            560,
+            170,
+            140,
+            40
+           ],
+           "confidence": 0.98,
+           "text": "Тара"
+          },
+          {
+           "box": [
+            80,
+            260,
+            140,
+            40
+           ],
+           "confidence": 0.98,
+           "text": "Итого:"
+          },
+          {
+           "box": [
+            240,
+            260,
+            140,
+            40
+           ],
+           "confidence": 0.98,
+           "text": "1"
+          },
+          {
+           "box": [
+            400,
+            260,
+            140,
+            40
+           ],
+           "confidence": 0.98,
+           "text": "234"
+          },
+          {
+           "box": [
+            560,
+            260,
+            140,
+            40
+           ],
+           "confidence": 0.98,
+           "text": "567,89"
+          },
+          {
+           "box": [
+            720,
+            260,
+            140,
+            40
+           ],
+           "confidence": 0.98,
+           "text": "руб."
+          }
+         ]
+        },
+        "reading_order": [],
+        "regions": [],
+        "source_page_image": "pages/page-0001.source.png",
+        "source_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+        "verification": {},
+        "width": 1600
+       }
+      ],
+      "source": {
+       "media_type": "image/png",
+       "name": "page.png",
+       "path": "source/page.png",
+       "sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+       "size_bytes": 49025
+      },
+      "version": "1.1"
+     }
+    },
+    "page.document/pages/page-0001.ocr.png": {
+     "image": [
+      1600,
+      900,
+      "RGB"
+     ],
+     "pixels": "90130e5173096ae4"
+    },
+    "page.document/pages/page-0001.source.png": {
+     "image": [
+      1600,
+      900,
+      "RGB"
+     ],
+     "pixels": "90130e5173096ae4"
+    },
+    "page.document/providers/yandex/page-0001.json": {
+     "json": {
+      "assets": {
+       "ocr_page_image": "pages/page-0001.ocr.png",
+       "ocr_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+       "raster_dpi": 300,
+       "source_page_image": "pages/page-0001.source.png",
+       "source_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15"
+      },
+      "engine": "yandex",
+      "kind": "yandex",
+      "may_rewrite": false,
+      "page": 0,
+      "text": "АКТ ПРОВЕРКИ № 2026-117\nОмская область, город Тара\nИтого: 1 234 567,89 руб.",
+      "words": [
+       {
+        "box": [
+         80,
+         80,
+         140,
+         40
+        ],
+        "confidence": 0.98,
+        "text": "АКТ"
+       },
+       {
+        "box": [
+         240,
+         80,
+         140,
+         40
+        ],
+        "confidence": 0.98,
+        "text": "ПРОВЕРКИ"
+       },
+       {
+        "box": [
+         400,
+         80,
+         140,
+         40
+        ],
+        "confidence": 0.98,
+        "text": "№"
+       },
+       {
+        "box": [
+         560,
+         80,
+         140,
+         40
+        ],
+        "confidence": 0.98,
+        "text": "2026-117"
+       },
+       {
+        "box": [
+         80,
+         170,
+         140,
+         40
+        ],
+        "confidence": 0.98,
+        "text": "Омская"
+       },
+       {
+        "box": [
+         240,
+         170,
+         140,
+         40
+        ],
+        "confidence": 0.98,
+        "text": "область,"
+       },
+       {
+        "box": [
+         400,
+         170,
+         140,
+         40
+        ],
+        "confidence": 0.98,
+        "text": "город"
+       },
+       {
+        "box": [
+         560,
+         170,
+         140,
+         40
+        ],
+        "confidence": 0.98,
+        "text": "Тара"
+       },
+       {
+        "box": [
+         80,
+         260,
+         140,
+         40
+        ],
+        "confidence": 0.98,
+        "text": "Итого:"
+       },
+       {
+        "box": [
+         240,
+         260,
+         140,
+         40
+        ],
+        "confidence": 0.98,
+        "text": "1"
+       },
+       {
+        "box": [
+         400,
+         260,
+         140,
+         40
+        ],
+        "confidence": 0.98,
+        "text": "234"
+       },
+       {
+        "box": [
+         560,
+         260,
+         140,
+         40
+        ],
+        "confidence": 0.98,
+        "text": "567,89"
+       },
+       {
+        "box": [
+         720,
+         260,
+         140,
+         40
+        ],
+        "confidence": 0.98,
+        "text": "руб."
+       }
+      ]
+     }
+    },
+    "page.document/source/page.png": {
+     "image": [
+      1600,
+      900,
+      "RGB"
+     ],
+     "pixels": "90130e5173096ae4"
+    },
+    "page.docx": {
+     "images": 0,
+     "page": [
+      279.4,
+      215.9,
+      "LANDSCAPE (1)"
+     ],
+     "paragraphs": "Normal|АКТ ПРОВЕРКИ № 2026-117\nNormal|Омская область, город Тара\nNormal|Итого: 1 234 567,89 руб.",
+     "tables": []
+    },
+    "page.md": {
+     "text": "# page\n\n> OCR engine: `yandex`\n\n## Страница 1\n\nАКТ ПРОВЕРКИ № 2026-117\nОмская область, город Тара\nИтого: 1 234 567,89 руб.\n"
+    }
+   },
+   "requests": [
+    {
+     "body": {
+      "content": "<text 65368 sha ea6c1f69a163>",
+      "languageCodes": [
+       "ru",
+       "en"
+      ],
+      "mimeType": "PNG",
+      "model": "page"
+     },
+     "method": "POST",
+     "url": "https://ocr.api.cloud.yandex.net/ocr/v1/recognizeText",
+     "via": "requests"
+    }
+   ],
+   "result": {
+    "engine": "yandex",
+    "exit_code": 0,
+    "files": 1,
+    "formats": [
+     "docx",
+     "json",
+     "markdown"
+    ],
+    "output": "text",
+    "pages": 1
+   }
+  },
+  "build_docx": {
+   "deliverables": [
+    "note.docx"
+   ],
+   "message": "Operation finished.",
+   "ok": true,
+   "output": {
+    "note.docx": {
+     "images": 0,
+     "page": [
+      215.9,
+      279.4,
+      "PORTRAIT (0)"
+     ],
+     "paragraphs": "Heading 1|Пояснительная записка\ncode-line|Вводный абзац о проекте планировки.\nHeading 2|Таблица показателей\ncode-line|первый пункт\ncode-line|второй пункт",
+     "tables": [
+      [
+       [
+        "№",
+        "Показатель",
+        "Значение"
+       ],
+       [
+        "1",
+        "Площадь, га",
+        "12,5"
+       ],
+       [
+        "2",
+        "Население, чел.",
+        "3 400"
+       ]
+      ]
+     ]
+    }
+   },
+   "requests": [],
+   "result": {
+    "destination": "<STAND>\\deliverables\\build_docx",
+    "destination_explicit": true,
+    "exit_code": 0,
+    "skipped": [],
+    "source": "<BASE>\\fixtures\\markdown",
+    "source_explicit": true,
+    "staged_files": 1,
+    "synced_files": 1
+   }
+  },
+  "build_pptx": {
+   "deliverables": [],
+   "log_tail": [
+    "[CMD] <STAND>\\runtime\\python.exe -u <STAND>\\system_core\\compile_md_to_pptx.py",
+    "\f=== AUDION OFFICE OCR AI: PPTX COMPILER ===",
+    "[BUILD] note.md -> PPTX",
+    "Traceback (most recent call last):",
+    "  File \"<STAND>\\system_core\\compile_md_to_pptx.py\", line <N>, in <module>",
+    "    compile_markdown_to_pptx()",
+    "  File \"<STAND>\\system_core\\compile_md_to_pptx.py\", line <N>, in compile_markdown_to_pptx",
+    "    paragraph = text_frame.add_paragraph()",
+    "                ^^^^^^^^^^^^^^^^^^^^^^^^",
+    "AttributeError: 'NoneType' object has no attribute 'add_paragraph'",
+    "[EXIT] 1",
+    "Traceback (most recent call last):\n  File \"E:\\TOOLS\\Audion Office OCR AI\\system_core\\core\\jobs.py\", line <N>, in execute_operation\n    result = _load_callable(operation.service)(context)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"E:\\TOOLS\\Audion Office OCR AI\\system_core\\services\\office_service.py\", line <N>, in build_pptx\n    return _run_mirrored_script(context, \"compile_md_to_pptx.py\", progress_seconds=<N>)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"E:\\TOOLS\\Audion Office OCR AI\\system_core\\services\\office_service.py\", line <N>, in _run_mirrored_script\n    result = _run_script(context, script_name, args, progress_seconds=progress_seconds, extra_env=extra_env)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"E:\\TOOLS\\Audion Office OCR AI\\system_core\\services\\office_service.py\", line <N>, in _run_script\n    return run_process(\n           ^^^^^^^^^^^^\n  File \"E:\\TOOLS\\Audion Office OCR AI\\system_core\\core\\jobs.py\", line <N>, in run_process\n    raise RuntimeError(f\"Command failed with exit code {exit_code}.\")\nRuntimeError: Command failed with exit code 1.\n"
+   ],
+   "message": "RuntimeError: Command failed with exit code 1.",
+   "ok": false,
+   "output": {},
+   "requests": [],
+   "result": {}
+  },
+  "build_xlsx": {
+   "deliverables": [
+    "note.xlsx"
+   ],
+   "message": "Operation finished.",
+   "ok": true,
+   "output": {
+    "note.xlsx": {
+     "sheets": {
+      "Table_1": [
+       [
+        "№",
+        "Показатель",
+        "Значение"
+       ],
+       [
+        "1",
+        "Площадь, га",
+        "12,5"
+       ],
+       [
+        "2",
+        "Население, чел.",
+        "3 400"
+       ]
+      ]
+     }
+    }
+   },
+   "requests": [],
+   "result": {
+    "destination": "<STAND>\\deliverables\\build_xlsx",
+    "destination_explicit": true,
+    "exit_code": 0,
+    "skipped": [],
+    "source": "<BASE>\\fixtures\\markdown",
+    "source_explicit": true,
+    "staged_files": 1,
+    "synced_files": 1
+   }
+  },
+  "cleanup_document_model_artifacts": {
+   "deliverables": [],
+   "message": "Operation finished.",
+   "ok": true,
+   "output": {
+    "page.docx": {
+     "size": 4,
+     "unreadable": "PackageNotFoundError: Package not found at '<STAND>\\output\\page.docx'"
+    },
+    "page.md": {
+     "text": "# page\n"
+    }
+   },
+   "requests": [],
+   "result": {
+    "output": {
+     "machine_files": 2,
+     "packages": 1,
+     "skipped": []
+    },
+    "report": {
+     "machine_files": 0,
+     "packages": 0,
+     "skipped": []
+    },
+    "workspace": {
+     "machine_files": 0,
+     "packages": 0,
+     "skipped": []
+    }
+   }
+  },
+  "coordinate_tables": {
+   "deliverables": [],
+   "message": "Operation finished.",
+   "ok": true,
+   "output": {},
+   "report": {
+    "<TIME>_coordinate_tables/mirror.json": {
+     "json": {
+      "destination": "<STAND>\\deliverables\\coordinate_tables",
+      "destination_explicit": true,
+      "skipped": [],
+      "source": "<BASE>\\fixtures\\coords\\coords.pdf",
+      "source_explicit": true,
+      "staged_dirs": 0,
+      "staged_files": 1,
+      "synced_dirs": 1,
+      "synced_files": 0
+     }
+    },
+    "<TIME>_coordinate_tables/resolver_candidates.json": {
+     "json": []
+    },
+    "<TIME>_coordinate_tables/result.json": {
+     "json": {
+      "data": {
+       "destination": "<STAND>\\deliverables\\coordinate_tables",
+       "destination_explicit": true,
+       "exit_code": 0,
+       "skipped": [],
+       "source": "<BASE>\\fixtures\\coords\\coords.pdf",
+       "source_explicit": true,
+       "staged_files": 1,
+       "synced_files": 0
+      },
+      "log_file": "<STAND>\\logs\\<TIME>_coordinate_tables.log",
+      "message": "Operation finished.",
+      "ok": true,
+      "operation": {
+       "id": "coordinate_tables",
+       "parameters": {
+        "_workbench_source_path": "<BASE>\\fixtures\\coords\\coords.pdf",
+        "_workbench_target_path": "<STAND>\\deliverables\\coordinate_tables",
+        "coordinate_dpi": 180,
+        "coordinate_lang": "rus+eng",
+        "coordinate_ocr_engine": "auto"
+       },
+       "title": "coordinate_tables"
+      },
+      "report_dir": "<STAND>\\report\\<TIME>_coordinate_tables"
+     }
+    },
+    "<TIME>_coordinate_tables/review_items.json": {
+     "json": []
+    },
+    "<TIME>_coordinate_tables/safe_autofix_candidates.json": {
+     "json": []
+    },
+    "<TIME>_coordinate_tables/summary.json": {
+     "json": {
+      "ai_errors": 0,
+      "ai_mode": "off",
+      "ai_provider": "none",
+      "ai_resolved": 0,
+      "coordinate_rows": 0,
+      "coordinates_xlsx": "",
+      "created_at": "<VOLATILE>",
+      "files": 1,
+      "local_ocr_status": "available",
+      "manual_review_xlsx": "",
+      "mode": "coordinates",
+      "ocr_pages": 0,
+      "optional_tesseract_install": "install\\Install-Portable-Tesseract.cmd",
+      "pages": 1,
+      "review_items": 0,
+      "safe_autofix_candidates": 0,
+      "safe_autofix_candidates_json": "",
+      "tesseract_available": true,
+      "tesseract_note": "portable: E:\\TOOLS\\Audion Office OCR AI\\runtime\\tesseract\\tesseract.exe (tesseract v5.4.0.20240606; deu,eng,osd,rus, tessdata=E:\\TOOLS\\Audion Office OCR AI\\runtime\\tesseract\\tessdata)",
+      "vector_text_pages": 1
+     }
+    },
+    "latest_result.json": {
+     "json": {
+      "data": {
+       "destination": "<STAND>\\deliverables\\coordinate_tables",
+       "destination_explicit": true,
+       "exit_code": 0,
+       "skipped": [],
+       "source": "<BASE>\\fixtures\\coords\\coords.pdf",
+       "source_explicit": true,
+       "staged_files": 1,
+       "synced_files": 0
+      },
+      "log_file": "<STAND>\\logs\\<TIME>_coordinate_tables.log",
+      "message": "Operation finished.",
+      "ok": true,
+      "operation": {
+       "id": "coordinate_tables",
+       "parameters": {
+        "_workbench_source_path": "<BASE>\\fixtures\\coords\\coords.pdf",
+        "_workbench_target_path": "<STAND>\\deliverables\\coordinate_tables",
+        "coordinate_dpi": 180,
+        "coordinate_lang": "rus+eng",
+        "coordinate_ocr_engine": "auto"
+       },
+       "title": "coordinate_tables"
+      },
+      "report_dir": "<STAND>\\report\\<TIME>_coordinate_tables"
+     }
+    }
+   },
+   "requests": [],
+   "result": {
+    "destination": "<STAND>\\deliverables\\coordinate_tables",
+    "destination_explicit": true,
+    "exit_code": 0,
+    "skipped": [],
+    "source": "<BASE>\\fixtures\\coords\\coords.pdf",
+    "source_explicit": true,
+    "staged_files": 1,
+    "synced_files": 0
+   }
+  },
+  "copy_output_markdown_to_input": {
+   "deliverables": [],
+   "input": {
+    "nested/second.md": {
+     "text": "# Пояснительная записка\n\nВводный абзац о проекте планировки.\n\n## Таблица показателей\n\n| № | Показатель | Значение |\n|---|---|---|\n| 1 | Площадь, га | 12,5 |\n| 2 | Население, чел. | 3 400 |\n\n- первый пункт\n- второй пункт\n"
+    },
+    "note.md": {
+     "text": "# Пояснительная записка\n\nВводный абзац о проекте планировки.\n\n## Таблица показателей\n\n| № | Показатель | Значение |\n|---|---|---|\n| 1 | Площадь, га | 12,5 |\n| 2 | Население, чел. | 3 400 |\n\n- первый пункт\n- второй пункт\n"
+    }
+   },
+   "message": "Operation finished.",
+   "ok": true,
+   "output": {
+    "nested/second.md": {
+     "text": "# Пояснительная записка\n\nВводный абзац о проекте планировки.\n\n## Таблица показателей\n\n| № | Показатель | Значение |\n|---|---|---|\n| 1 | Площадь, га | 12,5 |\n| 2 | Население, чел. | 3 400 |\n\n- первый пункт\n- второй пункт\n"
+    },
+    "note.md": {
+     "text": "# Пояснительная записка\n\nВводный абзац о проекте планировки.\n\n## Таблица показателей\n\n| № | Показатель | Значение |\n|---|---|---|\n| 1 | Площадь, га | 12,5 |\n| 2 | Население, чел. | 3 400 |\n\n- первый пункт\n- второй пункт\n"
+    }
+   },
+   "requests": [],
+   "result": {
+    "copied": 2
+   }
+  },
+  "extract_local": {
+   "deliverables": [
+    "budget.md",
+    "data.md",
+    "letter.md",
+    "notes.md",
+    "page.md",
+    "report.md",
+    "slides.md"
+   ],
+   "message": "Operation finished.",
+   "ok": true,
+   "output": {
+    "budget.md": {
+     "text": "## Sheet: Бюджет\n\n| Статья | Сумма |\n| --- | --- |\n| Связь | 1200.5 |\n| Аренда | 340 |\n| Итого | 1540.5 |\n\n## Sheet: Notes\n\n| Comment | Value |\n| --- | --- |\n| Checked | True |\n"
+    },
+    "data.md": {
+     "text": "| Код;Наименование;Сумма |  |\n| --- | --- |\n| 1;Омск;1200 | 50 |\n| 2;Тара;340 |  |\n"
+    },
+    "letter.md": {
+     "text": "## Page 1\n\nПисьмо № 15\nОмская область, 2026 год.\n\n## Page 2\n\nСтраница вторая\nИтог: 1 234 567,89 руб.\n"
+    },
+    "notes.md": {
+     "text": "Заметки к проекту\nОмская область, 2026 год.\nTotal: 1 234 567,89\n"
+    },
+    "page.md": {
+     "text": "# Заголовок\n\nАбзац с **жирным** словом.\n\n| A | B |\n| --- | --- |\n| 1 | 2 |\n"
+    },
+    "report.md": {
+     "text": "# Отчёт о проверке\n\nПервый абзац отчёта: Омская область, договор № 2026-117 от 15.10.2026.\n\n| Код | Объект | Сумма |\n| --- | --- | --- |\n| 1 | Школа | 1 200,50 |\n\nИтог: 1 200,50 руб.\n"
+    },
+    "slides.md": {
+     "text": "## Slide 1\n\nПроект планировки\n\n- Первый пункт\n- Второй пункт\n\n## Slide 2\n\nИтоги 2026\n"
+    }
+   },
+   "requests": [],
+   "result": {
+    "destination": "<STAND>\\deliverables\\extract_local",
+    "destination_explicit": true,
+    "exit_code": 0,
+    "skipped": [],
+    "source": "<BASE>\\fixtures\\office",
+    "source_explicit": true,
+    "staged_files": 7,
+    "synced_files": 7
+   }
+  },
+  "inspect_tables": {
+   "deliverables": [],
+   "message": "Operation finished.",
+   "ok": true,
+   "output": {},
+   "requests": [],
+   "result": {
+    "destination": "<STAND>\\deliverables\\inspect_tables",
+    "files": 1,
+    "source": "<BASE>\\fixtures\\markdown"
+   }
+  },
+  "numeric_check": {
+   "deliverables": [],
+   "message": "Operation finished.",
+   "ok": true,
+   "report": {
+    "<TIME>_numeric_check_pass/result.json": {
+     "json": {
+      "data": {
+       "candidates": 5,
+       "checks": 5,
+       "cost_usd_estimate": 0.0,
+       "exit_code": 0,
+       "json": "<STAND>\\workspace\\numeric_check\\<TIME>_numeric_check_pass\\page_page1_numeric_check.json",
+       "locator": "tesseract",
+       "locator_error": "",
+       "markdown": "<STAND>\\workspace\\numeric_check\\<TIME>_numeric_check_pass\\page_page1_numeric_check.md",
+       "model": "grok-4.3",
+       "page": 1,
+       "source": "<STAND>\\input\\page.png",
+       "statuses": {
+        "match": 3,
+        "mismatch": 2
+       }
+      },
+      "log_file": "<STAND>\\logs\\<TIME>_numeric_check_pass.log",
+      "message": "Operation finished.",
+      "ok": true,
+      "operation": {
+       "id": "numeric_check_pass",
+       "parameters": {
+        "_workbench_source_path": "<BASE>\\fixtures\\scans\\page.png",
+        "_workbench_target_path": "<STAND>\\deliverables\\numeric_check",
+        "numeric_dpi": 300,
+        "numeric_locator": "tesseract",
+        "numeric_locator_hint": true,
+        "numeric_max_candidates": 6,
+        "numeric_min_digits": 8,
+        "numeric_page": 1,
+        "numeric_source": "input/page.png",
+        "ocr_binarize": "off",
+        "ocr_contrast": "high",
+        "ocr_denoise": "weak",
+        "ocr_deskew": true,
+        "ocr_tesseract_lang": "rus+eng",
+        "ocr_tesseract_psm": 6,
+        "ocr_unsharp": "strong",
+        "xai_api_key": "",
+        "xai_model": "grok-4.3"
+       },
+       "title": "numeric_check"
+      },
+      "report_dir": "<STAND>\\report\\<TIME>_numeric_check_pass"
+     }
+    },
+    "latest_result.json": {
+     "json": {
+      "data": {
+       "candidates": 5,
+       "checks": 5,
+       "cost_usd_estimate": 0.0,
+       "exit_code": 0,
+       "json": "<STAND>\\workspace\\numeric_check\\<TIME>_numeric_check_pass\\page_page1_numeric_check.json",
+       "locator": "tesseract",
+       "locator_error": "",
+       "markdown": "<STAND>\\workspace\\numeric_check\\<TIME>_numeric_check_pass\\page_page1_numeric_check.md",
+       "model": "grok-4.3",
+       "page": 1,
+       "source": "<STAND>\\input\\page.png",
+       "statuses": {
+        "match": 3,
+        "mismatch": 2
+       }
+      },
+      "log_file": "<STAND>\\logs\\<TIME>_numeric_check_pass.log",
+      "message": "Operation finished.",
+      "ok": true,
+      "operation": {
+       "id": "numeric_check_pass",
+       "parameters": {
+        "_workbench_source_path": "<BASE>\\fixtures\\scans\\page.png",
+        "_workbench_target_path": "<STAND>\\deliverables\\numeric_check",
+        "numeric_dpi": 300,
+        "numeric_locator": "tesseract",
+        "numeric_locator_hint": true,
+        "numeric_max_candidates": 6,
+        "numeric_min_digits": 8,
+        "numeric_page": 1,
+        "numeric_source": "input/page.png",
+        "ocr_binarize": "off",
+        "ocr_contrast": "high",
+        "ocr_denoise": "weak",
+        "ocr_deskew": true,
+        "ocr_tesseract_lang": "rus+eng",
+        "ocr_tesseract_psm": 6,
+        "ocr_unsharp": "strong",
+        "xai_api_key": "",
+        "xai_model": "grok-4.3"
+       },
+       "title": "numeric_check"
+      },
+      "report_dir": "<STAND>\\report\\<TIME>_numeric_check_pass"
+     }
+    }
+   },
+   "requests": [
+    {
+     "body": {
+      "messages": [
+       {
+        "content": [
+         {
+          "text": "<text 737 sha de81419110e5>",
+          "type": "text"
+         },
+         {
+          "image_url": {
+           "detail": "high",
+           "url": "<text 45510 sha 203748f420a3>"
+          },
+          "type": "image_url"
+         }
+        ],
+        "role": "user"
+       }
+      ],
+      "model": "grok-4.3",
+      "temperature": 0
+     },
+     "method": "POST",
+     "url": "https://api.x.ai/v1/chat/completions",
+     "via": "requests"
+    },
+    {
+     "body": {
+      "messages": [
+       {
+        "content": [
+         {
+          "text": "<text 736 sha a94727c18180>",
+          "type": "text"
+         },
+         {
+          "image_url": {
+           "detail": "high",
+           "url": "<text 40826 sha 1d064da10229>"
+          },
+          "type": "image_url"
+         }
+        ],
+        "role": "user"
+       }
+      ],
+      "model": "grok-4.3",
+      "temperature": 0
+     },
+     "method": "POST",
+     "url": "https://api.x.ai/v1/chat/completions",
+     "via": "requests"
+    },
+    {
+     "body": {
+      "messages": [
+       {
+        "content": [
+         {
+          "text": "<text 737 sha 1efe196d1f12>",
+          "type": "text"
+         },
+         {
+          "image_url": {
+           "detail": "high",
+           "url": "<text 53110 sha 1895c9e763b3>"
+          },
+          "type": "image_url"
+         }
+        ],
+        "role": "user"
+       }
+      ],
+      "model": "grok-4.3",
+      "temperature": 0
+     },
+     "method": "POST",
+     "url": "https://api.x.ai/v1/chat/completions",
+     "via": "requests"
+    },
+    {
+     "body": {
+      "messages": [
+       {
+        "content": [
+         {
+          "text": "<text 737 sha e741445c5fc3>",
+          "type": "text"
+         },
+         {
+          "image_url": {
+           "detail": "high",
+           "url": "<text 46314 sha 727d47f7f3cf>"
+          },
+          "type": "image_url"
+         }
+        ],
+        "role": "user"
+       }
+      ],
+      "model": "grok-4.3",
+      "temperature": 0
+     },
+     "method": "POST",
+     "url": "https://api.x.ai/v1/chat/completions",
+     "via": "requests"
+    },
+    {
+     "body": {
+      "messages": [
+       {
+        "content": [
+         {
+          "text": "<text 750 sha 5884246e4b81>",
+          "type": "text"
+         },
+         {
+          "image_url": {
+           "detail": "high",
+           "url": "<text 32130 sha 5d01efa3a02d>"
+          },
+          "type": "image_url"
+         }
+        ],
+        "role": "user"
+       }
+      ],
+      "model": "grok-4.3",
+      "temperature": 0
+     },
+     "method": "POST",
+     "url": "https://api.x.ai/v1/chat/completions",
+     "via": "requests"
+    }
+   ],
+   "result": {
+    "candidates": 5,
+    "checks": 5,
+    "cost_usd_estimate": 0.0,
+    "exit_code": 0,
+    "json": "<STAND>\\workspace\\numeric_check\\<TIME>_numeric_check_pass\\page_page1_numeric_check.json",
+    "locator": "tesseract",
+    "locator_error": "",
+    "markdown": "<STAND>\\workspace\\numeric_check\\<TIME>_numeric_check_pass\\page_page1_numeric_check.md",
+    "model": "grok-4.3",
+    "page": 1,
+    "source": "<STAND>\\input\\page.png",
+    "statuses": {
+     "match": 3,
+     "mismatch": 2
+    }
+   },
+   "workspace": {
+    "numeric_check/<TIME>_numeric_check_pass/crops/page_page1_candidate_01_money.png": {
+     "image": [
+      1200,
+      285,
+      "RGB"
+     ],
+     "pixels": "813c45bf76814b69"
+    },
+    "numeric_check/<TIME>_numeric_check_pass/crops/page_page1_candidate_02_document_number.png": {
+     "image": [
+      1200,
+      197,
+      "RGB"
+     ],
+     "pixels": "9135762f288b2452"
+    },
+    "numeric_check/<TIME>_numeric_check_pass/crops/page_page1_candidate_03_long_number.png": {
+     "image": [
+      1200,
+      231,
+      "RGB"
+     ],
+     "pixels": "75b49ecd3cafe192"
+    },
+    "numeric_check/<TIME>_numeric_check_pass/crops/page_page1_candidate_04_long_number.png": {
+     "image": [
+      1200,
+      230,
+      "RGB"
+     ],
+     "pixels": "80011c45ee1210ee"
+    },
+    "numeric_check/<TIME>_numeric_check_pass/crops/page_page1_candidate_05_long_number.png": {
+     "image": [
+      1200,
+      157,
+      "RGB"
+     ],
+     "pixels": "9d57c036e7d04f48"
+    },
+    "numeric_check/<TIME>_numeric_check_pass/page_page1_numeric_check.json": {
+     "json": {
+      "candidates": [
+       {
+        "box": [
+         0,
+         304,
+         606,
+         144
+        ],
+        "crop": "<STAND>\\workspace\\numeric_check\\<TIME>_numeric_check_pass\\crops\\page_page1_candidate_01_money.png",
+        "digits": 9,
+        "id": 1,
+        "kind": "money",
+        "text": "Итого: 1 234 567,89 руб."
+       },
+       {
+        "box": [
+         17,
+         48,
+         662,
+         109
+        ],
+        "crop": "<STAND>\\workspace\\numeric_check\\<TIME>_numeric_check_pass\\crops\\page_page1_candidate_02_document_number.png",
+        "digits": 7,
+        "id": 2,
+        "kind": "document_number",
+        "text": "АКТ ПРОВЕРКИ № 2026-117"
+       },
+       {
+        "box": [
+         7,
+         479,
+         688,
+         133
+        ],
+        "crop": "<STAND>\\workspace\\numeric_check\\<TIME>_numeric_check_pass\\crops\\page_page1_candidate_03_long_number.png",
+        "digits": 18,
+        "id": 3,
+        "kind": "long_number",
+        "text": "1 452 123,45 2312 456,78"
+       },
+       {
+        "box": [
+         4,
+         549,
+         691,
+         133
+        ],
+        "crop": "<STAND>\\workspace\\numeric_check\\<TIME>_numeric_check_pass\\crops\\page_page1_candidate_04_long_number.png",
+        "digits": 18,
+        "id": 4,
+        "kind": "long_number",
+        "text": "2 452 130,10 2312 470,05"
+       },
+       {
+        "box": [
+         19,
+         228,
+         832,
+         109
+        ],
+        "crop": "<STAND>\\workspace\\numeric_check\\<TIME>_numeric_check_pass\\crops\\page_page1_candidate_05_long_number.png",
+        "digits": 15,
+        "id": 5,
+        "kind": "long_number",
+        "text": "Contract Мо 2026-117 dated 15.10.2026"
+       }
+      ],
+      "checks": [
+       {
+        "candidate_id": 1,
+        "cost_usd_estimate": null,
+        "elapsed_sec": "<VOLATILE>",
+        "locator_digit_sequences": [
+         "1234567"
+        ],
+        "model": "grok-4.3",
+        "parsed": {
+         "items": [],
+         "raw": "АКТ ПРОВЕРКИ № 2026-117 (xAI)\nОмская область, город Тара\nИтого: 1 234 567,89 руб."
+        },
+        "provider": "xai",
+        "status": "match",
+        "text": "АКТ ПРОВЕРКИ № 2026-117 (xAI)\nОмская область, город Тара\nИтого: 1 234 567,89 руб.",
+        "usage": {
+         "completion_tokens": 20,
+         "prompt_tokens": 100,
+         "total_tokens": 120
+        },
+        "verified_digit_sequences": [
+         "2026117",
+         "1234567"
+        ]
+       },
+       {
+        "candidate_id": 2,
+        "cost_usd_estimate": null,
+        "elapsed_sec": "<VOLATILE>",
+        "locator_digit_sequences": [
+         "2026117"
+        ],
+        "model": "grok-4.3",
+        "parsed": {
+         "items": [],
+         "raw": "АКТ ПРОВЕРКИ № 2026-117 (xAI)\nОмская область, город Тара\nИтого: 1 234 567,89 руб."
+        },
+        "provider": "xai",
+        "status": "match",
+        "text": "АКТ ПРОВЕРКИ № 2026-117 (xAI)\nОмская область, город Тара\nИтого: 1 234 567,89 руб.",
+        "usage": {
+         "completion_tokens": 20,
+         "prompt_tokens": 100,
+         "total_tokens": 120
+        },
+        "verified_digit_sequences": [
+         "2026117",
+         "1234567"
+        ]
+       },
+       {
+        "candidate_id": 3,
+        "cost_usd_estimate": null,
+        "elapsed_sec": "<VOLATILE>",
+        "locator_digit_sequences": [
+         "1452123",
+         "452312456"
+        ],
+        "model": "grok-4.3",
+        "parsed": {
+         "items": [],
+         "raw": "АКТ ПРОВЕРКИ № 2026-117 (xAI)\nОмская область, город Тара\nИтого: 1 234 567,89 руб."
+        },
+        "provider": "xai",
+        "status": "mismatch",
+        "text": "АКТ ПРОВЕРКИ № 2026-117 (xAI)\nОмская область, город Тара\nИтого: 1 234 567,89 руб.",
+        "usage": {
+         "completion_tokens": 20,
+         "prompt_tokens": 100,
+         "total_tokens": 120
+        },
+        "verified_digit_sequences": [
+         "2026117",
+         "1234567"
+        ]
+       },
+       {
+        "candidate_id": 4,
+        "cost_usd_estimate": null,
+        "elapsed_sec": "<VOLATILE>",
+        "locator_digit_sequences": [
+         "2452130",
+         "102312470"
+        ],
+        "model": "grok-4.3",
+        "parsed": {
+         "items": [],
+         "raw": "АКТ ПРОВЕРКИ № 2026-117 (xAI)\nОмская область, город Тара\nИтого: 1 234 567,89 руб."
+        },
+        "provider": "xai",
+        "status": "mismatch",
+        "text": "АКТ ПРОВЕРКИ № 2026-117 (xAI)\nОмская область, город Тара\nИтого: 1 234 567,89 руб.",
+        "usage": {
+         "completion_tokens": 20,
+         "prompt_tokens": 100,
+         "total_tokens": 120
+        },
+        "verified_digit_sequences": [
+         "2026117",
+         "1234567"
+        ]
+       },
+       {
+        "candidate_id": 5,
+        "cost_usd_estimate": null,
+        "elapsed_sec": "<VOLATILE>",
+        "locator_digit_sequences": [
+         "2026117",
+         "15102026"
+        ],
+        "model": "grok-4.3",
+        "parsed": {
+         "items": [],
+         "raw": "АКТ ПРОВЕРКИ № 2026-117 (xAI)\nОмская область, город Тара\nИтого: 1 234 567,89 руб."
+        },
+        "provider": "xai",
+        "status": "match",
+        "text": "АКТ ПРОВЕРКИ № 2026-117 (xAI)\nОмская область, город Тара\nИтого: 1 234 567,89 руб.",
+        "usage": {
+         "completion_tokens": 20,
+         "prompt_tokens": 100,
+         "total_tokens": 120
+        },
+        "verified_digit_sequences": [
+         "2026117",
+         "1234567"
+        ]
+       }
+      ],
+      "locator": "tesseract",
+      "locator_error": "",
+      "model": "grok-4.3",
+      "numeric_source_image": "<STAND>\\workspace\\numeric_check\\<TIME>_numeric_check_pass\\page_page1_numeric_source.png",
+      "page": 1,
+      "provider": "xai",
+      "source": "<STAND>\\input\\page.png",
+      "total_cost_usd_estimate": 0.0
+     }
+    },
+    "numeric_check/<TIME>_numeric_check_pass/page_page1_numeric_check.md": {
+     "text": "# Numeric Check: page.png page 1\n\n- provider: `xai`\n- model: `grok-4.3`\n- locator: `tesseract`\n- total_cost_usd_estimate: `0.0`\n\n| ID | Status | Kind | Locator text | Locator digits | Verified values | Verified digits | Seconds | Cost | Crop |\n| ---: | --- | --- | --- | --- | --- | --- | ---: | ---: | --- |\n| 1 | match | money | Итого: 1 234 567,89 руб. | `1234567` | АКТ ПРОВЕРКИ № 2026-117 (xAI) Омская область, город Тара Итого: 1 234 567,89 руб. | `2026117`<br>`1234567` | <N> |  | page_page1_candidate_01_money.png |\n| 2 | match | document_number | АКТ ПРОВЕРКИ № 2026-117 | `2026117` | АКТ ПРОВЕРКИ № 2026-117 (xAI) Омская область, город Тара Итого: 1 234 567,89 руб. | `2026117`<br>`1234567` | <N> |  | page_page1_candidate_02_document_number.png |\n| 3 | mismatch | long_number | 1 452 123,45 2312 456,78 | `1452123`<br>`452312456` | АКТ ПРОВЕРКИ № 2026-117 (xAI) Омская область, город Тара Итого: 1 234 567,89 руб. | `2026117`<br>`1234567` | <N> |  | page_page1_candidate_03_long_number.png |\n| 4 | mismatch | long_number | 2 452 130,10 2312 470,05 | `2452130`<br>`102312470` | АКТ ПРОВЕРКИ № 2026-117 (xAI) Омская область, город Тара Итого: 1 234 567,89 руб. | `2026117`<br>`1234567` | <N> |  | page_page1_candidate_04_long_number.png |\n| 5 | match | long_number | Contract Мо 2026-117 dated 15.10.2026 | `2026117`<br>`15102026` | АКТ ПРОВЕРКИ № 2026-117 (xAI) Омская область, город Тара Итого: 1 234 567,89 руб. | `2026117`<br>`1234567` | <N> |  | page_page1_candidate_05_long_number.png |\n"
+    },
+    "numeric_check/<TIME>_numeric_check_pass/page_page1_numeric_source.png": {
+     "image": [
+      1600,
+      900,
+      "RGB"
+     ],
+     "pixels": "00f12a3941929e9e"
+    }
+   }
+  },
+  "quality_benchmark_local": {
+   "deliverables": [],
+   "message": "Operation finished.",
+   "ok": true,
+   "report": {
+    "<TIME>_ocr_quality_benchmark/result.json": {
+     "json": {
+      "data": {
+       "engines": [
+        "tesseract"
+       ],
+       "errors": 0,
+       "exit_code": 0,
+       "include_api": false,
+       "json": "<STAND>\\workspace\\ocr_quality_benchmark\\<TIME>_ocr_quality_benchmark\\page_page1_benchmark.json",
+       "markdown": "<STAND>\\workspace\\ocr_quality_benchmark\\<TIME>_ocr_quality_benchmark\\page_page1_benchmark.md",
+       "page": 1,
+       "results": 2,
+       "source": "<STAND>\\input\\page.png",
+       "variants": [
+        "raw",
+        "clean"
+       ]
+      },
+      "log_file": "<STAND>\\logs\\<TIME>_ocr_quality_benchmark.log",
+      "message": "Operation finished.",
+      "ok": true,
+      "operation": {
+       "id": "ocr_quality_benchmark",
+       "parameters": {
+        "_workbench_source_path": "<BASE>\\fixtures\\scans\\page.png",
+        "_workbench_target_path": "<STAND>\\deliverables\\quality_benchmark_local",
+        "benchmark_dpi": 300,
+        "benchmark_include_api": false,
+        "benchmark_local_engines": [
+         "tesseract"
+        ],
+        "benchmark_page": 1,
+        "benchmark_source": "input/page.png",
+        "benchmark_variants": [
+         "raw",
+         "clean"
+        ],
+        "ocr_binarize": "auto",
+        "ocr_contrast": "auto",
+        "ocr_denoise": "weak",
+        "ocr_deskew": true,
+        "ocr_sr_scale": 0,
+        "ocr_strip_vlines": false,
+        "ocr_tesseract_lang": "rus+eng",
+        "ocr_tesseract_psm": 6,
+        "ocr_unsharp": "auto"
+       },
+       "title": "quality_benchmark_local"
+      },
+      "report_dir": "<STAND>\\report\\<TIME>_ocr_quality_benchmark"
+     }
+    },
+    "latest_result.json": {
+     "json": {
+      "data": {
+       "engines": [
+        "tesseract"
+       ],
+       "errors": 0,
+       "exit_code": 0,
+       "include_api": false,
+       "json": "<STAND>\\workspace\\ocr_quality_benchmark\\<TIME>_ocr_quality_benchmark\\page_page1_benchmark.json",
+       "markdown": "<STAND>\\workspace\\ocr_quality_benchmark\\<TIME>_ocr_quality_benchmark\\page_page1_benchmark.md",
+       "page": 1,
+       "results": 2,
+       "source": "<STAND>\\input\\page.png",
+       "variants": [
+        "raw",
+        "clean"
+       ]
+      },
+      "log_file": "<STAND>\\logs\\<TIME>_ocr_quality_benchmark.log",
+      "message": "Operation finished.",
+      "ok": true,
+      "operation": {
+       "id": "ocr_quality_benchmark",
+       "parameters": {
+        "_workbench_source_path": "<BASE>\\fixtures\\scans\\page.png",
+        "_workbench_target_path": "<STAND>\\deliverables\\quality_benchmark_local",
+        "benchmark_dpi": 300,
+        "benchmark_include_api": false,
+        "benchmark_local_engines": [
+         "tesseract"
+        ],
+        "benchmark_page": 1,
+        "benchmark_source": "input/page.png",
+        "benchmark_variants": [
+         "raw",
+         "clean"
+        ],
+        "ocr_binarize": "auto",
+        "ocr_contrast": "auto",
+        "ocr_denoise": "weak",
+        "ocr_deskew": true,
+        "ocr_sr_scale": 0,
+        "ocr_strip_vlines": false,
+        "ocr_tesseract_lang": "rus+eng",
+        "ocr_tesseract_psm": 6,
+        "ocr_unsharp": "auto"
+       },
+       "title": "quality_benchmark_local"
+      },
+      "report_dir": "<STAND>\\report\\<TIME>_ocr_quality_benchmark"
+     }
+    }
+   },
+   "requests": [],
+   "result": {
+    "engines": [
+     "tesseract"
+    ],
+    "errors": 0,
+    "exit_code": 0,
+    "include_api": false,
+    "json": "<STAND>\\workspace\\ocr_quality_benchmark\\<TIME>_ocr_quality_benchmark\\page_page1_benchmark.json",
+    "markdown": "<STAND>\\workspace\\ocr_quality_benchmark\\<TIME>_ocr_quality_benchmark\\page_page1_benchmark.md",
+    "page": 1,
+    "results": 2,
+    "source": "<STAND>\\input\\page.png",
+    "variants": [
+     "raw",
+     "clean"
+    ]
+   },
+   "workspace": {
+    "ocr_quality_benchmark/<TIME>_ocr_quality_benchmark/page_page1_benchmark.json": {
+     "json": {
+      "comparisons": [
+       {
+        "avg_conf": "0.8552 -> 0.8617 (+0.0065)",
+        "chars": "163 -> 163 (0)",
+        "cyrillic": "0.2515 -> 0.2515 (0)",
+        "engine": "tesseract",
+        "low_conf": "0.1786 -> 0.1429 (-0.0357)",
+        "markdown_fences": "0 -> 0 (0)",
+        "markdown_marks": "0 -> 0 (0)",
+        "suspicious": "0 -> 0 (0)",
+        "verdict": "clean better",
+        "words": "28 -> 28 (0)"
+       }
+      ],
+      "engines": [
+       "tesseract"
+      ],
+      "errors": [],
+      "page": 1,
+      "results": [
+       {
+        "cost_usd_estimate": null,
+        "elapsed_sec": "<VOLATILE>",
+        "engine": "tesseract",
+        "image": "<STAND>\\workspace\\ocr_quality_benchmark\\<TIME>_ocr_quality_benchmark\\page_page1_tesseract_raw.png",
+        "metrics": {
+         "chars": 163,
+         "cyrillic_ratio": 0.2515,
+         "latin_ratio": 0.092,
+         "lines": 6,
+         "markdown_emphasis": 0,
+         "markdown_fences": 0,
+         "repeated_punct": 0,
+         "suspicious_ratio": 0.0,
+         "words": 28
+        },
+        "page": 1,
+        "source": "<STAND>\\input\\page.png",
+        "text": "АКТ ПРОВЕРКИ № 2026-117\nОмская область, город Тара\nContract No 2026-117 dated 15.10.2026\nИтого: 1 234 567,89 руб.\n1 452 123,45 2312 456,78\n2 452 130,10 2312 470,05",
+        "usage": {},
+        "variant": "raw",
+        "word_metrics": {
+         "avg_confidence": 0.8552,
+         "low_confidence_ratio": 0.1786,
+         "words_with_boxes": 28
+        }
+       },
+       {
+        "cost_usd_estimate": null,
+        "elapsed_sec": "<VOLATILE>",
+        "engine": "tesseract",
+        "image": "<STAND>\\workspace\\ocr_quality_benchmark\\<TIME>_ocr_quality_benchmark\\page_page1_tesseract_clean.png",
+        "metrics": {
+         "chars": 163,
+         "cyrillic_ratio": 0.2515,
+         "latin_ratio": 0.092,
+         "lines": 6,
+         "markdown_emphasis": 0,
+         "markdown_fences": 0,
+         "repeated_punct": 0,
+         "suspicious_ratio": 0.0,
+         "words": 28
+        },
+        "page": 1,
+        "source": "<STAND>\\input\\page.png",
+        "text": "АКТ ПРОВЕРКИ № 2026-117\nОмская область, город Тара\nContract No 2026-117 dated 15.10.2026\nИтого: 1 234 567,89 руб.\n1 452 123,45 2312 456,78\n2 452 130,10 2312 470,05",
+        "usage": {},
+        "variant": "clean",
+        "word_metrics": {
+         "avg_confidence": 0.8617,
+         "low_confidence_ratio": 0.1429,
+         "words_with_boxes": 28
+        }
+       }
+      ],
+      "source": "<STAND>\\input\\page.png",
+      "variants": [
+       "raw",
+       "clean"
+      ]
+     }
+    },
+    "ocr_quality_benchmark/<TIME>_ocr_quality_benchmark/page_page1_benchmark.md": {
+     "text": "# OCR Quality Benchmark: page.png page 1\n\n## Raw vs clean summary\n\n| Engine | Chars | Words | Cyrillic | Suspicious | MD fences | MD marks | Avg conf | Low conf | Verdict |\n| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |\n| tesseract | 163 -> 163 (0) | 28 -> 28 (0) | 0.2515 -> 0.2515 (0) | 0 -> 0 (0) | 0 -> 0 (0) | 0 -> 0 (0) | 0.8552 -> 0.8617 (+0.0065) | 0.1786 -> 0.1429 (-0.0357) | clean better |\n\n## raw / tesseract\n\n- elapsed_sec: <N>\n- usage: `{}`\n- metrics: `{\"chars\": 163, \"words\": 28, \"lines\": 6, \"cyrillic_ratio\": 0.25153374233128833, \"latin_ratio\": 0.09202453987730061, \"suspicious_ratio\": 0.0, \"repeated_punct\": 0, \"markdown_emphasis\": 0, \"markdown_fences\": 0}`\n- word_metrics: `{\"words_with_boxes\": 28, \"avg_confidence\": 0.8552, \"low_confidence_ratio\": 0.1786}`\n\n```text\nАКТ ПРОВЕРКИ № 2026-117\nОмская область, город Тара\nContract No 2026-117 dated 15.10.2026\nИтого: 1 234 567,89 руб.\n1 452 123,45 2312 456,78\n2 452 130,10 2312 470,05\n```\n\n## clean / tesseract\n\n- elapsed_sec: <N>\n- usage: `{}`\n- metrics: `{\"chars\": 163, \"words\": 28, \"lines\": 6, \"cyrillic_ratio\": 0.25153374233128833, \"latin_ratio\": 0.09202453987730061, \"suspicious_ratio\": 0.0, \"repeated_punct\": 0, \"markdown_emphasis\": 0, \"markdown_fences\": 0}`\n- word_metrics: `{\"words_with_boxes\": 28, \"avg_confidence\": 0.8617, \"low_confidence_ratio\": 0.1429}`\n\n```text\nАКТ ПРОВЕРКИ № 2026-117\nОмская область, город Тара\nContract No 2026-117 dated 15.10.2026\nИтого: 1 234 567,89 руб.\n1 452 123,45 2312 456,78\n2 452 130,10 2312 470,05\n```\n"
+    },
+    "ocr_quality_benchmark/<TIME>_ocr_quality_benchmark/page_page1_tesseract_clean.png": {
+     "image": [
+      1600,
+      900,
+      "L"
+     ],
+     "pixels": "3b3390d9f25519bc"
+    },
+    "ocr_quality_benchmark/<TIME>_ocr_quality_benchmark/page_page1_tesseract_raw.png": {
+     "image": [
+      1600,
+      900,
+      "RGB"
+     ],
+     "pixels": "90130e5173096ae4"
+    }
+   }
+  },
+  "tesseract_auto": {
+   "deliverables": [
+    "page.document.json",
+    "page.document/document.json",
+    "page.document/pages/page-0001.ocr.png",
+    "page.document/pages/page-0001.source.png",
+    "page.document/providers/tesseract/page-0001.json",
+    "page.document/source/page.png",
+    "page.md"
+   ],
+   "message": "Operation finished.",
+   "ok": true,
+   "output": {
+    "page.document.json": {
+     "json": {
+      "chars": 7488,
+      "keys": [
+       "created_at",
+       "document_id",
+       "export_history",
+       "manual_corrections",
+       "metadata",
+       "pages",
+       "source",
+       "version"
+      ],
+      "sha": "f74bb2b09382df91"
+     }
+    },
+    "page.document/document.json": {
+     "json": {
+      "chars": 7488,
+      "keys": [
+       "created_at",
+       "document_id",
+       "export_history",
+       "manual_corrections",
+       "metadata",
+       "pages",
+       "source",
+       "version"
+      ],
+      "sha": "f74bb2b09382df91"
+     }
+    },
+    "page.document/pages/page-0001.ocr.png": {
+     "image": [
+      1600,
+      900,
+      "L"
+     ],
+     "pixels": "bc556c6a877bc3ae"
+    },
+    "page.document/pages/page-0001.source.png": {
+     "image": [
+      1600,
+      900,
+      "RGB"
+     ],
+     "pixels": "90130e5173096ae4"
+    },
+    "page.document/providers/tesseract/page-0001.json": {
+     "json": {
+      "assets": {
+       "ocr_page_image": "pages/page-0001.ocr.png",
+       "ocr_page_sha256": "a346ffd0a2d2ffd8ba603b453ab28603fefc7d32e8e4efcdee290723b74fc09d",
+       "raster_dpi": 300,
+       "source_page_image": "pages/page-0001.source.png",
+       "source_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15"
+      },
+      "engine": "tesseract",
+      "kind": "ocr",
+      "may_rewrite": false,
+      "page": 0,
+      "text": "АКТ ПРОВЕРКИ № 2026-117\nОмская область, город Тара\nContract Мо 2026-117 dated 15.10.2026\nИтого: 1 234 567,89 руб.\n1 452123,45 2312 456,78\n2 452130,10 2312 470,05",
+      "words": [
+       {
+        "box": [
+         80,
+         88,
+         74,
+         29
+        ],
+        "confidence": 0.9662,
+        "text": "АКТ"
+       },
+       {
+        "box": [
+         168,
+         88,
+         214,
+         29
+        ],
+        "confidence": 0.9669,
+        "text": "ПРОВЕРКИ"
+       },
+       {
+        "box": [
+         399,
+         88,
+         38,
+         29
+        ],
+        "confidence": 0.9119,
+        "text": "№"
+       },
+       {
+        "box": [
+         451,
+         88,
+         165,
+         29
+        ],
+        "confidence": 0.9119,
+        "text": "2026-117"
+       },
+       {
+        "box": [
+         82,
+         178,
+         136,
+         29
+        ],
+        "confidence": 0.9623,
+        "text": "Омская"
+       },
+       {
+        "box": [
+         233,
+         177,
+         156,
+         36
+        ],
+        "confidence": 0.9585,
+        "text": "область,"
+       },
+       {
+        "box": [
+         405,
+         186,
+         101,
+         29
+        ],
+        "confidence": 0.9621,
+        "text": "город"
+       },
+       {
+        "box": [
+         519,
+         178,
+         88,
+         37
+        ],
+        "confidence": 0.967,
+        "text": "Тара"
+       },
+       {
+        "box": [
+         82,
+         268,
+         148,
+         29
+        ],
+        "confidence": 0.9661,
+        "text": "Contract"
+       },
+       {
+        "box": [
+         244,
+         268,
+         47,
+         29
+        ],
+        "confidence": 0.9287,
+        "text": "Мо"
+       },
+       {
+        "box": [
+         304,
+         268,
+         165,
+         29
+        ],
+        "confidence": 0.9658,
+        "text": "2026-117"
+       },
+       {
+        "box": [
+         482,
+         268,
+         96,
+         29
+        ],
+        "confidence": 0.96,
+        "text": "dated"
+       },
+       {
+        "box": [
+         595,
+         268,
+         193,
+         29
+        ],
+        "confidence": 0.9633,
+        "text": "15.10.2026"
+       },
+       {
+        "box": [
+         83,
+         358,
+         111,
+         29
+        ],
+        "confidence": 0.9636,
+        "text": "Итого:"
+       },
+       {
+        "box": [
+         212,
+         358,
+         11,
+         29
+        ],
+        "confidence": 0.9596,
+        "text": "1"
+       },
+       {
+        "box": [
+         242,
+         358,
+         64,
+         29
+        ],
+        "confidence": 0.9596,
+        "text": "234"
+       },
+       {
+        "box": [
+         319,
+         358,
+         119,
+         35
+        ],
+        "confidence": 0.9282,
+        "text": "567,89"
+       },
+       {
+        "box": [
+         452,
+         357,
+         71,
+         38
+        ],
+        "confidence": 0.964,
+        "text": "руб."
+       },
+       {
+        "box": [
+         84,
+         528,
+         11,
+         29
+        ],
+        "confidence": 0.9649,
+        "text": "1"
+       },
+       {
+        "box": [
+         146,
+         528,
+         197,
+         35
+        ],
+        "confidence": 0.8294,
+        "text": "452123,45"
+       },
+       {
+        "box": [
+         389,
+         528,
+         96,
+         29
+        ],
+        "confidence": 0.9109,
+        "text": "2312"
+       },
+       {
+        "box": [
+         498,
+         528,
+         120,
+         35
+        ],
+        "confidence": 0.9109,
+        "text": "456,78"
+       },
+       {
+        "box": [
+         81,
+         598,
+         19,
+         29
+        ],
+        "confidence": 0.9638,
+        "text": "2"
+       },
+       {
+        "box": [
+         146,
+         598,
+         197,
+         35
+        ],
+        "confidence": 0.8952,
+        "text": "452130,10"
+       },
+       {
+        "box": [
+         389,
+         598,
+         96,
+         29
+        ],
+        "confidence": 0.4244,
+        "text": "2312"
+       },
+       {
+        "box": [
+         498,
+         598,
+         120,
+         35
+        ],
+        "confidence": 0.4244,
+        "text": "470,05"
+       }
+      ]
+     }
+    },
+    "page.document/source/page.png": {
+     "image": [
+      1600,
+      900,
+      "RGB"
+     ],
+     "pixels": "90130e5173096ae4"
+    },
+    "page.md": {
+     "text": "# page\n\n> OCR engine: `tesseract`\n\n## Страница 1\n\nАКТ ПРОВЕРКИ № 2026-117\nОмская область, город Тара\nContract Мо 2026-117 dated 15.10.2026\nИтого: 1 234 567,89 руб.\n1 452123,45 2312 456,78\n2 452130,10 2312 470,05\n"
+    }
+   },
+   "requests": [],
+   "result": {
+    "engine": "tesseract",
+    "exit_code": 0,
+    "files": 1,
+    "formats": [
+     "json",
+     "markdown"
+    ],
+    "output": "text",
+    "pages": 1
+   }
+  },
+  "tesseract_heavy": {
+   "deliverables": [
+    "page.document.json",
+    "page.document/document.json",
+    "page.document/pages/page-0001.ocr.png",
+    "page.document/pages/page-0001.source.png",
+    "page.document/providers/tesseract/page-0001.json",
+    "page.document/source/page.png",
+    "page.md"
+   ],
+   "message": "Operation finished.",
+   "ok": true,
+   "output": {
+    "page.document.json": {
+     "json": {
+      "chars": 8049,
+      "keys": [
+       "created_at",
+       "document_id",
+       "export_history",
+       "manual_corrections",
+       "metadata",
+       "pages",
+       "source",
+       "version"
+      ],
+      "sha": "db5ce8f6c7a4d360"
+     }
+    },
+    "page.document/document.json": {
+     "json": {
+      "chars": 8049,
+      "keys": [
+       "created_at",
+       "document_id",
+       "export_history",
+       "manual_corrections",
+       "metadata",
+       "pages",
+       "source",
+       "version"
+      ],
+      "sha": "db5ce8f6c7a4d360"
+     }
+    },
+    "page.document/pages/page-0001.ocr.png": {
+     "image": [
+      1600,
+      900,
+      "L"
+     ],
+     "pixels": "3bbd8ff24843e213"
+    },
+    "page.document/pages/page-0001.source.png": {
+     "image": [
+      1600,
+      900,
+      "RGB"
+     ],
+     "pixels": "90130e5173096ae4"
+    },
+    "page.document/providers/tesseract/page-0001.json": {
+     "json": {
+      "assets": {
+       "ocr_page_image": "pages/page-0001.ocr.png",
+       "ocr_page_sha256": "da75ff272a8a0311ee8cc81f0569a5f7ca5f081c43ea7b7c52f143f7f1ffac24",
+       "raster_dpi": 300,
+       "source_page_image": "pages/page-0001.source.png",
+       "source_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15"
+      },
+      "engine": "tesseract",
+      "kind": "ocr",
+      "may_rewrite": false,
+      "page": 0,
+      "text": "АКТ ПРОВЕРКИ № 2026-117\nОмская область, город Тара\nContract No 2026-117 dated 15.10.2026\nИтого: 1 234 567.89 руб.\n1 452 123.45 2312 456,78\n2 452 130.10 2312 470.05",
+      "words": [
+       {
+        "box": [
+         81,
+         88,
+         72,
+         29
+        ],
+        "confidence": 0.9696,
+        "text": "АКТ"
+       },
+       {
+        "box": [
+         168,
+         88,
+         214,
+         29
+        ],
+        "confidence": 0.9684,
+        "text": "ПРОВЕРКИ"
+       },
+       {
+        "box": [
+         399,
+         88,
+         38,
+         29
+        ],
+        "confidence": 0.9302,
+        "text": "№"
+       },
+       {
+        "box": [
+         452,
+         88,
+         163,
+         29
+        ],
+        "confidence": 0.9155,
+        "text": "2026-117"
+       },
+       {
+        "box": [
+         82,
+         178,
+         136,
+         29
+        ],
+        "confidence": 0.9618,
+        "text": "Омская"
+       },
+       {
+        "box": [
+         233,
+         177,
+         156,
+         33
+        ],
+        "confidence": 0.9593,
+        "text": "область,"
+       },
+       {
+        "box": [
+         405,
+         186,
+         101,
+         28
+        ],
+        "confidence": 0.9589,
+        "text": "город"
+       },
+       {
+        "box": [
+         520,
+         178,
+         86,
+         36
+        ],
+        "confidence": 0.9694,
+        "text": "Тара"
+       },
+       {
+        "box": [
+         82,
+         268,
+         147,
+         29
+        ],
+        "confidence": 0.9669,
+        "text": "Contract"
+       },
+       {
+        "box": [
+         244,
+         268,
+         47,
+         29
+        ],
+        "confidence": 0.9652,
+        "text": "No"
+       },
+       {
+        "box": [
+         305,
+         268,
+         163,
+         29
+        ],
+        "confidence": 0.9652,
+        "text": "2026-117"
+       },
+       {
+        "box": [
+         482,
+         269,
+         96,
+         28
+        ],
+        "confidence": 0.9647,
+        "text": "dated"
+       },
+       {
+        "box": [
+         596,
+         268,
+         192,
+         29
+        ],
+        "confidence": 0.9626,
+        "text": "15.10.2026"
+       },
+       {
+        "box": [
+         83,
+         358,
+         110,
+         29
+        ],
+        "confidence": 0.9642,
+        "text": "Итого:"
+       },
+       {
+        "box": [
+         213,
+         359,
+         10,
+         27
+        ],
+        "confidence": 0.9671,
+        "text": "1"
+       },
+       {
+        "box": [
+         243,
+         358,
+         62,
+         29
+        ],
+        "confidence": 0.9671,
+        "text": "234"
+       },
+       {
+        "box": [
+         320,
+         358,
+         118,
+         32
+        ],
+        "confidence": 0.9608,
+        "text": "567.89"
+       },
+       {
+        "box": [
+         452,
+         357,
+         70,
+         38
+        ],
+        "confidence": 0.9688,
+        "text": "руб."
+       },
+       {
+        "box": [
+         85,
+         529,
+         10,
+         27
+        ],
+        "confidence": 0.9632,
+        "text": "1"
+       },
+       {
+        "box": [
+         146,
+         528,
+         64,
+         29
+        ],
+        "confidence": 0.4034,
+        "text": "452"
+       },
+       {
+        "box": [
+         228,
+         528,
+         115,
+         32
+        ],
+        "confidence": 0.4034,
+        "text": "123.45"
+       },
+       {
+        "box": [
+         390,
+         528,
+         95,
+         29
+        ],
+        "confidence": 0.82,
+        "text": "2312"
+       },
+       {
+        "box": [
+         498,
+         528,
+         120,
+         32
+        ],
+        "confidence": 0.82,
+        "text": "456,78"
+       },
+       {
+        "box": [
+         82,
+         598,
+         18,
+         29
+        ],
+        "confidence": 0.9683,
+        "text": "2"
+       },
+       {
+        "box": [
+         146,
+         598,
+         64,
+         29
+        ],
+        "confidence": 0.7849,
+        "text": "452"
+       },
+       {
+        "box": [
+         228,
+         598,
+         115,
+         32
+        ],
+        "confidence": 0.7849,
+        "text": "130.10"
+       },
+       {
+        "box": [
+         390,
+         598,
+         95,
+         29
+        ],
+        "confidence": 0.9199,
+        "text": "2312"
+       },
+       {
+        "box": [
+         498,
+         598,
+         120,
+         32
+        ],
+        "confidence": 0.8672,
+        "text": "470.05"
+       }
+      ]
+     }
+    },
+    "page.document/source/page.png": {
+     "image": [
+      1600,
+      900,
+      "RGB"
+     ],
+     "pixels": "90130e5173096ae4"
+    },
+    "page.md": {
+     "text": "# page\n\n> OCR engine: `tesseract`\n\n## Страница 1\n\nАКТ ПРОВЕРКИ № 2026-117\nОмская область, город Тара\nContract No 2026-117 dated 15.10.2026\nИтого: 1 234 567.89 руб.\n1 452 123.45 2312 456,78\n2 452 130.10 2312 470.05\n"
+    }
+   },
+   "requests": [],
+   "result": {
+    "engine": "tesseract",
+    "exit_code": 0,
+    "files": 1,
+    "formats": [
+     "json",
+     "markdown"
+    ],
+    "output": "text",
+    "pages": 1
+   }
+  },
+  "tesseract_manual": {
+   "deliverables": [
+    "page.document.json",
+    "page.document/document.json",
+    "page.document/pages/page-0001.ocr.png",
+    "page.document/pages/page-0001.source.png",
+    "page.document/providers/tesseract/page-0001.json",
+    "page.document/source/page.png",
+    "page.md"
+   ],
+   "message": "Operation finished.",
+   "ok": true,
+   "output": {
+    "page.document.json": {
+     "json": {
+      "chars": 8085,
+      "keys": [
+       "created_at",
+       "document_id",
+       "export_history",
+       "manual_corrections",
+       "metadata",
+       "pages",
+       "source",
+       "version"
+      ],
+      "sha": "d97854beebe58b7e"
+     }
+    },
+    "page.document/document.json": {
+     "json": {
+      "chars": 8085,
+      "keys": [
+       "created_at",
+       "document_id",
+       "export_history",
+       "manual_corrections",
+       "metadata",
+       "pages",
+       "source",
+       "version"
+      ],
+      "sha": "d97854beebe58b7e"
+     }
+    },
+    "page.document/pages/page-0001.ocr.png": {
+     "image": [
+      1600,
+      900,
+      "L"
+     ],
+     "pixels": "3bbd8ff24843e213"
+    },
+    "page.document/pages/page-0001.source.png": {
+     "image": [
+      1600,
+      900,
+      "RGB"
+     ],
+     "pixels": "90130e5173096ae4"
+    },
+    "page.document/providers/tesseract/page-0001.json": {
+     "json": {
+      "assets": {
+       "ocr_page_image": "pages/page-0001.ocr.png",
+       "ocr_page_sha256": "da75ff272a8a0311ee8cc81f0569a5f7ca5f081c43ea7b7c52f143f7f1ffac24",
+       "raster_dpi": 300,
+       "source_page_image": "pages/page-0001.source.png",
+       "source_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15"
+      },
+      "engine": "tesseract",
+      "kind": "ocr",
+      "may_rewrite": false,
+      "page": 0,
+      "text": "АКТ ПРОВЕРКИ № 2026-117\nОмская область, город Тара\nContract No 2026-117 dated 15.10.2026\nИтого: 1 234 567.89 руб.\n1 452 123.45 2312 456,78\n2 452 130.10 2312 470.05",
+      "words": [
+       {
+        "box": [
+         81,
+         88,
+         72,
+         29
+        ],
+        "confidence": 0.9696,
+        "text": "АКТ"
+       },
+       {
+        "box": [
+         168,
+         88,
+         214,
+         29
+        ],
+        "confidence": 0.9684,
+        "text": "ПРОВЕРКИ"
+       },
+       {
+        "box": [
+         399,
+         88,
+         38,
+         29
+        ],
+        "confidence": 0.9302,
+        "text": "№"
+       },
+       {
+        "box": [
+         452,
+         88,
+         163,
+         29
+        ],
+        "confidence": 0.9155,
+        "text": "2026-117"
+       },
+       {
+        "box": [
+         82,
+         178,
+         136,
+         29
+        ],
+        "confidence": 0.9618,
+        "text": "Омская"
+       },
+       {
+        "box": [
+         233,
+         177,
+         156,
+         33
+        ],
+        "confidence": 0.9593,
+        "text": "область,"
+       },
+       {
+        "box": [
+         405,
+         186,
+         101,
+         28
+        ],
+        "confidence": 0.9589,
+        "text": "город"
+       },
+       {
+        "box": [
+         520,
+         178,
+         86,
+         36
+        ],
+        "confidence": 0.9694,
+        "text": "Тара"
+       },
+       {
+        "box": [
+         82,
+         268,
+         147,
+         29
+        ],
+        "confidence": 0.9669,
+        "text": "Contract"
+       },
+       {
+        "box": [
+         244,
+         268,
+         47,
+         29
+        ],
+        "confidence": 0.9652,
+        "text": "No"
+       },
+       {
+        "box": [
+         305,
+         268,
+         163,
+         29
+        ],
+        "confidence": 0.9652,
+        "text": "2026-117"
+       },
+       {
+        "box": [
+         482,
+         269,
+         96,
+         28
+        ],
+        "confidence": 0.9647,
+        "text": "dated"
+       },
+       {
+        "box": [
+         596,
+         268,
+         192,
+         29
+        ],
+        "confidence": 0.9626,
+        "text": "15.10.2026"
+       },
+       {
+        "box": [
+         83,
+         358,
+         110,
+         29
+        ],
+        "confidence": 0.9642,
+        "text": "Итого:"
+       },
+       {
+        "box": [
+         213,
+         359,
+         10,
+         27
+        ],
+        "confidence": 0.9671,
+        "text": "1"
+       },
+       {
+        "box": [
+         243,
+         358,
+         62,
+         29
+        ],
+        "confidence": 0.9671,
+        "text": "234"
+       },
+       {
+        "box": [
+         320,
+         358,
+         118,
+         32
+        ],
+        "confidence": 0.9608,
+        "text": "567.89"
+       },
+       {
+        "box": [
+         452,
+         357,
+         70,
+         38
+        ],
+        "confidence": 0.9688,
+        "text": "руб."
+       },
+       {
+        "box": [
+         85,
+         529,
+         10,
+         27
+        ],
+        "confidence": 0.9632,
+        "text": "1"
+       },
+       {
+        "box": [
+         146,
+         528,
+         64,
+         29
+        ],
+        "confidence": 0.4034,
+        "text": "452"
+       },
+       {
+        "box": [
+         228,
+         528,
+         115,
+         32
+        ],
+        "confidence": 0.4034,
+        "text": "123.45"
+       },
+       {
+        "box": [
+         390,
+         528,
+         95,
+         29
+        ],
+        "confidence": 0.82,
+        "text": "2312"
+       },
+       {
+        "box": [
+         498,
+         528,
+         120,
+         32
+        ],
+        "confidence": 0.82,
+        "text": "456,78"
+       },
+       {
+        "box": [
+         82,
+         598,
+         18,
+         29
+        ],
+        "confidence": 0.9683,
+        "text": "2"
+       },
+       {
+        "box": [
+         146,
+         598,
+         64,
+         29
+        ],
+        "confidence": 0.7849,
+        "text": "452"
+       },
+       {
+        "box": [
+         228,
+         598,
+         115,
+         32
+        ],
+        "confidence": 0.7849,
+        "text": "130.10"
+       },
+       {
+        "box": [
+         390,
+         598,
+         95,
+         29
+        ],
+        "confidence": 0.9199,
+        "text": "2312"
+       },
+       {
+        "box": [
+         498,
+         598,
+         120,
+         32
+        ],
+        "confidence": 0.8672,
+        "text": "470.05"
+       }
+      ]
+     }
+    },
+    "page.document/source/page.png": {
+     "image": [
+      1600,
+      900,
+      "RGB"
+     ],
+     "pixels": "90130e5173096ae4"
+    },
+    "page.md": {
+     "text": "# page\n\n> OCR engine: `tesseract`\n\n## Страница 1\n\nАКТ ПРОВЕРКИ № 2026-117\nОмская область, город Тара\nContract No 2026-117 dated 15.10.2026\nИтого: 1 234 567.89 руб.\n1 452 123.45 2312 456,78\n2 452 130.10 2312 470.05\n"
+    }
+   },
+   "requests": [],
+   "result": {
+    "engine": "tesseract",
+    "exit_code": 0,
+    "files": 1,
+    "formats": [
+     "json",
+     "markdown"
+    ],
+    "output": "text",
+    "pages": 1
+   }
+  },
+  "tesseract_numbers": {
+   "deliverables": [
+    "page.document.json",
+    "page.document/document.json",
+    "page.document/pages/page-0001.ocr.png",
+    "page.document/pages/page-0001.source.png",
+    "page.document/providers/tesseract/page-0001.json",
+    "page.document/source/page.png",
+    "page.md"
+   ],
+   "message": "Operation finished.",
+   "ok": true,
+   "output": {
+    "page.document.json": {
+     "json": {
+      "chars": 7668,
+      "keys": [
+       "created_at",
+       "document_id",
+       "export_history",
+       "manual_corrections",
+       "metadata",
+       "pages",
+       "source",
+       "version"
+      ],
+      "sha": "a903d1a1dd38ff2e"
+     }
+    },
+    "page.document/document.json": {
+     "json": {
+      "chars": 7668,
+      "keys": [
+       "created_at",
+       "document_id",
+       "export_history",
+       "manual_corrections",
+       "metadata",
+       "pages",
+       "source",
+       "version"
+      ],
+      "sha": "a903d1a1dd38ff2e"
+     }
+    },
+    "page.document/pages/page-0001.ocr.png": {
+     "image": [
+      1600,
+      900,
+      "L"
+     ],
+     "pixels": "54ffb8fee1d8cf9c"
+    },
+    "page.document/pages/page-0001.source.png": {
+     "image": [
+      1600,
+      900,
+      "RGB"
+     ],
+     "pixels": "90130e5173096ae4"
+    },
+    "page.document/providers/tesseract/page-0001.json": {
+     "json": {
+      "assets": {
+       "ocr_page_image": "pages/page-0001.ocr.png",
+       "ocr_page_sha256": "c6ffb222c367118390cb2889be4ff68fe53b94e2f1cb55b3c1f385298c77a436",
+       "raster_dpi": 300,
+       "source_page_image": "pages/page-0001.source.png",
+       "source_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15"
+      },
+      "engine": "tesseract",
+      "kind": "ocr",
+      "may_rewrite": false,
+      "page": 0,
+      "text": "АКТ ПРОВЕРКИ № 2026-117\nОмская область, город Тара\nContract No 2026-117 dated 15.10.2026\nИтого: 1 234 567,89 руб.\n1 452123,45 2312 456,78\n2 452130,10 2312 470,05",
+      "words": [
+       {
+        "box": [
+         81,
+         88,
+         73,
+         29
+        ],
+        "confidence": 0.9682,
+        "text": "АКТ"
+       },
+       {
+        "box": [
+         168,
+         88,
+         214,
+         29
+        ],
+        "confidence": 0.9682,
+        "text": "ПРОВЕРКИ"
+       },
+       {
+        "box": [
+         399,
+         88,
+         38,
+         29
+        ],
+        "confidence": 0.9301,
+        "text": "№"
+       },
+       {
+        "box": [
+         451,
+         88,
+         165,
+         29
+        ],
+        "confidence": 0.9243,
+        "text": "2026-117"
+       },
+       {
+        "box": [
+         82,
+         178,
+         136,
+         29
+        ],
+        "confidence": 0.96,
+        "text": "Омская"
+       },
+       {
+        "box": [
+         233,
+         177,
+         156,
+         36
+        ],
+        "confidence": 0.9596,
+        "text": "область,"
+       },
+       {
+        "box": [
+         405,
+         186,
+         101,
+         29
+        ],
+        "confidence": 0.9649,
+        "text": "город"
+       },
+       {
+        "box": [
+         519,
+         178,
+         87,
+         37
+        ],
+        "confidence": 0.9674,
+        "text": "Тара"
+       },
+       {
+        "box": [
+         82,
+         268,
+         148,
+         29
+        ],
+        "confidence": 0.9611,
+        "text": "Contract"
+       },
+       {
+        "box": [
+         244,
+         268,
+         47,
+         29
+        ],
+        "confidence": 0.9661,
+        "text": "No"
+       },
+       {
+        "box": [
+         304,
+         268,
+         165,
+         29
+        ],
+        "confidence": 0.9679,
+        "text": "2026-117"
+       },
+       {
+        "box": [
+         482,
+         268,
+         96,
+         29
+        ],
+        "confidence": 0.9646,
+        "text": "dated"
+       },
+       {
+        "box": [
+         595,
+         268,
+         193,
+         29
+        ],
+        "confidence": 0.9659,
+        "text": "15.10.2026"
+       },
+       {
+        "box": [
+         83,
+         358,
+         111,
+         29
+        ],
+        "confidence": 0.9663,
+        "text": "Итого:"
+       },
+       {
+        "box": [
+         212,
+         359,
+         11,
+         28
+        ],
+        "confidence": 0.9634,
+        "text": "1"
+       },
+       {
+        "box": [
+         242,
+         358,
+         64,
+         29
+        ],
+        "confidence": 0.9634,
+        "text": "234"
+       },
+       {
+        "box": [
+         320,
+         358,
+         118,
+         35
+        ],
+        "confidence": 0.9187,
+        "text": "567,89"
+       },
+       {
+        "box": [
+         452,
+         357,
+         71,
+         38
+        ],
+        "confidence": 0.9652,
+        "text": "руб."
+       },
+       {
+        "box": [
+         84,
+         529,
+         11,
+         28
+        ],
+        "confidence": 0.9619,
+        "text": "1"
+       },
+       {
+        "box": [
+         146,
+         528,
+         197,
+         35
+        ],
+        "confidence": 0.7984,
+        "text": "452123,45"
+       },
+       {
+        "box": [
+         389,
+         528,
+         96,
+         29
+        ],
+        "confidence": 0.9533,
+        "text": "2312"
+       },
+       {
+        "box": [
+         498,
+         528,
+         120,
+         35
+        ],
+        "confidence": 0.9533,
+        "text": "456,78"
+       },
+       {
+        "box": [
+         81,
+         598,
+         19,
+         29
+        ],
+        "confidence": 0.9588,
+        "text": "2"
+       },
+       {
+        "box": [
+         146,
+         598,
+         197,
+         35
+        ],
+        "confidence": 0.884,
+        "text": "452130,10"
+       },
+       {
+        "box": [
+         389,
+         598,
+         96,
+         29
+        ],
+        "confidence": 0.1702,
+        "text": "2312"
+       },
+       {
+        "box": [
+         498,
+         598,
+         120,
+         35
+        ],
+        "confidence": 0.7776,
+        "text": "470,05"
+       }
+      ]
+     }
+    },
+    "page.document/source/page.png": {
+     "image": [
+      1600,
+      900,
+      "RGB"
+     ],
+     "pixels": "90130e5173096ae4"
+    },
+    "page.md": {
+     "text": "# page\n\n> OCR engine: `tesseract`\n\n## Страница 1\n\nАКТ ПРОВЕРКИ № 2026-117\nОмская область, город Тара\nContract No 2026-117 dated 15.10.2026\nИтого: 1 234 567,89 руб.\n1 452123,45 2312 456,78\n2 452130,10 2312 470,05\n"
+    }
+   },
+   "requests": [],
+   "result": {
+    "engine": "tesseract",
+    "exit_code": 0,
+    "files": 1,
+    "formats": [
+     "json",
+     "markdown"
+    ],
+    "output": "text",
+    "pages": 1
+   }
+  },
+  "tesseract_raw_all_formats": {
+   "deliverables": [
+    "page.document.json",
+    "page.document/document.json",
+    "page.document/pages/page-0001.ocr.png",
+    "page.document/pages/page-0001.source.png",
+    "page.document/providers/tesseract/page-0001.json",
+    "page.document/source/page.png",
+    "page.docx",
+    "page.html",
+    "page.md",
+    "page.odt",
+    "page.searchable.pdf",
+    "page.verification.json",
+    "page.xlsx"
+   ],
+   "message": "Operation finished.",
+   "ok": true,
+   "output": {
+    "page.document.json": {
+     "json": {
+      "chars": 8129,
+      "keys": [
+       "created_at",
+       "document_id",
+       "export_history",
+       "manual_corrections",
+       "metadata",
+       "pages",
+       "source",
+       "version"
+      ],
+      "sha": "a4f394ea9aec7d0c"
+     }
+    },
+    "page.document/document.json": {
+     "json": {
+      "chars": 8129,
+      "keys": [
+       "created_at",
+       "document_id",
+       "export_history",
+       "manual_corrections",
+       "metadata",
+       "pages",
+       "source",
+       "version"
+      ],
+      "sha": "a4f394ea9aec7d0c"
+     }
+    },
+    "page.document/pages/page-0001.ocr.png": {
+     "image": [
+      1600,
+      900,
+      "RGB"
+     ],
+     "pixels": "90130e5173096ae4"
+    },
+    "page.document/pages/page-0001.source.png": {
+     "image": [
+      1600,
+      900,
+      "RGB"
+     ],
+     "pixels": "90130e5173096ae4"
+    },
+    "page.document/providers/tesseract/page-0001.json": {
+     "json": {
+      "assets": {
+       "ocr_page_image": "pages/page-0001.ocr.png",
+       "ocr_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15",
+       "raster_dpi": 300,
+       "source_page_image": "pages/page-0001.source.png",
+       "source_page_sha256": "2f5818589fdda74fd29bc1f4bf45513339d9f0ea657fed63c60359a8b0fe0f15"
+      },
+      "engine": "tesseract",
+      "kind": "ocr",
+      "may_rewrite": false,
+      "page": 0,
+      "text": "АКТ ПРОВЕРКИ № 2026-117\nОмская область, город Тара\nContract No 2026-117 dated 15.10.2026\nИтого: 1 234 567,89 руб.\n1 452 123,45 2312 456,78\n2 452 130,10 2312 470,05",
+      "words": [
+       {
+        "box": [
+         80,
+         88,
+         74,
+         29
+        ],
+        "confidence": 0.9594,
+        "text": "АКТ"
+       },
+       {
+        "box": [
+         168,
+         88,
+         214,
+         29
+        ],
+        "confidence": 0.9594,
+        "text": "ПРОВЕРКИ"
+       },
+       {
+        "box": [
+         399,
+         88,
+         38,
+         29
+        ],
+        "confidence": 0.9071,
+        "text": "№"
+       },
+       {
+        "box": [
+         451,
+         88,
+         164,
+         29
+        ],
+        "confidence": 0.9071,
+        "text": "2026-117"
+       },
+       {
+        "box": [
+         82,
+         178,
+         136,
+         29
+        ],
+        "confidence": 0.9634,
+        "text": "Омская"
+       },
+       {
+        "box": [
+         233,
+         177,
+         156,
+         36
+        ],
+        "confidence": 0.9572,
+        "text": "область,"
+       },
+       {
+        "box": [
+         406,
+         186,
+         100,
+         29
+        ],
+        "confidence": 0.9688,
+        "text": "город"
+       },
+       {
+        "box": [
+         519,
+         178,
+         87,
+         37
+        ],
+        "confidence": 0.9658,
+        "text": "Тара"
+       },
+       {
+        "box": [
+         82,
+         268,
+         148,
+         29
+        ],
+        "confidence": 0.963,
+        "text": "Contract"
+       },
+       {
+        "box": [
+         244,
+         268,
+         47,
+         29
+        ],
+        "confidence": 0.9696,
+        "text": "No"
+       },
+       {
+        "box": [
+         304,
+         268,
+         164,
+         29
+        ],
+        "confidence": 0.9653,
+        "text": "2026-117"
+       },
+       {
+        "box": [
+         482,
+         268,
+         95,
+         29
+        ],
+        "confidence": 0.9662,
+        "text": "dated"
+       },
+       {
+        "box": [
+         595,
+         268,
+         192,
+         29
+        ],
+        "confidence": 0.9648,
+        "text": "15.10.2026"
+       },
+       {
+        "box": [
+         83,
+         358,
+         111,
+         29
+        ],
+        "confidence": 0.9605,
+        "text": "Итого:"
+       },
+       {
+        "box": [
+         212,
+         358,
+         11,
+         29
+        ],
+        "confidence": 0.9646,
+        "text": "1"
+       },
+       {
+        "box": [
+         242,
+         358,
+         63,
+         29
+        ],
+        "confidence": 0.9676,
+        "text": "234"
+       },
+       {
+        "box": [
+         320,
+         358,
+         118,
+         35
+        ],
+        "confidence": 0.9329,
+        "text": "567,89"
+       },
+       {
+        "box": [
+         453,
+         357,
+         70,
+         38
+        ],
+        "confidence": 0.9653,
+        "text": "руб."
+       },
+       {
+        "box": [
+         84,
+         528,
+         11,
+         29
+        ],
+        "confidence": 0.9684,
+        "text": "1"
+       },
+       {
+        "box": [
+         146,
+         528,
+         64,
+         29
+        ],
+        "confidence": 0.4257,
+        "text": "452"
+       },
+       {
+        "box": [
+         227,
+         528,
+         116,
+         35
+        ],
+        "confidence": 0.4257,
+        "text": "123,45"
+       },
+       {
+        "box": [
+         389,
+         528,
+         96,
+         29
+        ],
+        "confidence": 0.5383,
+        "text": "2312"
+       },
+       {
+        "box": [
+         498,
+         528,
+         119,
+         35
+        ],
+        "confidence": 0.9003,
+        "text": "456,78"
+       },
+       {
+        "box": [
+         81,
+         598,
+         19,
+         29
+        ],
+        "confidence": 0.9568,
+        "text": "2"
+       },
+       {
+        "box": [
+         146,
+         598,
+         64,
+         29
+        ],
+        "confidence": 0.3836,
+        "text": "452"
+       },
+       {
+        "box": [
+         227,
+         598,
+         115,
+         35
+        ],
+        "confidence": 0.3836,
+        "text": "130,10"
+       },
+       {
+        "box": [
+         389,
+         598,
+         96,
+         29
+        ],
+        "confidence": 0.8772,
+        "text": "2312"
+       },
+       {
+        "box": [
+         498,
+         598,
+         120,
+         35
+        ],
+        "confidence": 0.8772,
+        "text": "470,05"
+       }
+      ]
+     }
+    },
+    "page.document/source/page.png": {
+     "image": [
+      1600,
+      900,
+      "RGB"
+     ],
+     "pixels": "90130e5173096ae4"
+    },
+    "page.docx": {
+     "images": 0,
+     "page": [
+      279.4,
+      215.9,
+      "LANDSCAPE (1)"
+     ],
+     "paragraphs": "Normal|АКТ ПРОВЕРКИ № 2026-117\nNormal|Омская область, город Тара\nNormal|Contract No 2026-117 dated 15.10.2026\nNormal|Итого: 1 234 567,89 руб.\nNormal|1 452 123,45 2312 456,78\nNormal|2 452 130,10 2312 470,05",
+     "tables": []
+    },
+    "page.html": {
+     "markup": {
+      "chars": 66239,
+      "head": "<!doctype html><html lang=\"ru\"><head><meta charset=\"utf-8\"><title>page.png</title>\n<style>body{font:16px Arial,sans-serif;margin:24px;color:#202124}section{margin:0 0 40px}.page-grid{display:grid;grid-template-columns:minmax(320px,1fr) minmax(320px,1fr);gap:24px;align-items:start}img{max-width:100%;",
+      "sha": "0645135560bfe8bb"
+     },
+     "visible_text": "page.png page Страница 1 АКТ ПРОВЕРКИ № 2026-117 Омская область, город Тара Contract No 2026-117 dated 15.10.2026 Итого: 1 234 567,89 руб. 1 452 123,45 2312 456,78 2 452 130,10 2312 470,05"
+    },
+    "page.md": {
+     "text": "# page\n\n> OCR engine: `tesseract`\n\n## Страница 1\n\nАКТ ПРОВЕРКИ № 2026-117\nОмская область, город Тара\nContract No 2026-117 dated 15.10.2026\nИтого: 1 234 567,89 руб.\n1 452 123,45 2312 456,78\n2 452 130,10 2312 470,05\n"
+    },
+    "page.odt": {
+     "odt_text": "Страница 1 АКТ ПРОВЕРКИ № 2026-117 Омская область, город Тара Contract No 2026-117 dated 15.10.2026 Итого: 1 234 567,89 руб. 1 452 123,45 2312 456,78 2 452 130,10 2312 470,05"
+    },
+    "page.searchable.pdf": {
+     "pages": [
+      {
+       "images": 1,
+       "size": [
+        384,
+        216
+       ],
+       "text": "АКТ\nПРОВЕРКИ\n№\n2026­117\nОмская\nобласть,\nгород\nТара\nContract\nNo\n2026­117\ndated\n15.10.2026\nИтого:\n1 234\n567,89\nруб.\n1\n452\n123,45\n2312\n456,78\n2\n452\n130,10\n2312\n470,05"
+      }
+     ]
+    },
+    "page.verification.json": {
+     "json": [
+      {
+       "fusion": {},
+       "page": 1,
+       "primary_verification": {},
+       "provider_verifications": {}
+      }
+     ]
+    },
+    "page.xlsx": {
+     "sheets": {
+      "OCR Audit": [
+       [
+        "Страница",
+        "Основной провайдер",
+        "Tesseract статус",
+        "Tesseract числа",
+        "Yandex статус",
+        "Yandex числа",
+        "Fusion замен",
+        "Fusion проверить",
+        "Confidence"
+       ],
+       [
+        1,
+        "tesseract",
+        null,
+        null,
+        null,
+        null,
+        0,
+        0,
+        0.8552
+       ]
+      ],
+      "Страница 1": [
+       [
+        "АКТ ПРОВЕРКИ № 2026-117"
+       ],
+       [
+        "Омская область, город Тара"
+       ],
+       [
+        "Contract No 2026-117 dated 15.10.2026"
+       ],
+       [
+        "Итого: 1 234 567,89 руб."
+       ],
+       [
+        "1 452 123,45 2312 456,78"
+       ],
+       [
+        "2 452 130,10 2312 470,05"
+       ]
+      ]
+     }
+    }
+   },
+   "requests": [],
+   "result": {
+    "engine": "tesseract",
+    "exit_code": 0,
+    "files": 1,
+    "formats": [
+     "docx",
+     "html",
+     "json",
+     "markdown",
+     "odt",
+     "searchable_pdf",
+     "verification",
+     "xlsx"
+    ],
+    "output": "text",
+    "pages": 1
+   }
+  },
+  "tesseract_structured": {
+   "deliverables": [],
+   "log_tail": [
+    "Starting operation: ocr_local_run",
+    "Parameters: {\"_workbench_source_path\": \"<BASE>\\\\fixtures\\\\scans\\\\page.png\", \"_workbench_target_path\": \"<STAND>\\\\deliverables\\\\tesseract_structured\", \"ocr_engine\": \"tesseract\", \"ocr_output_contract\": \"structured\", \"ocr_output_formats\": [\"docx\", \"xlsx\", \"markdown\", \"json\"], \"ocr_preprocess_profile\": \"raw\", \"ocr_tesseract_lang\": \"rus+eng\", \"ocr_tesseract_psm\": 6, \"provider\": \"yandex\"}",
+    "[MIRROR] source -> input: <BASE>\\fixtures\\scans\\page.png -> <STAND>\\input",
+    "[MIRROR] staged files: 1, dirs: 0",
+    "[OCR BRICK] Preprocess profile=raw; overrides={\"enabled\": false, \"sr_scale\": 0}",
+    "[OCR BRICK] input\\page.png -> engine=tesseract",
+    "Traceback (most recent call last):\n  File \"E:\\TOOLS\\Audion Office OCR AI\\system_core\\core\\jobs.py\", line <N>, in execute_operation\n    result = _load_callable(operation.service)(context)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"E:\\TOOLS\\Audion Office OCR AI\\system_core\\services\\office_service.py\", line <N>, in ocr_brick_run\n    results = controller.run_job(req, job_id=context.report_dir.name)\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"E:\\TOOLS\\Audion Office OCR AI\\system_core\\ocr_brick\\pipeline_controller.py\", line <N>, in run_job\n    raise ValueError(\nValueError: engine 'tesseract' cannot produce structured output (no analyze_layout); use a layout engine (surya)\n"
+   ],
+   "message": "ValueError: engine 'tesseract' cannot produce structured output (no analyze_layout); use a layout engine (surya)",
+   "ok": false,
+   "output": {},
+   "requests": [],
+   "result": {}
+  },
+  "workbench_review": {
+   "deliverables": [],
+   "message": "Operation finished.",
+   "ok": true,
+   "output": {},
+   "report": {
+    "<TIME>_workbench_review/manual_review.xlsx": {
+     "sheets": {
+      "manual_review": [
+       [
+        "source",
+        "page",
+        "kind",
+        "reason",
+        "text",
+        "confidence",
+        "bbox",
+        "crop_path",
+        "resolver_status",
+        "visible_text",
+        "resolver_confidence",
+        "resolver_reason",
+        "safe_to_autofix"
+       ],
+       [
+        "page.png",
+        1,
+        "low_confidence",
+        "Tesseract confidence below 70.",
+        "452",
+        42,
+        "[146, 528, 210, 557]",
+        "<STAND>\\report\\<TIME>_workbench_review\\sources\\page\\crops\\page_0001_low_conf_0019.png",
+        "disabled",
+        null,
+        0.42,
+        "AI resolver is disabled.",
+        false
+       ],
+       [
+        "page.png",
+        1,
+        "low_confidence",
+        "Tesseract confidence below 70.",
+        "123,45",
+        42,
+        "[227, 528, 343, 563]",
+        "<STAND>\\report\\<TIME>_workbench_review\\sources\\page\\crops\\page_0001_low_conf_0020.png",
+        "disabled",
+        null,
+        0.42,
+        "AI resolver is disabled.",
+        false
+       ],
+       [
+        "page.png",
+        1,
+        "low_confidence",
+        "Tesseract confidence below 70.",
+        "2312",
+        53,
+        "[389, 528, 485, 557]",
+        "<STAND>\\report\\<TIME>_workbench_review\\sources\\page\\crops\\page_0001_low_conf_0021.png",
+        "disabled",
+        null,
+        0.53,
+        "AI resolver is disabled.",
+        false
+       ],
+       [
+        "page.png",
+        1,
+        "low_confidence",
+        "Tesseract confidence below 70.",
+        "452",
+        38,
+        "[146, 598, 210, 627]",
+        "<STAND>\\report\\<TIME>_workbench_review\\sources\\page\\crops\\page_0001_low_conf_0024.png",
+        "disabled",
+        null,
+        0.38,
+        "AI resolver is disabled.",
+        false
+       ],
+       [
+        "page.png",
+        1,
+        "low_confidence",
+        "Tesseract confidence below 70.",
+        "130,10",
+        38,
+        "[227, 598, 342, 633]",
+        "<STAND>\\report\\<TIME>_workbench_review\\sources\\page\\crops\\page_0001_low_conf_0025.png",
+        "disabled",
+        null,
+        0.38,
+        "AI resolver is disabled.",
+        false
+       ]
+      ]
+     }
+    },
+    "<TIME>_workbench_review/mirror.json": {
+     "json": {
+      "destination": "<STAND>\\deliverables\\workbench_review",
+      "destination_explicit": true,
+      "skipped": [],
+      "source": "<BASE>\\fixtures\\scans",
+      "source_explicit": true,
+      "staged_dirs": 0,
+      "staged_files": 1,
+      "synced_dirs": 1,
+      "synced_files": 0
+     }
+    },
+    "<TIME>_workbench_review/resolver_candidates.json": {
+     "json": []
+    },
+    "<TIME>_workbench_review/result.json": {
+     "json": {
+      "data": {
+       "destination": "<STAND>\\deliverables\\workbench_review",
+       "destination_explicit": true,
+       "exit_code": 0,
+       "skipped": [],
+       "source": "<BASE>\\fixtures\\scans",
+       "source_explicit": true,
+       "staged_files": 1,
+       "synced_files": 0
+      },
+      "log_file": "<STAND>\\logs\\<TIME>_workbench_review.log",
+      "message": "Operation finished.",
+      "ok": true,
+      "operation": {
+       "id": "workbench_review",
+       "parameters": {
+        "_workbench_source_path": "<BASE>\\fixtures\\scans",
+        "_workbench_target_path": "<STAND>\\deliverables\\workbench_review",
+        "workbench_dpi": 180,
+        "workbench_lang": "rus+eng",
+        "workbench_low_confidence": 70,
+        "workbench_ocr_engine": "auto",
+        "workbench_oem": 1,
+        "workbench_psm": 6
+       },
+       "title": "workbench_review"
+      },
+      "report_dir": "<STAND>\\report\\<TIME>_workbench_review"
+     }
+    },
+    "<TIME>_workbench_review/review_items.json": {
+     "json": [
+      {
+       "bbox": [
+        146,
+        528,
+        210,
+        557
+       ],
+       "confidence": 42.0,
+       "crop_path": "<STAND>\\report\\<TIME>_workbench_review\\sources\\page\\crops\\page_0001_low_conf_0019.png",
+       "kind": "low_confidence",
+       "page": 1,
+       "reason": "Tesseract confidence below 70.",
+       "relative_source": "page.png",
+       "resolver_result": {
+        "confidence": 0.42,
+        "reason": "AI resolver is disabled.",
+        "safe_to_autofix": false,
+        "visible_text": null
+       },
+       "resolver_status": "disabled",
+       "source": "<STAND>\\input\\page.png",
+       "text": "452"
+      },
+      {
+       "bbox": [
+        227,
+        528,
+        343,
+        563
+       ],
+       "confidence": 42.0,
+       "crop_path": "<STAND>\\report\\<TIME>_workbench_review\\sources\\page\\crops\\page_0001_low_conf_0020.png",
+       "kind": "low_confidence",
+       "page": 1,
+       "reason": "Tesseract confidence below 70.",
+       "relative_source": "page.png",
+       "resolver_result": {
+        "confidence": 0.42,
+        "reason": "AI resolver is disabled.",
+        "safe_to_autofix": false,
+        "visible_text": null
+       },
+       "resolver_status": "disabled",
+       "source": "<STAND>\\input\\page.png",
+       "text": "123,45"
+      },
+      {
+       "bbox": [
+        389,
+        528,
+        485,
+        557
+       ],
+       "confidence": 53.0,
+       "crop_path": "<STAND>\\report\\<TIME>_workbench_review\\sources\\page\\crops\\page_0001_low_conf_0021.png",
+       "kind": "low_confidence",
+       "page": 1,
+       "reason": "Tesseract confidence below 70.",
+       "relative_source": "page.png",
+       "resolver_result": {
+        "confidence": 0.53,
+        "reason": "AI resolver is disabled.",
+        "safe_to_autofix": false,
+        "visible_text": null
+       },
+       "resolver_status": "disabled",
+       "source": "<STAND>\\input\\page.png",
+       "text": "2312"
+      },
+      {
+       "bbox": [
+        146,
+        598,
+        210,
+        627
+       ],
+       "confidence": 38.0,
+       "crop_path": "<STAND>\\report\\<TIME>_workbench_review\\sources\\page\\crops\\page_0001_low_conf_0024.png",
+       "kind": "low_confidence",
+       "page": 1,
+       "reason": "Tesseract confidence below 70.",
+       "relative_source": "page.png",
+       "resolver_result": {
+        "confidence": 0.38,
+        "reason": "AI resolver is disabled.",
+        "safe_to_autofix": false,
+        "visible_text": null
+       },
+       "resolver_status": "disabled",
+       "source": "<STAND>\\input\\page.png",
+       "text": "452"
+      },
+      {
+       "bbox": [
+        227,
+        598,
+        342,
+        633
+       ],
+       "confidence": 38.0,
+       "crop_path": "<STAND>\\report\\<TIME>_workbench_review\\sources\\page\\crops\\page_0001_low_conf_0025.png",
+       "kind": "low_confidence",
+       "page": 1,
+       "reason": "Tesseract confidence below 70.",
+       "relative_source": "page.png",
+       "resolver_result": {
+        "confidence": 0.38,
+        "reason": "AI resolver is disabled.",
+        "safe_to_autofix": false,
+        "visible_text": null
+       },
+       "resolver_status": "disabled",
+       "source": "<STAND>\\input\\page.png",
+       "text": "130,10"
+      }
+     ]
+    },
+    "<TIME>_workbench_review/safe_autofix_candidates.json": {
+     "json": []
+    },
+    "<TIME>_workbench_review/sources/page/crops/page_0001_low_conf_0019.png": {
+     "image": [
+      80,
+      45,
+      "RGB"
+     ],
+     "pixels": "78a5cbe3022d3ddf"
+    },
+    "<TIME>_workbench_review/sources/page/crops/page_0001_low_conf_0020.png": {
+     "image": [
+      132,
+      51,
+      "RGB"
+     ],
+     "pixels": "102afe474675b45e"
+    },
+    "<TIME>_workbench_review/sources/page/crops/page_0001_low_conf_0021.png": {
+     "image": [
+      112,
+      45,
+      "RGB"
+     ],
+     "pixels": "863fbe05c1698bf3"
+    },
+    "<TIME>_workbench_review/sources/page/crops/page_0001_low_conf_0024.png": {
+     "image": [
+      80,
+      45,
+      "RGB"
+     ],
+     "pixels": "78a5cbe3022d3ddf"
+    },
+    "<TIME>_workbench_review/sources/page/crops/page_0001_low_conf_0025.png": {
+     "image": [
+      131,
+      51,
+      "RGB"
+     ],
+     "pixels": "8a26693f030851ee"
+    },
+    "<TIME>_workbench_review/summary.json": {
+     "json": {
+      "ai_errors": 0,
+      "ai_mode": "off",
+      "ai_provider": "none",
+      "ai_resolved": 0,
+      "coordinate_rows": 0,
+      "coordinates_xlsx": "",
+      "created_at": "<VOLATILE>",
+      "files": 1,
+      "local_ocr_status": "available",
+      "manual_review_xlsx": "<STAND>\\report\\<TIME>_workbench_review\\manual_review.xlsx",
+      "mode": "review",
+      "ocr_pages": 1,
+      "optional_tesseract_install": "install\\Install-Portable-Tesseract.cmd",
+      "pages": 1,
+      "review_items": 5,
+      "safe_autofix_candidates": 0,
+      "safe_autofix_candidates_json": "",
+      "tesseract_available": true,
+      "tesseract_note": "portable: E:\\TOOLS\\Audion Office OCR AI\\runtime\\tesseract\\tesseract.exe (tesseract v5.4.0.20240606; deu,eng,osd,rus, tessdata=E:\\TOOLS\\Audion Office OCR AI\\runtime\\tesseract\\tessdata)",
+      "vector_text_pages": 0
+     }
+    },
+    "latest_result.json": {
+     "json": {
+      "data": {
+       "destination": "<STAND>\\deliverables\\workbench_review",
+       "destination_explicit": true,
+       "exit_code": 0,
+       "skipped": [],
+       "source": "<BASE>\\fixtures\\scans",
+       "source_explicit": true,
+       "staged_files": 1,
+       "synced_files": 0
+      },
+      "log_file": "<STAND>\\logs\\<TIME>_workbench_review.log",
+      "message": "Operation finished.",
+      "ok": true,
+      "operation": {
+       "id": "workbench_review",
+       "parameters": {
+        "_workbench_source_path": "<BASE>\\fixtures\\scans",
+        "_workbench_target_path": "<STAND>\\deliverables\\workbench_review",
+        "workbench_dpi": 180,
+        "workbench_lang": "rus+eng",
+        "workbench_low_confidence": 70,
+        "workbench_ocr_engine": "auto",
+        "workbench_oem": 1,
+        "workbench_psm": 6
+       },
+       "title": "workbench_review"
+      },
+      "report_dir": "<STAND>\\report\\<TIME>_workbench_review"
+     }
+    }
+   },
+   "requests": [],
+   "result": {
+    "destination": "<STAND>\\deliverables\\workbench_review",
+    "destination_explicit": true,
+    "exit_code": 0,
+    "skipped": [],
+    "source": "<BASE>\\fixtures\\scans",
+    "source_explicit": true,
+    "staged_files": 1,
+    "synced_files": 0
+   }
+  }
+ },
+ "schema": 1
+}

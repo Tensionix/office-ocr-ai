@@ -124,7 +124,7 @@ function Copy-PortableRuntime {
     $stageRuntime = Join-Path $stageDir "runtime"
     New-Item -ItemType Directory -Force -Path $stageRuntime | Out-Null
 
-    $excludedTopLevel = @(".playwright", "tesseract", "testing")
+    $excludedTopLevel = @("tesseract", "testing")
     Get-ChildItem -LiteralPath $baseRuntimeDir -Force | ForEach-Object {
         if ($excludedTopLevel -contains $_.Name) {
             return

@@ -1,10 +1,6 @@
 # engines/yandex.py
-# Yandex Vision OCR adapter. Two modes, selected by params["mode"]:
-#   "sync"  -> recognizeText, one page per POST. Fits the standard recognize()
-#              contract and returns {text, box, confidence}.
-#   "batch" -> async pipeline via Object Storage + operation polling, for
-#              thousands of pages. Exposed as a separate flow (run_batch), since
-#              it is not a single-image call.
+# Yandex Vision OCR adapter: recognizeText, one page per POST. Fits the standard
+# recognize() contract and returns {text, box, confidence}.
 # Auth supports both api_key and IAM token (see yandex_creds).
 # Endpoints/fields marked [VERIFY] against current Yandex Cloud docs at impl time.
 # No globals; creds and HTTP client are injected/built from explicit paths.
@@ -22,7 +18,6 @@ from .yandex_creds import YandexCreds
 
 # [VERIFY] current endpoints. recognizeText is the sync OCR API.
 _SYNC_URL = "https://ocr.api.cloud.yandex.net/ocr/v1/recognizeText"
-# batch uses vision batchAnalyze + Object Storage; wired in run_batch() stub.
 
 
 class YandexAdapter:
@@ -37,8 +32,7 @@ class YandexAdapter:
     def recognize(self, clean_png_path: str, params: dict) -> OcrResult:
         mode = params.get("mode", "sync")
         if mode != "sync":
-            raise ValueError("YandexAdapter.recognize() is sync-only; "
-                             "use run_batch() for batch mode")
+            raise ValueError("YandexAdapter.recognize() is sync-only: batch mode is not built")
         model = params.get("model", "page")          # page | handwritten | <specialized>
         langs = params.get("languageCodes", ["ru", "en"])
         content = base64.b64encode(Path(clean_png_path).read_bytes()).decode("ascii")
@@ -77,17 +71,6 @@ class YandexAdapter:
         return OcrResult(kind="yandex", text=text, words=words, engine="yandex")
 
     # -- batch mode (thousands of pages) --
-
-    def run_batch(self, source_keys: list[str], bucket: str, params: dict) -> str:
-        """Kick off async batch recognition over files already in Object Storage.
-        Returns an operation/job id to poll. STUB: wire batchAnalyze + polling +
-        result fetch from the bucket. See the Yandex 'yc-vision-ocr-recognizer'
-        example (Object Storage in/out + timer-driven polling).
-        TODO(codex): implement upload -> batchAnalyze -> poll operation_id ->
-        download JSON results -> normalize to OcrResult per page."""
-        raise NotImplementedError(
-            "TODO(codex): implement Yandex async batch via Object Storage + "
-            "batchAnalyze + operation polling for large jobs")
 
 
 def _verts_to_box(vertices: list[dict]) -> tuple[int, int, int, int] | None:

@@ -27,11 +27,10 @@ shift
 goto ARG_LOOP
 :ARGS_DONE
 
-rem Prefer a non-target PowerShell. Portable fallback is fine here because this
-rem helper never replaces system_core\powershell.
-where pwsh.exe >nul 2>nul && set "PS_EXE=pwsh.exe"
+rem The PowerShell the program carries comes first; the one of the machine - where App\ is not built yet.
+if exist "%ROOT%\App\AudionPs.exe" set "PS_EXE=%ROOT%\App\AudionPs.exe"
+if not defined PS_EXE where pwsh.exe >nul 2>nul && set "PS_EXE=pwsh.exe"
 if not defined PS_EXE where powershell.exe >nul 2>nul && set "PS_EXE=powershell.exe"
-if not defined PS_EXE if exist "%ROOT%\system_core\powershell\pwsh.exe" set "PS_EXE=%ROOT%\system_core\powershell\pwsh.exe"
 
 if not defined PS_EXE goto ERR_NOPS
 if not exist "%PS1_FILE%" goto ERR_NOPS1

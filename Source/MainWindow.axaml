@@ -1,0 +1,281 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:views="using:AudionOfficeOcrAi.Views"
+        x:Class="AudionOfficeOcrAi.MainWindow"
+        Title="Audion Office OCR AI"
+        Width="1500" Height="880" MinWidth="1180" MinHeight="700"
+        WindowStartupLocation="CenterScreen"
+        Background="{DynamicResource AppBg}"
+        Foreground="{DynamicResource TextMain}"
+        FontFamily="{DynamicResource FontUi}"
+        Icon="avares://AudionOfficeOcrAi/Assets/app.ico"
+        FontSize="{DynamicResource FontBase}">
+  <!--
+    The standard layout of the Audion windows: the program and its look in the header, the sections
+    as a band under it, the pages of the chosen section and the switches of a page as a second band,
+    the cards of the page on the left, the working area and the terminal on the right, the state at
+    the bottom. What the bands and the cards hold is not written here: the console command tells it
+    (config\window_layout.yaml, config\tool_manifest.yaml).
+  -->
+  <Grid RowDefinitions="Auto,*">
+
+  <!-- The header: a band of its own, darker than the window and parted from it by a rule. Its first
+       line is the program, the language and the look; its second - the machine and what it has for
+       OCR, each part in a small badge. -->
+  <Border Grid.Row="0" Classes="headband">
+    <Grid RowDefinitions="Auto,Auto">
+    <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto">
+      <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+        <TextBlock Text="AUDION OFFICE OCR AI" FontSize="15" FontWeight="Bold" VerticalAlignment="Center"/>
+        <TextBlock x:Name="VersionText" Classes="caption"/>
+      </StackPanel>
+      <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+        <StackPanel x:Name="ServiceRow" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,8,0"/>
+        <ToggleButton x:Name="LangRu" Classes="switch" Content="RU" Margin="0,0,4,0" ToolTip.Tip="Язык окна: русский."/>
+        <ToggleButton x:Name="LangEn" Classes="switch" Content="EN" Margin="0,0,8,0" ToolTip.Tip="Язык окна: английский."/>
+        <ToggleButton x:Name="ThemeButton" Classes="switch icon" Margin="0" ToolTip.Tip="Тема: Audion Code Dark (по умолчанию), Audion Vault Dark, Audion Dark или Audion Light.">
+          <Path Classes="icon" Tag="sun"/>
+          <ToggleButton.Flyout>
+            <MenuFlyout Placement="BottomEdgeAlignedRight">
+              <MenuItem x:Name="ThemeCode" Header="Audion Code Dark" ToggleType="Radio"/>
+              <MenuItem x:Name="ThemeVault" Header="Audion Vault Dark" ToggleType="Radio"/>
+              <MenuItem x:Name="ThemeDark" Header="Audion Dark" ToggleType="Radio"/>
+              <MenuItem x:Name="ThemeLight" Header="Audion Light" ToggleType="Radio"/>
+            </MenuFlyout>
+          </ToggleButton.Flyout>
+        </ToggleButton>
+        <!-- The sections the layout puts into the header (place: header) - SETUP, what the machine needs first. -->
+        <StackPanel x:Name="HeaderSections" Orientation="Horizontal" VerticalAlignment="Center" Margin="8,0,0,0"/>
+        <ToggleButton x:Name="SheetSettings" Classes="switch" Content="SETTINGS" Margin="0,0,4,0"
+                      ToolTip.Tip="Настройки окна: цвета, шрифты и размеры."/>
+        <ToggleButton x:Name="SheetAbout" Classes="switch" Content="ABOUT" Margin="0"
+                      ToolTip.Tip="О программе: версия, папки, автор."/>
+      </StackPanel>
+    </Grid>
+    <!-- This machine and what it has for OCR, badge by badge (MainWindow.axaml.cs, ShowMachine): a few words each, the whole in the tooltip. -->
+    <WrapPanel Grid.Row="1" x:Name="MachineRow" Orientation="Horizontal" Margin="0,8,0,0"/>
+    </Grid>
+  </Border>
+
+  <Grid Grid.Row="1" x:Name="Shell" RowDefinitions="Auto,Auto,Auto,*,Auto" Margin="10,8,10,10" Focusable="True">
+
+    <!-- The sections: one band across the window, each with its sign and a line of what it is for. -->
+    <Grid Grid.Row="1" x:Name="SectionRow" Margin="0,0,0,6"/>
+
+    <Grid Grid.Row="3" x:Name="Zones" ColumnDefinitions="*,9,560">
+
+      <!-- Left: the cards of the page - an operation with its form, or a block of buttons. -->
+      <Border Grid.Column="0" x:Name="LeftZone" Classes="frame" MinWidth="560">
+        <Grid RowDefinitions="Auto,Auto,Auto,*">
+          <!-- The actions of a page with one form: its name, its buttons, "back to the defaults".
+               They stay in sight while the form under them scrolls. -->
+          <Border Grid.Row="0" x:Name="ActionBar" Classes="hsep" BorderThickness="0,0,0,1" Margin="0" Padding="12,8,10,8" IsVisible="False">
+            <Grid ColumnDefinitions="Auto,Auto,*,Auto">
+              <TextBlock Grid.Column="0" x:Name="ActionTitle" Classes="pagetitle"/>
+              <TextBox Grid.Column="1" x:Name="PageSearchBox" Classes="masks" Width="220" Height="24" MinHeight="24" Padding="8,0" Margin="14,0,0,0"
+                       VerticalContentAlignment="Center" VerticalAlignment="Center" PlaceholderText="поиск по странице" IsVisible="False"
+                       AutomationProperties.AutomationId="search_page"
+                       ToolTip.Tip="Показать на всей странице карточки, в названии которых есть каждое набранное слово. Отметки спрятанных карточек остаются."/>
+              <WrapPanel Grid.Column="2" x:Name="ActionButtons" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+              <Button Grid.Column="3" x:Name="ActionReset" Classes="tool" Margin="6,0,0,0" VerticalAlignment="Center"
+                      ToolTip.Tip="К умолчаниям: вернуть поля этой страницы к значениям программы.">
+                <Path Classes="icon" Tag="undo-2"/>
+              </Button>
+            </Grid>
+          </Border>
+          <!-- What is switched here: the pages of the chosen section, then the switches of the page
+               (the engine of Local OCR, the provider of API OCR). Neither scrolls away with the form. -->
+          <Border Grid.Row="1" x:Name="PageBar" Classes="hsep" BorderThickness="0,0,0,1" Margin="0" Padding="10,8,10,8">
+            <StackPanel Spacing="6">
+              <views:EvenRow x:Name="PageRow" Spacing="6"/>
+              <ContentControl x:Name="BandHost" IsVisible="False"/>
+            </StackPanel>
+          </Border>
+          <!-- A line of the page that is not a field: the layout service of Surya on its switch. -->
+          <Border Grid.Row="2" x:Name="NoteBar" Classes="hsep" BorderThickness="0,0,0,1" Margin="0" Padding="12,7,10,7" IsVisible="False"/>
+          <!-- The pages opened so far, one over another; only the one chosen is in sight (MainWindow.Pages.cs). -->
+          <Panel Grid.Row="3" x:Name="PageHost"/>
+          <TextBlock Grid.Row="3" x:Name="CardsNote" Classes="note" HorizontalAlignment="Center" VerticalAlignment="Center"
+                     TextAlignment="Center" TextWrapping="Wrap" MaxWidth="560" IsVisible="False"/>
+        </Grid>
+      </Border>
+
+      <GridSplitter Grid.Column="1" ResizeDirection="Columns"/>
+
+      <!-- Right: the working area - where the files come from and where the results go - and the terminal. -->
+      <Grid Grid.Column="2" RowDefinitions="Auto,*" MinWidth="420">
+
+        <Border Grid.Row="0" Classes="card" Padding="9,8,8,4" Margin="0,0,0,8">
+          <StackPanel>
+            <Grid ColumnDefinitions="96,*,Auto" Margin="0,0,0,4">
+              <TextBlock Grid.Column="0" Classes="cardtitle" Text="ИСТОЧНИК" VerticalAlignment="Center"/>
+              <TextBox Grid.Column="1" x:Name="SourceBox" AutomationProperties.AutomationId="source_box" Classes="masks" Height="24" MinHeight="24" Padding="8,0" VerticalContentAlignment="Center" VerticalAlignment="Center"
+                       ToolTip.Tip="Откуда берутся файлы: папка или один файл. Внешний источник перед запуском копируется в папку input программы (input и output при этом очищаются); input программы читается как есть. Путь внутри программы показан от её корня. При старте окна - папка input. Папку или файл можно бросить в окно."/>
+              <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="6,0,0,0">
+                <Button x:Name="PickFolderButton" AutomationProperties.AutomationId="pick_source_folder" Classes="tool" Margin="0,0,4,0" ToolTip.Tip="ПАПКА: выбрать папку-источник.">
+                  <Path Classes="icon" Tag="folder"/>
+                </Button>
+                <Button x:Name="PickFileButton" AutomationProperties.AutomationId="pick_source_file" Classes="tool" Margin="0,0,4,0" ToolTip.Tip="ФАЙЛ: выбрать один файл-источник - скан, PDF или офисный документ.">
+                  <Path Classes="icon" Tag="file-plus"/>
+                </Button>
+                <Border Classes="vsep" Margin="2,0,6,0" VerticalAlignment="Center"/>
+                <Button x:Name="SourceHistoryButton" AutomationProperties.AutomationId="history_source" Classes="tool" Margin="0,0,4,0" ToolTip.Tip="Прежние источники: закреплённые сверху.">
+                  <Path Classes="icon" Tag="history"/>
+                </Button>
+                <Button x:Name="SourcePinButton" AutomationProperties.AutomationId="pin_source" Classes="tool mid" Margin="0,0,4,0" ToolTip.Tip="Закрепить этот путь в списке источников или открепить.">
+                  <Path Classes="icon" Tag="pin"/>
+                </Button>
+                <Button x:Name="SourceOpenButton" AutomationProperties.AutomationId="open_source" Classes="tool" Margin="0" ToolTip.Tip="Открыть источник в Проводнике.">
+                  <Path Classes="icon" Tag="folder-open"/>
+                </Button>
+              </StackPanel>
+            </Grid>
+            <Grid ColumnDefinitions="96,*,Auto" Margin="0,0,0,6">
+              <TextBlock Grid.Column="0" Classes="cardtitle" Text="НАЗНАЧЕНИЕ" VerticalAlignment="Center"/>
+              <TextBox Grid.Column="1" x:Name="TargetBox" AutomationProperties.AutomationId="target_box" Classes="masks" Height="24" MinHeight="24" Padding="8,0" VerticalContentAlignment="Center" VerticalAlignment="Center"
+                       ToolTip.Tip="Куда кладутся результаты: после операции содержимое output программы копируется сюда поверх. Путь внутри программы показан от её корня. При старте окна - папка output."/>
+              <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="6,0,0,0">
+                <Button x:Name="PickTargetButton" AutomationProperties.AutomationId="pick_target_folder" Classes="tool" Margin="0,0,4,0" ToolTip.Tip="ПАПКА: выбрать папку назначения.">
+                  <Path Classes="icon" Tag="folder"/>
+                </Button>
+                <Border Classes="vsep" Margin="30,0,6,0" VerticalAlignment="Center"/>
+                <Button x:Name="TargetHistoryButton" AutomationProperties.AutomationId="history_target" Classes="tool" Margin="0,0,4,0" ToolTip.Tip="Прежние назначения: закреплённые сверху.">
+                  <Path Classes="icon" Tag="history"/>
+                </Button>
+                <Button x:Name="TargetPinButton" AutomationProperties.AutomationId="pin_target" Classes="tool mid" Margin="0,0,4,0" ToolTip.Tip="Закрепить этот путь в списке назначений или открепить.">
+                  <Path Classes="icon" Tag="pin"/>
+                </Button>
+                <Button x:Name="TargetOpenButton" AutomationProperties.AutomationId="open_target" Classes="tool" Margin="0" ToolTip.Tip="Открыть назначение в Проводнике.">
+                  <Path Classes="icon" Tag="folder-open"/>
+                </Button>
+              </StackPanel>
+            </Grid>
+            <!-- Every button of the row keeps 4 px at its right and under it: none stands glued to the next. -->
+            <WrapPanel Orientation="Horizontal">
+              <Button x:Name="ResetPathsButton" AutomationProperties.AutomationId="reset_paths" Classes="small" Margin="0,0,4,4" ToolTip.Tip="Вернуть оба пути к папкам input и output программы. Незакреплённая история путей очищается, закрепления остаются.">
+                <StackPanel Orientation="Horizontal" Spacing="6">
+                  <Path Classes="icon" Tag="rotate-ccw"/>
+                  <TextBlock Text="СБРОСИТЬ"/>
+                </StackPanel>
+              </Button>
+              <Button x:Name="ListFilesButton" AutomationProperties.AutomationId="list_source" Classes="small" Margin="0,0,4,4" ToolTip.Tip="Назвать в терминале, что лежит в источнике: папки и файлы первого уровня, по алфавиту.">
+                <StackPanel Orientation="Horizontal" Spacing="6">
+                  <Path Classes="icon" Tag="list"/>
+                  <TextBlock Text="СПИСОК"/>
+                </StackPanel>
+              </Button>
+              <!-- The operations of the working folders of the program (`folders` of the layout) that remove
+                   nothing; those that remove stand in the menu of the clearing beside them. -->
+              <StackPanel x:Name="FolderTools" Orientation="Horizontal"/>
+              <!-- The one clearing of the working area: a sign that opens what may be cleared. -->
+              <Button x:Name="ClearFoldersButton" AutomationProperties.AutomationId="clear_folders" Classes="tool burn" Margin="0,0,4,4" ToolTip.Tip="Очистка: содержимое источника, назначения или обоих - в Корзину, сами папки остаются; артефакты DocumentModel в output. Перед удалением окно спрашивает и называет пути.">
+                <Path Classes="icon" Tag="trash-2"/>
+              </Button>
+            </WrapPanel>
+          </StackPanel>
+        </Border>
+
+        <Border Grid.Row="1" Classes="card" Padding="9,7,8,8">
+          <Grid RowDefinitions="Auto,Auto,*,Auto">
+            <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto" Margin="0,0,0,6">
+              <TextBlock Grid.Column="0" Classes="cardtitle" Text="ТЕРМИНАЛ" VerticalAlignment="Center"/>
+              <StackPanel Grid.Column="2" Orientation="Horizontal">
+                <Button x:Name="LogsButton" AutomationProperties.AutomationId="open_logs" Classes="small" Margin="0,0,4,0" ToolTip.Tip="Открыть папку logs: журнал каждой операции.">
+                  <StackPanel Orientation="Horizontal" Spacing="6">
+                    <Path Classes="icon" Tag="file-text"/>
+                    <TextBlock Text="ЛОГИ"/>
+                  </StackPanel>
+                </Button>
+                <Button x:Name="ReportButton" AutomationProperties.AutomationId="open_report" Classes="small" Margin="0,0,4,0" ToolTip.Tip="Открыть папку report: отчёты операций, отчёты Workbench, результат последней операции.">
+                  <StackPanel Orientation="Horizontal" Spacing="6">
+                    <Path Classes="icon" Tag="clipboard-list"/>
+                    <TextBlock Text="ОТЧЁТЫ"/>
+                  </StackPanel>
+                </Button>
+                <Button x:Name="ConfigButton" AutomationProperties.AutomationId="open_config" Classes="small" Margin="0,0,4,0" ToolTip.Tip="Открыть папку config: манифест, промпты, ключи поставщиков, настройки моделей.">
+                  <StackPanel Orientation="Horizontal" Spacing="6">
+                    <Path Classes="icon" Tag="settings-2"/>
+                    <TextBlock Text="CONFIG"/>
+                  </StackPanel>
+                </Button>
+                <Button x:Name="CopyLogButton" AutomationProperties.AutomationId="copy_log" Classes="tool" Margin="0,0,4,0" ToolTip.Tip="Весь текст терминала - в буфер обмена.">
+                  <Path Classes="icon" Tag="copy"/>
+                </Button>
+                <Button x:Name="ClearLogButton" AutomationProperties.AutomationId="clear_log" Classes="tool" Margin="0,0,4,0" ToolTip.Tip="Очистить терминал. Файлы журналов в logs остаются.">
+                  <Path Classes="icon" Tag="eraser"/>
+                </Button>
+                <Button x:Name="WideLogButton" AutomationProperties.AutomationId="wide_log" Classes="tool" Margin="0" ToolTip.Tip="Развернуть терминал на всё окно и вернуть обратно.">
+                  <Path Classes="icon" Tag="maximize-2"/>
+                </Button>
+              </StackPanel>
+            </Grid>
+
+            <!-- The last run on one line: what ran, how long, how it ended - a name and its value, side by side. -->
+            <Grid Grid.Row="1" ColumnDefinitions="*,6,Auto,6,Auto" Margin="0,0,0,6">
+              <Border Grid.Column="0" Classes="fact" ToolTip.Tip="Операция, которая идёт сейчас или шла последней.">
+                <Grid ColumnDefinitions="Auto,*">
+                  <TextBlock Grid.Column="0" Classes="factname" Text="Операция:" Margin="0,0,7,0"/>
+                  <TextBlock Grid.Column="1" x:Name="RunNameText" Classes="num fact idle" Text="—" TextTrimming="CharacterEllipsis"/>
+                </Grid>
+              </Border>
+              <Border Grid.Column="2" Classes="fact" ToolTip.Tip="Сколько идёт или шла операция.">
+                <StackPanel Orientation="Horizontal" Spacing="7">
+                  <TextBlock Classes="factname" Text="Время:"/>
+                  <TextBlock x:Name="ClockText" Classes="num fact idle" Text="—"/>
+                </StackPanel>
+              </Border>
+              <Border Grid.Column="4" Classes="fact" ToolTip.Tip="Чем закончилась последняя операция.">
+                <StackPanel Orientation="Horizontal" Spacing="7">
+                  <TextBlock Classes="factname" Text="Итог:"/>
+                  <TextBlock x:Name="OutcomeText" Classes="num fact idle" Text="—"/>
+                </StackPanel>
+              </Border>
+            </Grid>
+
+            <Border Grid.Row="2" Grid.RowSpan="2" Classes="listbg" CornerRadius="5"/>
+            <ScrollViewer Grid.Row="2" x:Name="LogScroll" HorizontalScrollBarVisibility="Disabled">
+              <!-- Pages of text one under another, not one text: a text is laid out whole at every
+                   line added to it. Only the last page is laid out when lines arrive. -->
+              <StackPanel x:Name="LogPages" Margin="8,6" TextElement.FontFamily="{DynamicResource FontGrid}"
+                          TextElement.FontSize="{DynamicResource FontLog}" TextElement.Foreground="{DynamicResource LogPlain}"/>
+            </ScrollViewer>
+
+            <!-- The live line of a run, the last line of the terminal while an operation goes, behind a dot that breathes. -->
+            <Grid Grid.Row="3" x:Name="ActivityRow" ColumnDefinitions="Auto,*" Margin="9,0,8,7" IsVisible="False">
+              <Ellipse Grid.Column="0" x:Name="ActivityDot" Classes="livedot" Margin="0,1,8,0"/>
+              <TextBlock Grid.Column="1" x:Name="ActivityText" FontFamily="{DynamicResource FontGrid}" FontSize="{DynamicResource FontLog}"
+                         Foreground="{DynamicResource LogPlain}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+            </Grid>
+          </Grid>
+        </Border>
+      </Grid>
+    </Grid>
+
+    <!-- SETTINGS or ABOUT, in place of the sections and their pages; the state below stays in sight. -->
+    <Border Grid.Row="1" Grid.RowSpan="3" x:Name="SheetHost" Classes="frame" IsVisible="False">
+      <Panel>
+        <ScrollViewer x:Name="SheetScroll" Margin="22,18" HorizontalScrollBarVisibility="Disabled">
+          <StackPanel x:Name="SheetBody" Spacing="6" MaxWidth="1120" HorizontalAlignment="Center"/>
+        </ScrollViewer>
+        <Button x:Name="SheetClose" Classes="tool" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,10,12,0"
+                ToolTip.Tip="Закрыть и вернуться к разделам (Esc).">
+          <Path Classes="icon" Tag="x"/>
+        </Button>
+      </Panel>
+    </Border>
+
+    <!-- The state: what the window is doing, how far a run is, and STOP while it goes. -->
+    <Grid Grid.Row="4" ColumnDefinitions="*,Auto,Auto" Margin="2,7,0,0" MinHeight="26">
+      <TextBlock Grid.Column="0" x:Name="StatusText" Classes="status" Text="Готово." TextTrimming="CharacterEllipsis" VerticalAlignment="Center" Margin="0,0,18,0"/>
+      <ProgressBar Grid.Column="1" x:Name="ProgressBar" Minimum="0" Maximum="100" Width="240" Height="6" Margin="0,0,10,0" VerticalAlignment="Center" IsVisible="False"/>
+      <Button Grid.Column="2" x:Name="StopButton" AutomationProperties.AutomationId="stop" Classes="small burn" IsVisible="False"
+              ToolTip.Tip="Остановить идущую операцию. Она останавливается в ближайшей точке, где читает вывод; молчащую операцию повторное нажатие через несколько секунд завершает сразу, со всем, что она запустила.">
+        <StackPanel Orientation="Horizontal" Spacing="6">
+          <Path Classes="icon" Tag="square"/>
+          <TextBlock Text="СТОП"/>
+        </StackPanel>
+      </Button>
+    </Grid>
+  </Grid>
+  </Grid>
+</Window>

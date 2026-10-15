@@ -1302,7 +1302,6 @@ def ai_ocr_text(source_file: Path, provider: str, model: str, ocr_prep: str) -> 
                     f"({resolve_model(next_provider, 'auto')})."
                 )
                 previous_provider = current_provider
-                previous_error = exc
                 fallback_from = current_provider
                 current_provider = next_provider
                 current_model = "auto"

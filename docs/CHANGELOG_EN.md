@@ -2,23 +2,40 @@
 
 **Contents**
 
+- [2026-10-15 - 2.0.0: a native window and a console command](#2026-10-15---200-a-native-window-and-a-console-command)
 - [2026-07-19 - Resilient bootstrap downloads](#2026-07-19---resilient-bootstrap-downloads)
-  - [Changed](#changed)
 - [2026-07-17 - Canonical Workbench and shared CLI/GUI services](#2026-07-17---canonical-workbench-and-shared-cligui-services)
-  - [Changed](#changed-1)
-  - [Verified](#verified)
 - [2026-07-15 - Provider-neutral DocumentModel and office exports](#2026-07-15---provider-neutral-documentmodel-and-office-exports)
-  - [Added](#added)
-  - [Changed](#changed-2)
-  - [Clarified](#clarified)
 - [2026-07-06 - DEV Markdown PDF and GUI polish](#2026-07-06---dev-markdown-pdf-and-gui-polish)
-  - [Changed](#changed-3)
 - [2026-07-01 - OCR Brick integration and UI cleanup](#2026-07-01---ocr-brick-integration-and-ui-cleanup)
-  - [Added](#added-1)
-  - [Changed](#changed-4)
-  - [Removed](#removed)
-  - [Verified](#verified-1)
-  - [Cleanup](#cleanup)
+
+## 2026-10-15 - 2.0.0: a native window and a console command
+
+### Added
+- A native Windows window (C#, Avalonia): `Start.exe` opens `App\AudionOfficeOcrAi.exe`. The window carries its own .NET and its own PowerShell (`App\AudionPs.exe`), so nothing is installed.
+- `SETUP` in the header, before `SETTINGS`: the installation of what the machine needs for local OCR; while the machine has no Tesseract, the window opens on it at start. Five sections in one band under the header: `LOCAL OCR`, `API OCR`, `OCR CHECK`, `TABLES`, `TOOLS`; the quick conversion of office files into Markdown is `TOOLS` -> `To Markdown`. The engines of `LOCAL OCR` and the providers of `API OCR` are switches over the form; a form stands in named blocks with a coloured stripe, rarely needed settings under `ADDITIONAL`, risky choices in red. The marks of Yandex, Mistral, Gemini and ChatGPT wear their brand colours.
+- `ocr_cli.cmd`: every operation of the window runs from a console with the same settings - `describe`, `run --operation ID [--source] [--target] [--set NAME=VALUE]`, `options` (`--refresh` asks the provider), `key add|remove`, `hardware`, `version`. Exit codes: 0 done, 1 failed, 130 stopped, 2 a wrong call - refused before anything runs. The window writes the line it runs into its terminal.
+- The header names what the machine has for OCR: the recommendation for its video card, Tesseract and its languages, the layout service of Surya, the providers that have a key - a count of key files, never a key.
+- The layout service of Surya is started and stopped from the line under the `SURYA` switch.
+- A key of a provider is added and set aside from its field: it is pasted into a dialog, goes to the console command by its standard input and is shown nowhere; a key set aside moves to `config\deleted_keys\`.
+- The lists of models open under their field at once, from what the program keeps; `REFRESH THE LIST` asks the provider.
+- The working area: `SOURCE` (a folder or one file, dropped on the window or picked) and `TARGET` with a history of paths and pins; `LIST` names what lies in the source.
+
+### Changed
+- A run with a `SOURCE` outside the program asks first when `input\` or `output\` hold anything, and names how many items each holds: the source is copied into `input\`, and both are cleared before it. A `SOURCE` inside `output\` and a folder inside `input\` are refused before anything runs.
+- One clearing for the working area: the contents of `SOURCE`, `TARGET` or both into the Recycle Bin, and the DocumentModel artifacts, each with its question; the root of a drive, the program itself and links are refused.
+- `STOP` asks the operation to stop at its next safe point and ends it at once on a second press; closing the window while an operation goes asks first and waits for the stop.
+- The terminal shows the colours of the operations and one live line of what a run is doing.
+- The output of the programs an operation runs reaches the terminal as text whatever they write in: UTF-8, the OEM and the ANSI code pages, and now UTF-16 too; the byte order mark of UTF-8 no longer stands at the start of a line. The lines of the Surya layout service script, Russian messages of PowerShell among them, are no longer question marks.
+- `Layout.Service.ps1 -Disable` stops only the layout service of its own copy of the program.
+- The environment is built anew from the current packages of `install\requirements_full.in`; with google-genai 2.31 the request to Gemini names the type of a page image `mime_type`.
+- The install scripts take `App\AudionPs.exe` first. `install\verify_portable_env.cmd` checks the console command, Tesseract, `Start.exe` and the self-check of the window. `builder_main.cmd` gains `START LAUNCHER` and `WINDOW`; the steps of the OCR engines keep their numbers.
+
+### Removed
+- The window on NiceGUI in a pywebview frame, the console menus (`launcher_gui.cmd`, `launcher_project.cmd`, `launcher_project_ru.cmd`, `launcher_tools.cmd`), fzf and the portable PowerShell. The licences are collected by Audion Build Licenses and the release is made by Audion Build Publisher, so `install\make_release_archive.cmd` and `system_core\license\` are gone too.
+- NiceGUI and pywebview leave `install\requirements_full.in`; the environment built next holds only what the engine needs.
+- What nothing in the program used: the HTML terminal of the former window, the decoders and helpers only it called, a stub of Yandex batch OCR, the second example folder of Yandex keys under `system_core\ocr_brick\config`, the unused `requirements.txt` of OCR Brick and `ocr_named_entities_ru.md` (the hints are read from `ocr_named_entities_ru.yaml`).
+- `DEV Markdown PDF` with its engine and its Chromium (`runtime\.playwright`, step `[05]` of `builder_main.cmd`, the package `playwright`): paired dark and light PDFs of Markdown are made by Audion Build PDF Render (`render_markdown.cmd`). The PDF of the program stays Word-based (`Build PDF`).
 
 ## 2026-07-19 - Resilient bootstrap downloads
 

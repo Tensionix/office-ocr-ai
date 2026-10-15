@@ -5,7 +5,6 @@ from pathlib import Path
 from typing import Any, Callable
 import importlib
 import json
-import locale
 import os
 import subprocess
 import time
@@ -14,7 +13,7 @@ import traceback
 from .ansi import strip_ansi
 from .logging_utils import append_log, timestamp
 from .manifest import Operation
-from .output_decode import decode_process_bytes
+from .output_decode import ProcessText, decode_process_bytes
 from .paths import ProjectPaths
 
 
@@ -153,102 +152,6 @@ def is_python_command(command: list[str]) -> bool:
     return Path(command[0]).name.lower() in {"python.exe", "pythonw.exe", "python", "python3", "py.exe", "py"}
 
 
-def _windows_codepage(name: str) -> str | None:
-    if os.name != "nt":
-        return None
-    try:
-        import ctypes
-
-        value = int(getattr(ctypes.windll.kernel32, name)())
-    except (AttributeError, OSError, TypeError, ValueError):
-        return None
-    return f"cp{value}" if value > 0 else None
-
-
-def _fallback_output_encodings() -> list[str]:
-    candidates = [
-        _windows_codepage("GetOEMCP"),
-        "cp866",
-        locale.getpreferredencoding(False),
-        "mbcs" if os.name == "nt" else None,
-        _windows_codepage("GetACP"),
-        "cp1251",
-    ]
-    result: list[str] = []
-    for encoding in candidates:
-        if encoding and encoding.lower() not in {item.lower() for item in result}:
-            result.append(encoding)
-    return result
-
-
-def _looks_utf16ish(data: bytes) -> bool:
-    if len(data) < 4:
-        return False
-    sample = data[: min(len(data), 200)]
-    even_nuls = sum(1 for index in range(0, len(sample), 2) if sample[index] == 0)
-    odd_nuls = sum(1 for index in range(1, len(sample), 2) if sample[index] == 0)
-    pairs = max(1, len(sample) // 2)
-    return even_nuls / pairs > 0.35 or odd_nuls / pairs > 0.35
-
-
-def _decode_score(text: str) -> int:
-    score = 0
-    for char in text:
-        code = ord(char)
-        if char in "\r\n\t":
-            score += 1
-        elif 32 <= code < 127:
-            score += 1
-        elif "А" <= char <= "я" or char in "Ёё":
-            score += 8
-        elif code == 0xFFFD:
-            score -= 100
-        elif code == 0:
-            score -= 80
-        elif code < 32:
-            score -= 25
-        elif 0x2500 <= code <= 0x257F:
-            score -= 12
-        elif 0x2E80 <= code <= 0x9FFF:
-            score -= 20
-    for marker in ("����", "㤠", "䠩", "Ð", "Ñ", "╨", "╤"):
-        if marker in text:
-            score -= 60
-    return score
-
-
-def _decode_with_candidates(data: bytes) -> list[str]:
-    candidates: list[str] = []
-
-    def add_candidate(encoding: str, *, errors: str = "strict") -> None:
-        try:
-            text = data.decode(encoding, errors=errors)
-        except (LookupError, UnicodeDecodeError):
-            return
-        if text not in candidates:
-            candidates.append(text)
-
-    if data.startswith(b"\xef\xbb\xbf"):
-        add_candidate("utf-8-sig")
-    if data.startswith((b"\xff\xfe", b"\xfe\xff")):
-        add_candidate("utf-16")
-    add_candidate("utf-8")
-    if _looks_utf16ish(data):
-        add_candidate("utf-16")
-        add_candidate("utf-16-le")
-        add_candidate("utf-16-be")
-    for encoding in _fallback_output_encodings():
-        add_candidate(encoding)
-    if not candidates:
-        add_candidate("utf-8", errors="replace")
-    return candidates
-
-
-def decode_process_output(data: bytes) -> str:
-    """Decode one bytes chunk from a non-Python Windows tool without mojibake."""
-    return decode_process_bytes(data)
-
-
 SPINNER_FRAME_CHARS = set("-\\|/ \t")
 
 
@@ -313,6 +216,9 @@ def run_process(
     last_progress = start
 
     assert process.stdout is not None
+    # The bytes of a program that is not Python are read as one stream: a UTF-16 one cannot be
+    # decoded line by line (output_decode.ProcessText).
+    stream = None if python_command else ProcessText()
     for raw_line in process.stdout:
         if context.cancelled():
             context.log("[CANCEL] Terminating child process...")
@@ -323,7 +229,7 @@ def run_process(
                 process.kill()
             raise RuntimeError("Operation cancelled by user.")
 
-        for line in decoded_process_lines(raw_line):
+        for line in decoded_process_lines(raw_line if stream is None else stream.feed(raw_line)):
             lines.append(line)
             context.log(line)
 
@@ -333,6 +239,10 @@ def run_process(
             context.progress(min(0.95, 0.08 + elapsed / max(1.0, float(progress_seconds))))
             last_progress = now
 
+    for line in decoded_process_lines(stream.close() if stream is not None else ""):
+        lines.append(line)
+        context.log(line)
+
     exit_code = process.wait()
     context.log(f"[EXIT] {exit_code}")
     if check and exit_code != 0:
@@ -340,28 +250,6 @@ def run_process(
     return ProcessResult(exit_code=exit_code, lines=tuple(lines))
 
 
-def resolve_project_path(context: JobContext, raw_path: str) -> Path:
-    path_text = raw_path.strip().strip('"')
-    if not path_text:
-        raise RuntimeError("Path field is empty.")
-    path = Path(os.path.expandvars(path_text)).expanduser()
-    if not path.is_absolute():
-        path = context.paths.root / path
-    return path
-
-
-def run_cmd_script(
-    context: JobContext,
-    script: str,
-    args: list[str] | None = None,
-    *,
-    check: bool = True,
-) -> ProcessResult:
-    script_path = resolve_project_path(context, script)
-    if not script_path.exists():
-        raise RuntimeError(f"Script was not found: {script_path}")
-    command = ["cmd.exe", "/d", "/c", "call", str(script_path), *(args or [])]
-    return run_process(context, command, cwd=context.paths.root, check=check)
 
 
 def _load_callable(service: str) -> Callable[[JobContext], Any]:

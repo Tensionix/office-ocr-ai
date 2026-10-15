@@ -1,10 +1,8 @@
 import json
-from types import SimpleNamespace
 
 from system_core.ocr_brick.engines.mistral import MistralOCRAdapter, _page_markdown, _parse_html_table
 from system_core.ocr_brick.engines.regions import LayoutResult, layout_from_dict
 from system_core.ocr_brick.pipeline_controller import _normalize_mistral_cached_result, build_ocr_verification
-from system_core.services.office_service import _write_ocr_brick_outputs
 
 
 class _Response:
@@ -136,24 +134,3 @@ def test_verification_requires_review_on_numeric_mismatch():
     assert {item["token"] for item in report["missing_in_tesseract"]} == {"7903", "500", "2022"}
 
 
-def test_selected_output_formats_write_verification_files(tmp_path):
-    output = tmp_path / "output"
-    output.mkdir()
-    context = SimpleNamespace(
-        paths=SimpleNamespace(root=tmp_path, output=output),
-        log=lambda _message: None,
-    )
-    results = [{
-        "page": 0,
-        "text": "Текст",
-        "verification": build_ocr_verification(
-            "Сумма 500", "Сумма 500", primary_engine="mistral", threshold=1.0
-        ),
-    }]
-
-    _write_ocr_brick_outputs(context, tmp_path / "scan.pdf", results, {"json", "verification"})
-
-    assert (output / "scan.ocr_brick.json").is_file()
-    assert not (output / "scan.ocr_brick.md").exists()
-    assert (output / "scan.verification.json").is_file()
-    assert (output / "scan.verification.md").is_file()

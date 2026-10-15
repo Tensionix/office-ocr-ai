@@ -148,6 +148,8 @@ $arguments = @(
     "/target:winexe",
     "/platform:anycpu",
     "/optimize+",
+    # The launcher says what is missing in Russian too: its source is UTF-8.
+    "/codepage:65001",
     "/out:$output",
     "/win32manifest:$manifest",
     "/reference:System.dll",
